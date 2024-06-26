@@ -20,6 +20,8 @@ void sorcererSheet();
 
 void combatStarts();
 
+void whatsInTheBag();
+
 
 int main() {            // Main function
 
@@ -178,4 +180,15 @@ void combatStarts() {
     printf("|        Round One        |\n");
     printf("|                         |\n");
     printf("---------------------------\n");
+}
+
+void whatsInTheBag() {
+    printf("> Current contents of your backpack: "); 
+    for (int i = 0; i < 10; i++)
+    {
+        Sleep(100);
+        printf("[%s] ", backpack[i].iname);
+    }
+    printf("\n");
+    Sleep(1000);
 }
