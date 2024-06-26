@@ -7,6 +7,11 @@
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
 
+// NOTES:
+    // standard sleep: 1000ms
+    // action sleep: 2000ms
+    // discovery sleep: 3000ms
+    // backpack iteration sleep: 200ms
 
 // Global variables
 int location;
@@ -22,11 +27,13 @@ struct item {
 // list of fuctions:
 void loading(int s);
 void currentLocation(int location);
+void combatStarts();
 
 
-int main() {            // Main function
-    char q;
+int main() {
+    char q;     // variable to store Y/N answers for players decisions
 
+    // items hold IDs between 0-99
     struct item items[3];
     items[0].id = 0;
     strcpy(items[0].description, "");       // <- empty slot
@@ -38,11 +45,10 @@ int main() {            // Main function
     strcpy(items[2].description, "Stone Key");
 
     // backpack[0] = items[0]; works!!
-    struct item backpack[21];
-    backpack[0] = items[0];         // <- initialization of an empty backpack where 1st slot is empty
-    for (int i = 1; i < 21; i++)
+    struct item backpack[10];
+    for (int i = 0; i < 10; i++)
     {
-        backpack[i].id;
+        backpack[i].id = i + 100;   // backpack slots have 100-110 IDs
         strcpy(backpack[i].description, "");    // to fill backpack struct with empty space which then can be replaced by actual items
     }
     
@@ -56,23 +62,32 @@ int main() {            // Main function
     Sleep(1000);
 
     printf("> Current contents of your backpack: "); 
-    for (int i = 0; i < 21; i++)
+    for (int i = 0; i < 10; i++)
     {
+        Sleep(100);
         printf("[%s] ", backpack[i].description);
     }
     printf("\n");
     Sleep(1000);
 
-    printf("> Would you like to pick up this item? Y/N\n");
+    printf("> Would you like to pick up this item? [Y/N]\n");
     scanf(" %c", &q);      // adding space before %c forces programme to remove white spaces and now scanf can be stacked
     Sleep(1000);
 
     if (q == 'Y' || q == 'y')
     {
-        backpack[1] = items[2];
-        printf("> Updated backpack contents: ");
-        for (int j = 0; j < 21; j++)
+        for (int i = 0; i < 10; i++)
         {
+            if (strcmp(backpack[i].description, items[0].description) == 0)
+            {
+                backpack[i] = items[2];
+                break;
+            }
+        }
+        printf("> Updated backpack contents: ");
+        for (int j = 0; j < 10; j++)
+        {
+            Sleep(100);
             printf("[%s] ", backpack[j].description);
         }
         printf("\n");
@@ -85,43 +100,124 @@ int main() {            // Main function
     printf("> You see a massive stone door, instead of knob you see an opening that resembles [%s].\n", items[2].description);
     Sleep(3000);
 
-    printf("> Do you want to insert [%s] into the opening? Y/N\n", items[2].description);
+    printf("> Do you want to insert [%s] into the opening? [Y/N]\n", items[2].description);
     scanf(" %c", &q);
     if (q == 'Y' || q == 'y')
     {      
         int k = items[2].id;
         int result;
-        for (int j = 0; j < 21; j++)
+        for (int j = 0; j < 10; j++)
         {
-            if (backpack[j].id == items[k].id)
+            if (strcmp(backpack[j].description, items[k].description) == 0)
             {
-                result = 1;
+                result = 0;
                 break;
             } 
             else
             {
-                result = 0;
+                result = 1;
             }   
         } 
 
-        if (result == 0)
+        if (result == 1)
         {
             location = 2;
             printf("> You don't have a necessary item in your bag.\n");
             Sleep(1000);
-            printf("> You wonder off to find another route...\n");
-            Sleep(1000);
+
+            printf("> Would you like to go back to find the [%s] if not, you will have to look for a different passage? [Y/N] ", items[2].description);
+            scanf(" %c", &q);
+            if (q == 'Y' || q == 'y')
+            {
+                printf("> You go back to the crossroads where you encountered this strange item.\n");
+                Sleep(1000);
+                printf("> You manage to find it and put it in your backpack.\n");
+                Sleep(1000);
+                
+                for (int i = 0; i < 10; i++)
+                {
+                    if (strcmp(backpack[i].description, items[0].description) == 0)
+                    {
+                        backpack[i] = items[2];
+                        break;
+                    }
+                }
+                printf("> Updated backpack contents: ");
+                for (int j = 0; j < 10; j++)
+                {
+                    Sleep(100);
+                    printf("[%s] ", backpack[j].description);
+                }
+                printf("\n");
+
+                Sleep(2000);
+                printf("> You start jogging towards great stone gates to use the [%s].\n", items[2].description);
+                Sleep(1000);
+                printf("> A club hits your head... You fall to the ground...\n");
+                Sleep(1000);
+                printf("> You muster all the strength you have and pick yourself up.\n");
+                Sleep(1000);
+                printf("> Hobgoblin stand before you and is ready to strike!\n");
+                Sleep(3000);
+                combatStarts();
+                Sleep(3000);
+
+                printf("> You manged to defeat the adversary! You continue the journey towards stone gates.\n");
+                Sleep(3000);
+
+                {
+                    location = 1;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (strcmp(backpack[j].description, items[k].description) == 0)
+                        {
+                            backpack[j] = items[0];
+                            break;
+                        }
+                    }
+                    Sleep(2000); 
+                    printf("> You have used [%s].\n", items[2].description);
+                    Sleep(1000);
+                    printf("> These are your current backpack contents: ");
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Sleep(100);
+                        printf("[%s] ", backpack[i].description);
+                    }
+                    printf("\n");
+                    Sleep(2000);
+                    printf("> Stone gates slowly open and dark cave stands before you...\n");
+                }
+
+            }
+            else
+            {
+                printf("> You wonder off to find another route...\n");
+                Sleep(1000);
+            }
         }
         else
         {
             location = 1;
-            backpack[1] = backpack[0];
-            printf("> You have used [%s]. These are your current backpack contents: ", items[2].description);
-            for (int i = 0; i < 21; i++)
+            for (int j = 0; j < 10; j++)
             {
-                printf("%s ", backpack[i].description);
+                if (strcmp(backpack[j].description, items[k].description) == 0)
+                {
+                    backpack[j] = items[0];
+                    break;
+                }
+            }
+            Sleep(2000); 
+            printf("> You have used [%s].\n", items[2].description);
+            Sleep(1000);
+            printf("> These are your current backpack contents: ");
+            for (int i = 0; i < 10; i++)
+            {
+                Sleep(100);
+                printf("[%s] ", backpack[i].description);
             }
             printf("\n");
+            Sleep(2000);
             printf("> Stone gates slowly open and dark cave stands before you...\n");
         }
     }
@@ -172,4 +268,14 @@ void currentLocation(int location) {
         printf("|                         |\n");
         printf("---------------------------\n");
     }   
+}
+
+void combatStarts() {
+    printf("---------------------------\n");
+    printf("|                         |\n");
+    printf("|          Fight!         |\n");
+    printf("|                         |\n");
+    printf("|        Round One        |\n");
+    printf("|                         |\n");
+    printf("---------------------------\n");
 }
