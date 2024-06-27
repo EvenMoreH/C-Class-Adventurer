@@ -64,7 +64,8 @@ int main() {            // Main function
             }
             break;
         }
-        else {
+        else 
+        {
             printf("> A, B or C. Please try again.\n");
 
             // Clear the input buffer

@@ -26,6 +26,13 @@ int main() {            // Main function
 }
 
 void archerSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 10;
+
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Level: [1]        |\n");
@@ -46,6 +53,13 @@ void archerSheet() {
     printf("---------------------------\n");
 }
 void crusaderSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 12;
+
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Level: [1]        |\n");
@@ -66,6 +80,13 @@ void crusaderSheet() {
     printf("---------------------------\n");
 }
 void sorcererSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 8;
+
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Level: [1]        |\n");
