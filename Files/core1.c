@@ -14,6 +14,7 @@ int result;
 // Locations - global
     // Location IDs = 200-210
 int location;
+int currentLocation;    // Used in decision trees to move between locations
 struct location {
     int locationID;
     char locationName[40];
@@ -66,31 +67,37 @@ void addToBag(int itemID);
 void removeFromBag(int itemID);
 void decision();
 void foundItem(int itemID);
-void discoveredLocation(int location);
+void discoveredLocation(int location);      // Argument here is called location and should match one of the predefined location IDs
+void enterLocation(int location);           // Argument here is called location and should match one of the predefined location IDs
 
 
 
 int main() {            // Main function
 
-    whatsInTheBag();
-    addToBag(2);
-    whatsInTheBag();
-    removeFromBag(2);
-
     printf("> Would you like to enter this cave?\n");
+
     decision();
 
     if (result == 1)
     {
         printf("> You entered a cave.\n");
         Sleep(1000);
+
+        discoveredLocation(204);
+
         printf("> Would you like to go deeper?\n");
+
         decision();
 
         if (result == 1)
         {
             Sleep(1000);
             printf("> You go deeper and find a treasure!\n");
+
+            foundItem(4);
+            addToBag(4);
+            whatsInTheBag();
+
         }
         else
         {
@@ -103,6 +110,7 @@ int main() {            // Main function
         printf("> You went back to town.\n");
         Sleep(1000);
         printf("> Would you like to go to the tavern?\n");
+        
         decision();
 
         if (result == 1)
@@ -118,7 +126,8 @@ int main() {            // Main function
         
         
     }
-
+    
+    
     return 0;               // Ends main function
 }
 
@@ -175,25 +184,46 @@ void decision() {
 
 void foundItem(int itemID) {
     Sleep(1000);
-    printf("> You found [%s]", items[itemID].iname);
+    printf("-----------------------------------\n");
+    Sleep(500);
+    printf("> You found [%s]\n", items[itemID].iname);
+    Sleep(500);
+    printf("-----------------------------------\n");
     Sleep(2000);
 }
 
 void discoveredLocation(int location) {
-    // char tempLocation[40];
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     if (locations[i].locationID == location)
-    //     {
-    //         tempLocation[40] = locations[i].locationName;
-    //         break;
-    //     }
-    // }
-    // Sleep(1000);
-    // printf("------------------------------\n");
-    // Sleep(500);
-    // printf("> You discovered [%s]\n", tempLocation);
-    // Sleep(500);
-    // printf("------------------------------\n");
-    // Sleep(2000);
+    currentLocation = location;
+    for (int i = 0; i < 10; i++)
+    {
+        if (location == locations[i].locationID)
+        {
+            Sleep(1000);
+            printf("-----------------------------------\n");
+            Sleep(500);
+            printf("> You discovered [%s]\n", locations[i].locationName);
+            Sleep(500);
+            printf("-----------------------------------\n");
+            Sleep(2000);
+            break;
+        }
+    }
+}
+
+void enterLocation(int location) {
+    currentLocation = location;
+    for (int i = 0; i < 10; i++)
+    {
+        if (location == locations[i].locationID)
+        {
+            Sleep(1000);
+            printf("-----------------------------------\n");
+            Sleep(500);
+            printf("> You enter [%s]\n", locations[i].locationName);
+            Sleep(500);
+            printf("-----------------------------------\n");
+            Sleep(2000);
+            break;
+        }
+    }
 }
