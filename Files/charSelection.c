@@ -14,13 +14,25 @@ int main() {            // Main function
     for (int i = 0; i < 1; i++)
     {
         printf("> Who are you, brave adventurer?\n");
-        Sleep(700);
+        Sleep(1000);
         printf("> A. Archer\n");
-        Sleep(300);
+            Sleep(500);
+            printf("\tNimble and agile fighter relying on Bows, Shortswords and light armor.\n");
+            Sleep(500);
+            printf("\tArchers have average resiliency, and their combat capabilities rely on Dexterity\n");
+            Sleep(500);
         printf("> B. Crusader\n");
-        Sleep(300);
+            Sleep(500);
+            printf("\tStrong and durable fighter relying on Swords, Shields and heavy armor.\n");
+            Sleep(500);
+            printf("\tCrusaders have high resiliency, and their combat capabilities rely on Strength\n");
+            Sleep(500);
         printf("> C. Sorcerer\n");
-        Sleep(700);
+            Sleep(500);
+            printf("\tMasters of the dark arts, relying on Grimoires filled with spells, Staves and robes.\n");
+            Sleep(500);
+            printf("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity\n");
+        Sleep(1000);
     }
     
     char characterSelect;
@@ -85,8 +97,8 @@ int main() {            // Main function
         scanf("%s", &name);
         // scanf("%s", &surname);
         Sleep(500);
-        printf("\n> And thus your journey begins, brave [%s]\n", name);
-        Sleep(60000);
+        printf("\n> And thus your journey begins, brave [%s].\n", name);
+        Sleep(1000);
         break;
     }
     
@@ -103,5 +115,5 @@ void loading(int s) {
         printf("+");
         Sleep(ms);
     }
-    printf("]\n");
+    printf("]\n\n");
 }

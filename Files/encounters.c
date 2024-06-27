@@ -33,7 +33,7 @@ int playerMaxHealth(int VIT, int classHPX);
 
 int main() {            // Main function
 
-    srand(time(NULL));
+    srand(time(NULL));  // declaring randomize
 
     playerMaxHealth(7, 12);
     printf("MAX HP: [%i].\n", playerMaxHP);

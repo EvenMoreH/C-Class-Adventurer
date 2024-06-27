@@ -9,6 +9,17 @@
 
 // Global variables
     int itemID;
+    
+    // selected character
+        // 900 - Archer
+        // 901 - Crusader
+        // 902 - Sorcerer
+    int currentChar;
+
+    // for managing items that are held(equipped)
+    int mainWeapon = 0;
+    int offWeapon = 1;
+    int equippedArmor = 2;
 
     // for yes or no questions
     int q;
@@ -25,6 +36,8 @@
     // for dealing and receiving damage (player)
     int dmg;
     int dmgTaken;
+    int bonusDMG;
+    int bonusDMGspell;
 
     // for declaring initial MAX HP and calculating current HP (player)
     int playerMaxHP;
@@ -52,17 +65,25 @@ struct location {
 struct item {
     int id;
     char iname[25];
-    char description[100];
+    char description[100];  // For weapons it will be used to specify damage type
     int minDMG;
     int maxDMG;
 };
     // item IDs = 0-99
     struct item items[] = {
        {0, "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "", 1, 6},
-       {2, "Dagger", "", 1, 4},
-       {3, "Leather Armor", "", 0, 0},
-       {4, "Stoneskull Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
+       {1, "Bow", "Piercing", 1, 8},            // base item do not alter (Archer)
+       {2, "Shortsword", "Slashing", 1, 6},     // base item do not alter (Archer)
+       {3, "Longsword", "Slashing", 1, 8},      // base item do not alter (Crusader)
+       {4, "Shield", "Bludgeoning", 1, 6},      // base item do not alter (Crusader)
+       {5, "Staff", "Bludgeoning", 1, 6},       // base item do not alter (Sorcerer)
+       {6, "Leather Armor", "", 0, 0},          // base item do not alter (Archer)
+       {7, "Plate Armor", "", 0, 0},            // base item do not alter (Crusader)
+       {8, "Robes", "", 0, 0},                  // base item do not alter (Sorcerer)
+       {9, "Grimoire", "", 0, 0},                // base item do not alter (Sorcerer)
+
+       // story items:
+       {10, "Stoneskull Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
     };
 
 // Global backpack management
@@ -81,23 +102,69 @@ struct item {
         {110, "", "", 0, 0},
     };
 
+// Global held items management
+    // held IDs = 130-133
+    struct item held[] = {
+        {130, "", "", 0, 0},    // Main Weapon
+        {131, "", "", 0, 0},    // Off hand weapon
+        {132, "", "", 0, 0},    // Armor
+        {133, "", "", 0, 0},    // ??
+    };
+
 
 // Functions
+//into
+void intro();
+
+// selecting a character
+void chooseCharacter();
+void printCharacterSheet(int currentChar);
+
+// loading screen
+void loading(int s);
+
+// player classes
+void archerSheet();
+void crusaderSheet();
+void sorcererSheet();
+
+// bag management
 void whatsInTheBag();
 void addToBag(int itemID);
 void removeFromBag(int itemID);
-void decision();
+
+// found something?
 void foundItem(int itemID);
 void discoveredLocation(int location);      // Argument here is called location and should match one of the predefined location IDs
 void enterLocation(int location);           // Argument here is called location and should match one of the predefined location IDs
 
-int damage(int itemID);
-int hp(int dmgTaken);
+// attack and damage
+void attackRollMain(int mainWeapon, int bonusDMG);
+void attackRollOff(int equippedWeaponOff, int bonusDMG);
+void attackRollSpell(int equippedSpell, int bonusDMGspell);
+int damage(int itemID, int bonusDMG);
 
+// player health
+int hp(int dmgTaken);
 int playerMaxHealth(int vitality, int classHPX);
 
+// decisions
+void decision();
+void selectionAB();
+void selectionABC();
 
-int main() {            // Main function
+
+
+int main() {
+    // |------------------------------------------|
+        srand(time(NULL));  // declaring randomize|
+    // |------------------------------------------|
+
+    intro();
+
+    chooseCharacter();
+    printCharacterSheet(currentChar);
+
 
     printf("> Would you like to enter this cave?\n");
 
@@ -118,14 +185,11 @@ int main() {            // Main function
         {
             Sleep(1000);
             printf("> You go deeper and find a giant rat!\n");
-            
             Sleep(1000);
-            printf("> You hit it with your [%s].\n", items[2].iname);
 
-            dmg = damage(2);
-            
-            Sleep(1000);
-            printf("> You deal %d damage to it.\n", dmg);
+            attackRollMain(mainWeapon, bonusDMG);
+            Sleep(500);
+            attackRollOff(offWeapon, bonusDMG);
 
             Sleep(1000);
             printf("> It runs away leaving an old backpack unattended in the corner.\n");
@@ -162,15 +226,292 @@ int main() {            // Main function
             Sleep(1000);
             printf("> You go home and rest for the day.\n");
         }
-        
-        
     }
     
     
     return 0;               // Ends main function
 }
 
-// Fuctions - code
+// Fuctions - code:
+
+void chooseCharacter() {
+        printf("> Who are you, brave adventurer?\n");
+        Sleep(1000);
+        printf("> A. Archer\n");
+            Sleep(500);
+            printf("\tNimble and agile fighter relying on Bows, Shortswords and light armor.\n");
+            Sleep(500);
+            printf("\tArchers have average resiliency, and their combat capabilities rely on Dexterity\n");
+            Sleep(500);
+        printf("> B. Crusader\n");
+            Sleep(500);
+            printf("\tStrong and durable fighter relying on Swords, Shields and heavy armor.\n");
+            Sleep(500);
+            printf("\tCrusaders have high resiliency, and their combat capabilities rely on Strength\n");
+            Sleep(500);
+        printf("> C. Sorcerer\n");
+            Sleep(500);
+            printf("\tMasters of the dark arts, relying on Grimoires filled with spells, Staves and robes.\n");
+            Sleep(500);
+            printf("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity\n");
+        Sleep(1000);
+    
+    char characterSelect;
+    char currentCharacter[20];
+    char archer[10] = "Archer";
+    char crusader[10] = "Crusader";
+    char sorcerer[10] = "Sorcerer";
+
+    while (1)
+    {
+        printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
+        scanf("%c", &characterSelect);
+        
+        if (characterSelect == 'a' || characterSelect == 'A' || characterSelect == 'b' || characterSelect == 'B' || characterSelect == 'c' || characterSelect == 'C')
+        {
+            if (characterSelect == 'a' || characterSelect == 'A')
+            {
+                strcpy(currentCharacter, archer);
+                currentChar = 900;
+            }
+            if (characterSelect == 'b' || characterSelect == 'B')
+            {
+                strcpy(currentCharacter, crusader);
+                currentChar = 901;
+            }
+            if (characterSelect == 'c' || characterSelect == 'C')
+            {
+                strcpy(currentCharacter, sorcerer);
+                currentChar = 902;
+            }
+            
+            if (characterSelect == 'a' || characterSelect == 'A')
+            {
+                printf("> So you are an [%s]\n", currentCharacter);
+            }
+            else
+            {
+                printf("> So you are a [%s]\n", currentCharacter);    
+            }
+            break;
+        }
+        else 
+        {
+            printf("> A, B or C. Please try again.\n");
+
+            // Clear the input buffer
+            int clearBuffer;
+            while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
+            // I don't get the above yet but:
+            // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
+        }
+    }
+    char name[50];
+    char surname[50];
+
+    while (1)
+    {
+        Sleep(500);
+        printf("> What is your name Adventurer? ");
+        scanf("%s", &name);
+        // scanf("%s", &surname);
+        Sleep(500);
+        printf("\n> And thus your journey begins, brave [%s].\n\n", name);
+        Sleep(1000);
+        break;
+    }
+}
+
+void printCharacterSheet(int currentChar) {
+    Sleep(1000);
+    printf("> This is you and your equipment:\n");
+    Sleep(1000);
+
+    if (currentChar == 900)
+    {
+        archerSheet();
+    }
+    else if (currentChar == 901)
+    {
+        crusaderSheet();
+    }
+    else if (currentChar == 902)
+    {
+        sorcererSheet();
+    }
+    
+}
+
+void intro() {
+        printf("************************************************\n");
+        Sleep(250);
+        printf("****************                ****************\n");
+        Sleep(250);
+        printf("**************     WELCOME TO     **************\n");
+        Sleep(250);
+        printf("***********    C-CLASS ADVENTURER    ***********\n");
+        Sleep(250);
+        printf("*********                              *********\n");
+        Sleep(250);
+        printf("******    Journey Through Memory Leaks    ******\n");
+        Sleep(250);
+        printf("****                                        ****\n");
+        Sleep(300);
+        printf("************************************************\n\n\n");
+        Sleep(1500);
+
+        printf("> Throughout this game you will be making a lot of decisions\n");
+        Sleep(500);
+        printf("> To control your actions you will be answering prompts by typing:\n");
+        Sleep(250);
+        printf("> Y for Yes\n");
+        Sleep(250);
+        Sleep(250);
+        printf("> N for No\n");
+        Sleep(250);
+        printf("> A to select 1st option\n");
+        Sleep(250);
+        printf("> B to select 2nd option\n");
+        Sleep(250);
+        printf("> C to select 3rd option\n");
+        Sleep(250);
+        printf("> All of your inputs you can confirm by pressing Enter\n\n");
+        Sleep(1000);
+        printf("> Good Luck!\n\n");
+}
+
+// 10 element loading bar which takes the argument in seconds to display this amount of loading time
+void loading(int s) {
+    int ms = s * 100;
+    printf("\n> Loading: [");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("+");
+        Sleep(ms);
+    }
+    printf("]\n\n");
+}
+
+void archerSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 10;
+
+    bonusDMG = (((DEX / 2) - 2) + lvl);
+    
+    int attackMOD;
+    int attackMODmain = ((DEX / 2) - 2);
+    int attackMODoff = (attackMODmain - 1);
+
+    // lets equip starting items:
+    held[0] = items[1];
+    held[1] = items[2];
+    held[2] = items[6];
+
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Class: [Archer]   |\n");
+    printf("|  Your Statistics:       |\n");
+    printf("|     - Strength: [5]     |\n");
+    printf("|     - Dexterity: [7]    |\n");
+    printf("|     - Vitality: [5]     |\n");
+    printf("|     - Magic: [1]        |\n");
+    printf("---------------------------\n");
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Equipment:        |\n");
+    printf("|     - Bow               |\n");
+    printf("|     - Shortsword        |\n");
+    printf("|     - Leather Armor     |\n");
+    printf("|     - Backpack          |\n");
+    printf("---------------------------\n");
+    printf("\n");
+}
+
+void crusaderSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 12;
+
+    bonusDMG = (((STR / 2) - 2) + lvl);
+
+    int attackMOD;
+    int attackMODmain = ((STR / 2) - 2);
+    int attackMODoff = (attackMODmain - 1);
+    
+    // lets equip starting items:
+    held[0] = items[3];
+    held[1] = items[4];
+    held[2] = items[7];
+    
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Class: [Crusader] |\n");
+    printf("|  Your Statistics:       |\n");
+    printf("|     - Strength: [7]     |\n");
+    printf("|     - Dexterity: [3]    |\n");
+    printf("|     - Vitality: [7]     |\n");
+    printf("|     - Magic: [1]        |\n");
+    printf("---------------------------\n");
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Equipment:        |\n");
+    printf("|     - Longsword         |\n");
+    printf("|     - Shield            |\n");
+    printf("|     - Plate Armor       |\n");
+    printf("|     - Backpack          |\n");
+    printf("---------------------------\n");
+    printf("\n");
+}
+
+void sorcererSheet() {
+    int lvl = 1;
+    int STR = 5;
+    int DEX = 7;
+    int VIT = 5;
+    int MGC = 1;
+    int classHPX = 8;
+
+    bonusDMGspell = (((MGC / 2) - 2) + lvl);
+    bonusDMG = (((DEX / 2) - 2) + lvl);
+
+    int attackMOD;
+    int attackMODoff = (((DEX / 2) - 2) - 1);
+    int attackMODspell = (attackMODoff - 1);
+    
+    // lets equip starting items:
+    held[0] = items[5];
+    held[1] = items[9];
+    held[2] = items[8];
+    
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Class: [Sorcerer] |\n");
+    printf("|  Your Statistics:       |\n");
+    printf("|     - Strength: [3]     |\n");
+    printf("|     - Dexterity: [5]    |\n");
+    printf("|     - Vitality: [3]     |\n");
+    printf("|     - Magic: [7]        |\n");
+    printf("---------------------------\n");
+    Sleep(500);
+    printf("---------------------------\n");
+    printf("|  Your Equipment:        |\n");
+    printf("|     - Staff             |\n");
+    printf("|     - Grimoire          |\n");
+    printf("|     - Robes             |\n");
+    printf("|     - Backpack          |\n");
+    printf("---------------------------\n");
+    printf("\n");
+}
 
 void whatsInTheBag() {
     printf("> Current contents of your backpack: "); 
@@ -202,21 +543,6 @@ void removeFromBag(int itemID) {
             backpack[i] = items[0];
             break;
         }
-    }
-}
-
-void decision() {
-    int q;
-    Sleep(500);
-    printf("> [Y/N]: ");
-    scanf(" %c", &q);
-    if (q == 'Y' || q == 'y')
-    {
-        result = 0;
-    }
-    else
-    {
-        result = 1;
     }
 }
 
@@ -266,13 +592,6 @@ void enterLocation(int location) {
     }
 }
 
-int damage(int itemID) {
-    int x = items[itemID].minDMG;
-    int y = items[itemID].maxDMG;
-
-    return x + rand() % y;
-}
-
 int hp(int dmgTaken) {
     playerCurrentHP = playerMaxHP - dmgTaken;
 
@@ -300,4 +619,181 @@ int hp(int dmgTaken) {
 int playerMaxHealth(int VIT, int classHPX) {
     playerMaxHP = VIT * classHPX;
     return playerMaxHP;
+}
+
+int damage(int itemID, int bonusDMG) {
+    int x = held[itemID].minDMG;
+    int y = held[itemID].maxDMG;
+
+    dmg = bonusDMG + x + rand() % y;
+
+    printf("> You Deal [%i] damage!\n", dmg);
+
+    return bonusDMG + x + rand() % y;
+}
+
+void attackRollMain(int mainWeapon, int bonusDMG) {
+    itemID = mainWeapon;
+    
+    int random = 1 + rand() % 6;
+
+    int hit;
+    int attackMODmain;
+    int attackMOD = attackMODmain;
+    int attackRoll = 7 + attackMOD + random;
+
+    printf("> You attack with your [%s].\n", held[itemID].iname);
+    Sleep(1000);
+
+    if (attackRoll < 11)
+    {
+        hit = 1;
+        printf("> MISS!\n");
+        Sleep(1000);
+    }
+    else
+    {
+        hit = 0;
+        printf("> HIT!\n");
+        Sleep(1000);
+        damage(itemID, bonusDMG);
+    }
+}
+
+void attackRollOff(int offWeapon, int bonusDMG) {
+    itemID = offWeapon;
+
+    int random = 1 + rand() % 6;
+    
+    int hit;
+    int attackMODoff;
+    int attackMOD = attackMODoff;
+    int attackRoll = 7 + attackMOD + random;
+    
+    printf("> You attack with your [%s].\n", held[itemID].iname);
+    Sleep(1000);
+
+    if (attackRoll < 11)
+    {
+        hit = 1;
+        printf("> MISS!\n");
+        Sleep(1000);
+    }
+    else
+    {
+        hit = 0;
+        printf("> HIT!\n");
+        Sleep(1000);
+        damage(itemID, bonusDMG);
+    }
+}
+
+void attackRollSpell(int equippedSpell, int bonusDMGspell) {
+    int spellID; // <- placeholder befor I will built grimoirs
+    
+    // missing text prompt
+
+    spellID = equippedSpell;
+    
+    int random = 1 + rand() % 6;
+    
+    int hit;
+    int attackMODspell;
+    int attackMOD = attackMODspell;
+    int attackRoll = 7 + attackMOD + random;
+
+    if (attackRoll < 11)
+    {
+        hit = 1;
+        printf("> MISS!\n");
+        Sleep(1000);
+    }
+    else
+    {
+        hit = 0;
+        printf("> HIT!\n");
+        Sleep(1000);
+    }
+}
+
+void decision() {
+    int q;
+    Sleep(500);
+    printf("> [Y/N]: ");
+    scanf(" %c", &q);
+    if (q == 'Y' || q == 'y')
+    {
+        result = 0;
+    }
+    else
+    {
+        result = 1;
+    }
+}
+
+void selectionAB() {
+    int ab;
+    Sleep(500);
+    while (1)
+    {
+        printf("> [A/B]: ");
+        scanf(" %c", &ab);
+
+        if (ab == 'A' || ab == 'a')
+        {
+            abResult = 0;
+            break;
+        }
+        if (ab == 'B' || ab == 'b')
+        {
+            abResult = 1;
+            break;
+        }
+        else 
+        {
+        printf("> A, B. Please try again.\n");
+
+        // Clear the input buffer
+        int clearBuffer;
+        while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
+        // I don't get the above yet but:
+        // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
+        }
+    }
+}
+
+void selectionABC() {
+    int abc;
+    Sleep(500);
+    while (1)
+    {
+        printf("> [A/B/C]: ");
+        scanf(" %c", &abc);
+
+        if (abc == 'A' || abc == 'a')
+        {
+            abcResult = 0;
+            break;
+        }
+        if (abc == 'B' || abc == 'b')
+        {
+            abcResult = 1;
+            break;
+        }
+        if (abc == 'C' || abc == 'c')
+        {
+            abcResult = 2;
+            break;
+        }
+        else 
+        {
+        printf("> A, B. Please try again.\n");
+
+        // Clear the input buffer
+        int clearBuffer;
+        while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
+        // I don't get the above yet but:
+        // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
+        }
+    }
 }

@@ -7,9 +7,11 @@
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
 
-// level 1 - 5
-// stats 1 - 9
-// stat sum = 18
+// Player:
+    // level 1 - 5
+    // stats 1 - 9
+    // stat sum = 18
+    // stat modifier [-2, 2] 
 
 void archerSheet();
 void crusaderSheet();
@@ -20,6 +22,8 @@ int main() {            // Main function
 
     printf("> This is you: \n");
     archerSheet();
+
+
 
     Sleep(60000);
     return 0;               // Ends main function
@@ -32,6 +36,12 @@ void archerSheet() {
     int VIT = 5;
     int MGC = 1;
     int classHPX = 10;
+
+    int bonusDMG = (((DEX / 2) - 2) + lvl);
+    
+    int attackMOD;
+    int attackMODmain = ((DEX / 2) - 2);
+    int attackMODoff = (attackMODmain - 1);
 
     Sleep(500);
     printf("---------------------------\n");
@@ -52,6 +62,7 @@ void archerSheet() {
     printf("|     - Backpack          |\n");
     printf("---------------------------\n");
 }
+
 void crusaderSheet() {
     int lvl = 1;
     int STR = 5;
@@ -59,6 +70,12 @@ void crusaderSheet() {
     int VIT = 5;
     int MGC = 1;
     int classHPX = 12;
+
+    int bonusDMG = (((STR / 2) - 2) + lvl);
+
+    int attackMOD;
+    int attackMODmain = ((STR / 2) - 2);
+    int attackMODoff = (attackMODmain - 1);
 
     Sleep(500);
     printf("---------------------------\n");
@@ -73,12 +90,13 @@ void crusaderSheet() {
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
-    printf("|     - Flail             |\n");
+    printf("|     - Longsword         |\n");
     printf("|     - Shield            |\n");
-    printf("|     - Plate   Armor     |\n");
+    printf("|     - Plate Armor       |\n");
     printf("|     - Backpack          |\n");
     printf("---------------------------\n");
 }
+
 void sorcererSheet() {
     int lvl = 1;
     int STR = 5;
@@ -86,6 +104,13 @@ void sorcererSheet() {
     int VIT = 5;
     int MGC = 1;
     int classHPX = 8;
+
+    int bonusDMGspell = (((MGC / 2) - 2) + lvl);
+    int bonusDMG = (((DEX / 2) - 2) + lvl);
+
+    int attackMOD;
+    int attackMODoff = (((DEX / 2) - 2) - 1);
+    int attackMODspell = (attackMODoff - 1);
 
     Sleep(500);
     printf("---------------------------\n");
