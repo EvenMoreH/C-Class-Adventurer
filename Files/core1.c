@@ -116,6 +116,9 @@ struct item {
 //into
 void intro();
 
+// Clear buffer
+void clearBuffer();
+
 // selecting a character
 void chooseCharacter();
 void printCharacterSheet(int currentChar);
@@ -641,7 +644,8 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
     int attackMODmain;
     int attackMOD = attackMODmain;
     int attackRoll = 7 + attackMOD + random;
-
+    
+    Sleep(1000);
     printf("> You attack with your [%s].\n", held[itemID].iname);
     Sleep(1000);
 
@@ -670,6 +674,7 @@ void attackRollOff(int offWeapon, int bonusDMG) {
     int attackMOD = attackMODoff;
     int attackRoll = 7 + attackMOD + random;
     
+    Sleep(1000);
     printf("> You attack with your [%s].\n", held[itemID].iname);
     Sleep(1000);
 
@@ -796,4 +801,12 @@ void selectionABC() {
         // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
         }
     }
+}
+
+void clearBuffer() {
+    // Clear the input buffer
+    int clearBuffer;
+    while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
+    // I don't get the above yet but:
+    // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
 }
