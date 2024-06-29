@@ -133,7 +133,7 @@ void selectionAB();
 void attackRollMain(int mainWeapon, int bonusDMG);
 void attackRollOff(int equippedWeaponOff, int bonusDMG);
 void attackRollSpell(int equippedSpell, int bonusDMGspell);
-int damage(int itemID, int bonusDMG);
+int playerDamage(int itemID, int bonusDMG);
 int damageConsumable(int itemID);
 
 void healingPotion();
@@ -250,7 +250,7 @@ int damageConsumable(int itemID) {
     return dmg;
 }
 
-int damage(int itemID, int bonusDMG) {
+int playerDamage(int itemID, int bonusDMG) {
     int x = held[itemID].minDMG;
     int y = held[itemID].maxDMG;
     int randomDmgRoll = x + rand() % y;
@@ -258,6 +258,8 @@ int damage(int itemID, int bonusDMG) {
     dmg = bonusDMG + randomDmgRoll;
 
     printf("> You Deal [%i] damage!\n", dmg);
+
+    monsterDmgTaken = dmg;
 
     return bonusDMG + randomDmgRoll;
 }

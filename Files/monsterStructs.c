@@ -10,6 +10,7 @@
 ////  GLOBAL VARIABLES  ////////////////////////////////////////////////////////////////////////////
 int monsterID;
 int monsterDmgDone;
+int monsterCurrentHP;   // NEW
 int playerDmgTaken;
 int playerCurrentHP;
 
@@ -43,29 +44,44 @@ struct monster monsters[] = {
 ////  FUNCTION DECLARATION  ////////////////////////////////////////////////////////////////////////
 
 int playerHP(int playerDmgTaken);
-int monsterDamage(int monsterID);
+int monsterDamage1(int monsterID);
+int monsterDamage2(int monsterID);
+int monsterDamage3(int monsterID);
 
+void monsterAction(int monsterID);  // NEW
 
 int main() {
     /////////////////////////////////////////////////
         srand(time(NULL));  // declaring randomize //
     /////////////////////////////////////////////////
 
-    playerCurrentHP = 50;       // for testing manual declaration
+    playerCurrentHP = 40;       // for testing manual declaration
     
+    monsterCurrentHP = 30;
 
-    monsterDamage(1);
+
+    monsterAction(3);
     Sleep(1000);
     playerHP(playerDmgTaken);
     Sleep(1000);
-    monsterDamage(2);
+
+    monsterAction(3);
     Sleep(1000);
     playerHP(playerDmgTaken);
     Sleep(1000);
-    monsterDamage(3);
+    monsterAction(3);
     Sleep(1000);
     playerHP(playerDmgTaken);
     Sleep(1000);
+    monsterAction(3);
+    Sleep(1000);
+    playerHP(playerDmgTaken);
+    Sleep(1000);
+    monsterAction(3);
+    Sleep(1000);
+    playerHP(playerDmgTaken);
+    Sleep(1000);
+
 
     printf("\nEOF\n");
     Sleep(30000);
@@ -77,7 +93,7 @@ int main() {
 
     // function to random roll which attack was used and prints what attack was used should be here
 
-int monsterDamage(int monsterID) {
+int monsterDamage1(int monsterID) {
     int x = monsters[monsterID].monsterAttack1minDMG;
     int y = monsters[monsterID].monsterAttack1maxDMG;
 
@@ -85,7 +101,37 @@ int monsterDamage(int monsterID) {
 
     monsterDmgDone = randomDmgRoll;
 
-    printf("> [%s] deals [%i] damage!\n", monsters[monsterID].monsterName, monsterDmgDone);
+    printf("> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
+
+    playerDmgTaken = monsterDmgDone;
+
+    return randomDmgRoll;
+}
+
+int monsterDamage2(int monsterID) {
+    int x = monsters[monsterID].monsterAttack2minDMG;
+    int y = monsters[monsterID].monsterAttack2maxDMG;
+
+    int randomDmgRoll = x + rand() % y;
+
+    monsterDmgDone = randomDmgRoll;
+
+    printf("> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
+
+    playerDmgTaken = monsterDmgDone;
+
+    return randomDmgRoll;
+}
+
+int monsterDamage3(int monsterID) {
+    int x = monsters[monsterID].monsterAttack2minDMG;
+    int y = monsters[monsterID].monsterAttack2maxDMG;
+
+    int randomDmgRoll = x + rand() % y;
+
+    monsterDmgDone = randomDmgRoll;
+
+    printf("> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack3, monsterDmgDone);
 
     playerDmgTaken = monsterDmgDone;
 
@@ -112,5 +158,33 @@ int playerHP(int playerDmgTaken) {
     else
     {
         printf("> Your current HP: [%i]\n", playerCurrentHP);
+    }
+}
+
+void monsterAction(int monsterID) {
+    int randomActionRoll = 1 + rand() % 100;
+    int monsterAttackRoll = 1 + rand() % 20;
+    
+    if (monsterCurrentHP > monsters[monsterID].monsterTreshold)
+    {
+        if (monsterAttackRoll < 4)
+        {
+            printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+        }
+        else
+        {
+            if (randomActionRoll >= 40)
+            {
+                monsterDamage1(monsterID);
+            }
+            else
+            {
+                monsterDamage2(monsterID);
+            }
+        }
+    }
+    else
+    {
+        monsterDamage3(monsterID);
     }
 }
