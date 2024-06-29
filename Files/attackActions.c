@@ -43,6 +43,10 @@
     int playerMaxHP;
     int playerCurrentHP;
 
+    // monsters:
+        // temp - proper one is in CORE1
+    int monsterDmgTaken;
+
 // Locations - global
     // Location IDs = 200-210
 int location;
@@ -240,19 +244,22 @@ int damageConsumable(int itemID) {
     dmg = x + rand() % y;
 
     printf("> You Deal [%i] damage!\n", dmg);
-
-    return  x + rand() % y;
+    
+    monsterDmgTaken = dmg;
+    
+    return dmg;
 }
 
 int damage(int itemID, int bonusDMG) {
     int x = held[itemID].minDMG;
     int y = held[itemID].maxDMG;
+    int randomDmgRoll = x + rand() % y;
 
-    dmg = bonusDMG + x + rand() % y;
+    dmg = bonusDMG + randomDmgRoll;
 
     printf("> You Deal [%i] damage!\n", dmg);
 
-    return bonusDMG + x + rand() % y;
+    return bonusDMG + randomDmgRoll;
 }
 
 void attackRollMain(int mainWeapon, int bonusDMG) {
