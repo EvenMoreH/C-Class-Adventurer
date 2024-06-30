@@ -57,6 +57,9 @@
     char monsterRun[] = "Run";      // NEW  // required for monster Run check
     int monsterDmgTakenLog;   // log testing to skip dmg logs if dmg = 0
 
+    // ITEM Shortcuts
+    int potion = 11;
+
 
 //// STRUCTS ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -228,6 +231,10 @@ int main() {
     chooseCharacter();
     printCharacterSheet(currentChar);
 
+    addToBag(13);
+    addToBag(8);
+    addToBag(9);
+
 
     printf("> Would you like to enter this cave?\n");
 
@@ -247,20 +254,20 @@ int main() {
         if (result == 0)
         {
             Sleep(1000);
-            printf("> You go deeper and find a giant rat!\n");
+            printf("> You go deeper and find something lurking in the shadows!\n");
             Sleep(1000);
 
             encounter(1);
 
             Sleep(1000);
-            if (monsterCurrentHP > 0)
+            if (monsterCurrentHP > 0)   // ergo monster still alive
             {
-                printf("{TEMP}> You return to the cave entrance in [Location].\n");
+                printf("{TEMP}> You escaped and returned to the cave entrance in [Location].\n");
             }
             else
             {
-                foundItem(4);
-                addToBag(4);
+                foundItem(potion);  // shortcut for potions as int potions = 11
+                addToBag(potion);   // shortcut for potions as int potions = 11
                 whatsInTheBag();
             }
         }
@@ -681,11 +688,12 @@ void removeFromBag(int itemID) {
 }
 
 void foundItem(int itemID) {
-    Sleep(2000);
+    Sleep(1000);
+    printf("\n");
     printf("-----------------------------------\n");
     printf("> You found [%s]\n", items[itemID].iname);
     printf("-----------------------------------\n");
-    Sleep(2000);
+    Sleep(1000);
 }
 
 //  Locations  /////////////////////////////////////////////////////////////////////////////////////
@@ -696,11 +704,11 @@ void discoveredLocation(int location) {
     {
         if (location == locations[i].locationID)
         {
-            Sleep(2000);
+            Sleep(1000);
             printf("\n-----------------------------------\n");
             printf("> You discovered [%s]\n", locations[i].locationName);
             printf("-----------------------------------\n\n");
-            Sleep(2000);
+            Sleep(1000);
             break;
         }
     }
@@ -782,6 +790,8 @@ int damageConsumable(int itemID) {
     printf("> You Deal [%i] damage!\n", dmg);
     
     monsterDmgTaken = dmg;
+
+    monsterDmgTakenLog = dmg;
     
     return dmg;
 }
@@ -942,7 +952,7 @@ void itemSelect() {
         Sleep(100);
         if (strcmp(backpack[i].iname, items[11].iname) != 0)
         {
-            backpackEmpty1 = 1; // wombo combo to check if there are any healing items in backpack 
+            backpackEmpty1 += 1; // wombo combo to check if there are any healing items in backpack 
             backpackArray[i] = 99;
             continue;
         }
@@ -966,7 +976,7 @@ void itemSelect() {
             }
             else
             {
-                backpackEmpty2 = 1; // wombo combo to check if there are any damaging items in backpack 
+                backpackEmpty2 += 1; // wombo combo to check if there are any damaging items in backpack 
                 continue;
             }
         }
@@ -989,9 +999,11 @@ void itemSelect() {
     printf("\n");
     Sleep(1000);
 
-    if (backpackEmpty1 == 1 && backpackEmpty2 == 1)
+    if (backpackEmpty1 == 10 && backpackEmpty2 == 10)
     {
-        printf("> Backpack seems to be empty...\n");
+        monsterDmgTakenLog = 0;
+
+        printf("> Backpack is either empty or these are not consumable items...\n");
         Sleep(250);
         printf("> Dont waste your turns [%s].\n", name);
         Sleep(1000);
@@ -1033,10 +1045,11 @@ void itemSelect() {
                             printf("You have used [%s]\n", backpack[chosenItem].iname);
                             Sleep(1000);
                             damageConsumable(backpack[chosenItem].id);
+                            removeFromBag(backpack[chosenItem].id);
+                            whatsInTheBag();
                         }
                         else
                         {
-                            printf("> Backpack seems to be empty...\n");
                             break;
                         }
                         
@@ -1056,10 +1069,11 @@ void itemSelect() {
                             Sleep(1000);
                             printf("You have used [%s]\n", backpack[chosenItem].iname);
                             healingPotion();
+                            removeFromBag(backpack[chosenItem].id);
+                            whatsInTheBag();
                         }
                         else
                         {
-                            printf("> Backpack seems to be empty...\n");
                             break;
                         }
                     }   
@@ -1312,6 +1326,8 @@ int monsterDamageOpportunity(int monsterID) {
     playerDmgTaken = monsterDmgDone;
 
     return randomDmgRoll;
+
+    playerDmgTakenLog = monsterDmgDone;
 }
 
 void monsterAction(int monsterID) {
@@ -1324,7 +1340,7 @@ void monsterAction(int monsterID) {
     {
         if (monsterAttackRoll < 4)
         {
-            printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+            printf("\n> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
         }
@@ -1370,16 +1386,24 @@ void monsterAction(int monsterID) {
         }
         else
         {
-            if (strcmp(monsters[monsterID].monsterAttack3, monsterRun) == 0)
+            if (monsterCurrentHP > 0)
             {
-                playerDmgTaken = 0;
-                printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
-                playerDmgTakenLog = 0;
-                combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
+                if (strcmp(monsters[monsterID].monsterAttack3, monsterRun) == 0)
+                {
+                    playerDmgTaken = 0;
+                    printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
+                    playerDmgTakenLog = 0;
+                    monsterCurrentHP = 0;
+                    combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
+                }
+                else
+                {
+                monsterDamage3(monsterID);
+                }
             }
             else
             {
-            monsterDamage3(monsterID);
+                // skip cause "Enemy Defeated was already displayed"
             }
         }
     }
