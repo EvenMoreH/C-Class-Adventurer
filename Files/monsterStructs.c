@@ -50,6 +50,7 @@ int playerHP(int playerDmgTaken);
 int monsterDamage1(int monsterID);
 int monsterDamage2(int monsterID);
 int monsterDamage3(int monsterID);
+int monsterDamageOpportunity(int monsterID);    // NEW
 
 void monsterAction(int monsterID);  // NEW
 
@@ -143,6 +144,21 @@ int monsterDamage3(int monsterID) {
     return randomDmgRoll;
 }
 
+int monsterDamageOpportunity(int monsterID) {
+    int x = monsters[monsterID].monsterAttack1minDMG;
+    int y = monsters[monsterID].monsterAttack1maxDMG;
+
+    int randomDmgRoll = x + rand() % y;
+
+    monsterDmgDone = randomDmgRoll;
+
+    // printf("> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
+
+    playerDmgTaken = monsterDmgDone;
+
+    return randomDmgRoll;
+}
+
 ////////////////////////////////
 
 int playerHP(int playerDmgTaken) {
@@ -225,7 +241,7 @@ void monsterAction(int monsterID) {
             {
                 playerDmgTaken = 0;
                 printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
-                int combatEnd = 1;  // TEMP Variable to end the combat without using break; outside of while loop
+                int combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
             }
             else
             {

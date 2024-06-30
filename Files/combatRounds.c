@@ -50,6 +50,9 @@ int monsterCurrentHP;
 int monsterDmgDone;     // NEW
 int monsterDmgTaken;    // NEW
 
+// NEW: Combat
+int combatEnd;
+
 // Global item management
 struct item {
     int id;
@@ -110,6 +113,7 @@ struct item {
 int monsterHP(int monsterDmgTaken);
 int playerDamage(int itemID, int bonusDMG);
 
+void encounter(monsterID);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,22 +134,11 @@ int main() {
 
     held[0] = items[1];
 
-    int r = 0;
-    while (monsterCurrentHP > 0 && playerCurrentHP > 0)
-    {   
-        r++;
-        printf("\nRound %i:\n", r);
-        Sleep(500);
-        
-        playerCurrentHP = playerCurrentHP - playerDmgTaken;
-        printf("Player current HP: %i\n", playerCurrentHP); // PLACEHOLDER
-        
-        // to track monsterHP and playerDamage:
-        // playerDamage function will assign rolled dmg value to monsterDmgTaken variable
-        playerDamage(0, 2);
-        monsterHP(monsterDmgTaken);
-        Sleep(500);
-    }
+
+
+
+    
+
 
     return 0;
 }
@@ -186,4 +179,27 @@ int playerDamage(int itemID, int bonusDMG) {
     monsterDmgTaken = dmg;
 
     return bonusDMG + randomDmgRoll;
+}
+
+void encounter(monsterID) {
+    int r = 0;
+    combatEnd = 1;
+
+    while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
+    {   
+        r++;
+        printf("\nRound %i:\n", r);
+        Sleep(500);
+        
+        combatAction(monsterID);
+        Sleep(500);
+
+        monsterHP(monsterDmgTaken);
+        Sleep(500);
+
+        monsterAction(monsterID);
+        Sleep(500);
+
+        playerHP(playerDmgTaken);
+    }
 }

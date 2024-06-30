@@ -141,7 +141,7 @@ void healingPotion();
 void whatsInTheBag();
 void itemSelect();
 
-void combatAction();
+void combatAction(int monsterID);
 
 
 
@@ -548,7 +548,7 @@ void healingPotion() {
     }
 }
 
-void combatAction() {
+void combatAction(int monsterID) {
 
     monsterDmgTaken = 0;
 
@@ -592,11 +592,12 @@ void combatAction() {
         Sleep(500);
         printf("> You retreat and run back to the Town!\n");
         Sleep(500);
-        printf("{TEMP}> [Monster] catches your skin with its [Weapon]!\n");
+
+        printf("}> [%s] catches your skin with its [%s]!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1);
         Sleep(500);
-        printf("{TEMP}> You receive XYZ damage!\n");
+        monsterDamageOpportunity(monsterID);
         Sleep(500);
-        printf("{TEMP}> You current HP is: ABC!\n");
+        playerHP(playerDmgTaken);
         Sleep(500);
     }
 }
