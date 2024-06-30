@@ -549,6 +549,9 @@ void healingPotion() {
 }
 
 void combatAction() {
+
+    monsterDmgTaken = 0;
+
     printf("> Choose your action:\n");
     Sleep(1000);
     printf("A. Attack\n");

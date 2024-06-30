@@ -10,9 +10,12 @@
 ////  GLOBAL VARIABLES  ////////////////////////////////////////////////////////////////////////////
 int monsterID;
 int monsterDmgDone;
+int monsterDmgTaken;    // New
 int monsterCurrentHP;   // NEW
 int playerDmgTaken;
 int playerCurrentHP;
+int specialMonsterAttack = 0;   // NEW  // required for monster to only use special attack once
+char monsterRun[] = "Run";      // NEW  // required for monster Run check
 
 struct monster {
     int monsterID;
@@ -28,7 +31,7 @@ struct monster {
     char monsterAttack3[20];    // if treshold is triggered
     int monsterAttack3minDMG;
     int monsterAttack3maxDMG;
-    int monsterTreshold; // (if monsterCurrentHP <= monsterTreshold use special attack once and break;)
+    int monsterThreshold; // (if monsterCurrentHP <= monsterTreshold use special attack once and break;)
 };
 
 // monsterIDs = 400 - 499
@@ -57,10 +60,10 @@ int main() {
 
     playerCurrentHP = 40;       // for testing manual declaration
     
-    monsterCurrentHP = 30;
+    monsterCurrentHP = 3;
 
 
-    monsterAction(3);
+    monsterAction(1);
     Sleep(1000);
     playerHP(playerDmgTaken);
     Sleep(1000);
@@ -135,6 +138,8 @@ int monsterDamage3(int monsterID) {
 
     playerDmgTaken = monsterDmgDone;
 
+    specialMonsterAttack = 1;
+
     return randomDmgRoll;
 }
 
@@ -162,14 +167,17 @@ int playerHP(int playerDmgTaken) {
 }
 
 void monsterAction(int monsterID) {
+    playerDmgTaken = 0;
+    
     int randomActionRoll = 1 + rand() % 100;
     int monsterAttackRoll = 1 + rand() % 20;
     
-    if (monsterCurrentHP > monsters[monsterID].monsterTreshold)
+    if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
         if (monsterAttackRoll < 4)
         {
             printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+            playerDmgTaken = 0;
         }
         else
         {
@@ -185,6 +193,44 @@ void monsterAction(int monsterID) {
     }
     else
     {
-        monsterDamage3(monsterID);
+        if (specialMonsterAttack > 0)
+        {
+            playerDmgTaken = 0;
+
+            randomActionRoll = 1 + rand() % 100;
+            monsterAttackRoll = 1 + rand() % 20;
+
+            if (monsterAttackRoll < 4)
+            {
+                printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+                playerDmgTaken = 0;
+                printf("\nTEST: MAR = %i\n", monsterAttackRoll);
+
+            }
+            else
+            {
+                if (randomActionRoll >= 40)
+                {
+                    monsterDamage1(monsterID);
+                }
+                else
+                {
+                    monsterDamage2(monsterID);
+                }
+            }
+        }
+        else
+        {
+            if (strcmp(monsters[monsterID].monsterAttack3, monsterRun) == 0)
+            {
+                playerDmgTaken = 0;
+                printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
+                int combatEnd = 1;  // TEMP Variable to end the combat without using break; outside of while loop
+            }
+            else
+            {
+            monsterDamage3(monsterID);
+            }
+        }
     }
 }
