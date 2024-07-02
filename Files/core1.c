@@ -11,6 +11,7 @@
     int itemID;
     int combatEnd;
     char name[50];
+    int daze;
 
 
     // selected character
@@ -228,7 +229,7 @@ void monsterAction(int monsterID);  // NEW
 int main() {
     randomize();
 
-    intro();
+    // intro();
 
     chooseCharacter();
     printCharacterSheet(currentChar);
@@ -456,7 +457,6 @@ void intro() {
         Sleep(250);
         printf("> Y for Yes\n");
         Sleep(250);
-        Sleep(250);
         printf("> N for No\n");
         Sleep(250);
         printf("> A to select 1st option\n");
@@ -468,6 +468,16 @@ void intro() {
         printf("> When managing your backpack you will be selecting items by pressing correct number\n");
         Sleep(250);
         printf("> All of your inputs you can confirm by pressing Enter\n\n");
+
+        printf("> When attacking there is a chance to miss your opponents.\n");
+        Sleep(250);
+        printf("> Attacking with off hand weapon has even lower chance to hit but can daze your enemy forcing it to miss.\n");
+        Sleep(250);
+        printf("> When your bag is empty and you would try to use items in combat you will waste your turn so beware.\n");
+        Sleep(250);
+        printf("> Anyway!\n\n");
+        Sleep(250);
+
         Sleep(1000);
         printf("> Good Luck!\n\n");
 }
@@ -638,7 +648,7 @@ void encounter(int monsterID) {
     printf("\n> ---------------------------------------------\n");
     printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
     printf("> ---------------------------------------------\n");
-    printf("> Your current HP is [%i].\n", playerCurrentHP);
+    printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
     whatsInTheBag();
 
     Sleep(1000);
@@ -727,7 +737,7 @@ void foundItem(int itemID) {
 
     if (itemID == potion && playerCurrentHP < playerMaxHP)
     {
-        printf("> Currently you have [%i] Health.\n", playerCurrentHP);
+        printf("> Currently you have [%i/%i] Health.\n", playerCurrentHP, playerMaxHP);
         Sleep(500);
         printf("> Would you like to drink it immediately?\n");
         
@@ -816,7 +826,7 @@ int playerHP(int playerDmgTaken) {
         }
         else
         {
-            printf("> Your current HP: [%i]\n", playerCurrentHP);
+            printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
         }
     }
 }
@@ -968,7 +978,29 @@ void attackRollOff(int offWeapon, int bonusDMG) {
         hit = 0;
         printf("> HIT!\n");
         Sleep(1000);
+        
+        int isDazed = 1 + rand() % 100;
+        if (isDazed > 50)
+        {
+            daze = 100;
+            switch (currentChar)
+            {
+            case 900:
+                printf("> You strike deep, opening a big wound in your opponents guts rendering the creature shocked.\n");
+                break;
+                
+                case 901:
+                printf("> You strike with force so great that you daze your enemy.\n");
+                break;
+            
+                case 902:
+                printf("> You strike with such precision that your adversary is stunned.\n");
+                break;
+            }
+        }
+
         playerDamage(itemID, bonusDMG);
+
     }
 }
 
@@ -1176,7 +1208,7 @@ void healingPotion() {
                     Sleep(1000);
                     printf("> You restore [10 Health].\n");
                     Sleep(1000);
-                    printf("> You current health is: [%i].\n", playerCurrentHP);
+                    printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
                     break;
                 }
             }
@@ -1197,9 +1229,49 @@ if (playerCurrentHP > playerMaxHP)
 Sleep(1000);
 printf("> You restore [10 Health].\n");
 Sleep(1000);
-printf("> You current health is: [%i].\n", playerCurrentHP);
+printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
 }
 
+void regenerate() {
+    int tempPotion = 0;
+    
+    for (int i = 0; i < 10; i++)
+    {
+        if (strcmp(backpack[i].iname, items[11].iname) != 0)
+        {
+            continue;
+        }
+        else
+        {   
+            tempPotion++;
+        }
+    }
+    if (playerCurrentHP < playerMaxHP)
+    {
+        if (tempPotion > 0)
+        {
+            printf("\n> Your current Health is: [%i/%i]\n", playerCurrentHP, playerMaxHP);
+            printf("> You have [%i]x [%s] in your backpack.\n", tempPotion, items[11].iname);
+
+            printf("> Would you like to use one?\n");
+            decision();
+            if (result == 0)
+            {
+                healingPotion();
+                removeFromBag(potion);
+                whatsInTheBag();
+            }
+            else
+            {
+                printf("> Sure! Better to save it for later.\n");
+            }
+        }
+        else
+        {
+            printf("\n> Wounded, you think about drinking a [Healing Potion] but there is none in your backpack... Maybe next time.\n");
+        }
+    }
+}
 
 //  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
 
@@ -1415,7 +1487,7 @@ void monsterAction(int monsterID) {
     playerDmgTaken = 0;
     
     int randomActionRoll = 1 + rand() % 100;
-    int monsterAttackRoll = 1 + rand() % 20;
+    int monsterAttackRoll = (1 + rand() % 20) - daze;
     
     if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
@@ -1424,16 +1496,24 @@ void monsterAction(int monsterID) {
             printf("\n> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
+            if (daze == 100)
+            {
+                printf("\n> [%s] is no longer dazed!\n", monsters[monsterID].monsterName);
+
+            }
+            daze = 0;
         }
         else
         {
             if (randomActionRoll >= 40)
             {
                 monsterDamage1(monsterID);
+                daze = 0;
             }
             else
             {
                 monsterDamage2(monsterID);
+                daze = 0;
             }
         }
     }
@@ -1452,16 +1532,19 @@ void monsterAction(int monsterID) {
                 printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
                 playerDmgTaken = 0;
                 playerDmgTakenLog = 0;
+                daze = 0;
             }
             else
             {
                 if (randomActionRoll >= 40)
                 {
                     monsterDamage1(monsterID);
+                    daze = 0;
                 }
                 else
                 {
                     monsterDamage2(monsterID);
+                    daze = 0;
                 }
             }
         }
@@ -1476,59 +1559,19 @@ void monsterAction(int monsterID) {
                     playerDmgTakenLog = 0;
                     monsterCurrentHP = 0;
                     combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
+                    daze = 0;
                 }
                 else
                 {
                 monsterDamage3(monsterID);
+                daze = 0;
                 }
             }
             else
             {
                 // skip cause "Enemy Defeated was already displayed"
+                daze = 0;
             }
         }
-    }
-}
-
-
-void regenerate() {
-    int tempPotion = 0;
-    
-    for (int i = 0; i < 10; i++)
-    {
-        if (strcmp(backpack[i].iname, items[11].iname) != 0)
-        {
-            continue;
-        }
-        else
-        {   
-            tempPotion++;
-        }
-    }
-    if (playerCurrentHP < playerMaxHP)
-    {
-        if (tempPotion > 0)
-        {
-            printf("\n> Your current Health is: [%i]\n", playerCurrentHP);
-            printf("> You have [%i]x [%s] in your backpack.\n", tempPotion, items[11].iname);
-
-            printf("> Would you like to use one?\n");
-            decision();
-            if (result == 0)
-            {
-                healingPotion();
-                removeFromBag(potion);
-                whatsInTheBag();
-            }
-            else
-            {
-                printf("> Sure! Better to save it for later.\n");
-            }
-        }
-        else
-        {
-            printf("> Wounded, you think about drinking a [Potion] but there is none in your backpack... Maybe next time.\n");
-        }
-        
     }
 }
