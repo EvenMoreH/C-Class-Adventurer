@@ -207,14 +207,15 @@ void attackRollOff(int equippedWeaponOff, int bonusDMG);
 void attackRollSpell(int equippedSpell, int bonusDMGspell);
 void itemSelect();
 void healingPotion();
+void regenerate();      // NEW - asking if potions should be used after combat
 
 //  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
 void decision();
 void selectionAB();
 void selectionABC();
 
-// MONSTERS ////////////////////////////////////////////////////////////////////////////////////////
-int monsterHP(int monsterDmgTaken);
+// Monsters ////////////////////////////////////////////////////////////////////////////////////////
+int monsterHP(int monsterDmgTaken, int monsterID);
 int monsterMaxHP(int monsterID);
 int monsterDamage1(int monsterID);
 int monsterDamage2(int monsterID);
@@ -231,8 +232,10 @@ int main() {
     chooseCharacter();
     printCharacterSheet(currentChar);
 
+    // lets give some items for testing
     addToBag(13);
-    addToBag(8);
+    addToBag(potion);
+    addToBag(potion);
     addToBag(9);
 
 
@@ -266,8 +269,8 @@ int main() {
             }
             else
             {
-                foundItem(potion);  // shortcut for potions as int potions = 11
-                addToBag(potion);   // shortcut for potions as int potions = 11
+                foundItem(4);  // shortcut for potions as int potions = 11
+                addToBag(4);   // shortcut for potions as int potions = 11
                 whatsInTheBag();
             }
         }
@@ -642,7 +645,7 @@ void encounter(int monsterID) {
         combatAction(monsterID);
         Sleep(500);
 
-        monsterHP(monsterDmgTaken);
+        monsterHP(monsterDmgTaken, monsterID);
         Sleep(500);
 
         monsterAction(monsterID);
@@ -650,6 +653,12 @@ void encounter(int monsterID) {
 
         playerHP(playerDmgTaken);
     }
+
+    if (playerCurrentHP > 0 && combatEnd == 0)
+    {
+        regenerate();
+    }
+    
 }
 
 //  Backpack & Item Management  ////////////////////////////////////////////////////////////////////
@@ -1225,7 +1234,7 @@ void selectionABC() {
 
 // MONSTERS ////////////////////////////////////////////////////////////////////////////////////////
 
-int monsterHP(int monsterDmgTaken) {
+int monsterHP(int monsterDmgTaken, int monsterID) {
     monsterCurrentHP = monsterCurrentHP - monsterDmgTaken;
 
     if (monsterDmgTakenLog == 0)
@@ -1235,22 +1244,26 @@ int monsterHP(int monsterDmgTaken) {
     else
     {
         Sleep(1000);
-        printf("> Monster have taken: [%i] damage.\n", monsterDmgTaken);
+        printf("> [%s] have taken: [%i] damage.\n", monsters[monsterID].monsterName, monsterDmgTaken);
 
         if (monsterCurrentHP <= 0)
         {
             monsterCurrentHP = 0;
+            playerDmgTaken = 0;
+            playerDmgTakenLog = 0;
+            combatEnd = 0;
             Sleep(1000);
-            printf("-------------------\n");
+            printf("-----------------------------\n");
             Sleep(200);
-            printf("> [Enemy] defeated.\n");
+            printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
             Sleep(200);
-            printf("-------------------\n");
+            printf("-----------------------------\n");
             Sleep(2000);
+
         }
         else
         {
-            printf("> [Monster] current HP: [%i]\n", monsterCurrentHP);
+            printf("> [%s] current HP: [%i]\n", monsters[monsterID].monsterName, monsterCurrentHP);
         }
     }
 }
@@ -1404,6 +1417,44 @@ void monsterAction(int monsterID) {
             else
             {
                 // skip cause "Enemy Defeated was already displayed"
+            }
+        }
+    }
+}
+
+
+void regenerate() {
+    int tempPotion = 0;
+    
+    for (int i = 0; i < 10; i++)
+    {
+        if (strcmp(backpack[i].iname, items[11].iname) != 0)
+        {
+            continue;
+        }
+        else
+        {   
+            tempPotion++;
+        }
+    }
+    if (playerCurrentHP < playerMaxHP)
+    {
+        if (tempPotion > 0)
+        {
+            printf("\n> Your current Health is: [%i]\n", playerCurrentHP);
+            printf("> You have [%i]x [%s] in your backpack.\n", tempPotion, items[11].iname);
+
+            printf("> Would you like to use one?\n");
+            decision();
+            if (result == 0)
+            {
+                healingPotion();
+                removeFromBag(potion);
+                whatsInTheBag();
+            }
+            else
+            {
+                printf("> Sure! Better to save it for later.\n");
             }
         }
     }
