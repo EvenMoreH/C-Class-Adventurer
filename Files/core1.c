@@ -186,7 +186,7 @@ void encounter(int monsterID);
 
 //  Backpack & Item Management  ////////////////////////////////////////////////////////////////////
 void whatsInTheBag();
-void addToBag(int itemID);
+int addToBag(int itemID);
 void removeFromBag(int itemID);
 void foundItem(int itemID);
 
@@ -207,6 +207,7 @@ void attackRollOff(int equippedWeaponOff, int bonusDMG);
 void attackRollSpell(int equippedSpell, int bonusDMGspell);
 void itemSelect();
 void healingPotion();
+void instantHealingPotion();    // New for instant heal when potion is found and player has less than full HP
 void regenerate();      // NEW - asking if potions should be used after combat
 
 //  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
@@ -234,9 +235,15 @@ int main() {
 
     // lets give some items for testing
     addToBag(13);
-    addToBag(potion);
-    addToBag(potion);
+    // addToBag(potion);
+    // addToBag(potion);
     addToBag(9);
+    addToBag(9);
+    addToBag(9);
+    addToBag(9);
+    addToBag(9);
+
+
 
 
     printf("> Would you like to enter this cave?\n");
@@ -270,7 +277,7 @@ int main() {
             else
             {
                 foundItem(4);  // shortcut for potions as int potions = 11
-                addToBag(4);   // shortcut for potions as int potions = 11
+                foundItem(11);  // shortcut for potions as int potions = 11
                 whatsInTheBag();
             }
         }
@@ -674,15 +681,29 @@ void whatsInTheBag() {
     Sleep(1000);
 }
 
-void addToBag(int itemID) {
+int addToBag(int itemID) {
+    int tempBackpack = 0;
+
     for (int i = 0; i < 10; i++)
     {
         if (strcmp(backpack[i].iname, items[0].iname) == 0)
         {
             backpack[i] = items[itemID];
+            printf("> [%s] was added to your bag.\n", items[itemID].iname);
             break;
         }
+        else
+        {
+            tempBackpack++;
+        }
+        
+        if (tempBackpack == 10)
+        {
+            printf("> Your backpack is full.\n");
+        }
     }
+
+    return tempBackpack;
 }
 
 void removeFromBag(int itemID) {
@@ -703,6 +724,37 @@ void foundItem(int itemID) {
     printf("> You found [%s]\n", items[itemID].iname);
     printf("-----------------------------------\n");
     Sleep(1000);
+
+    if (itemID == potion && playerCurrentHP < playerMaxHP)
+    {
+        printf("> Currently you have [%i] Health.\n", playerCurrentHP);
+        Sleep(500);
+        printf("> Would you like to drink it immediately?\n");
+        
+        decision();
+
+        if (result == 0)
+        {
+            instantHealingPotion();
+        }
+        else if (result = 1)
+        {
+            Sleep(500);
+            printf("> You put it in the backpack for later use.\n");
+            // addToBag(itemID);
+            // TRIVIA: I could comment out above addToBag cause having it in if worked and output all data in said function
+            if (addToBag(itemID) == 10)
+            {
+                printf("> You decide to drink it anyway to avoid wasting it...\n");
+                Sleep(500);
+                instantHealingPotion();
+            }
+        }
+    }
+    else
+    {
+        addToBag(itemID);
+    }
 }
 
 //  Locations  /////////////////////////////////////////////////////////////////////////////////////
@@ -1133,6 +1185,22 @@ void healingPotion() {
     }
 }
 
+void instantHealingPotion() {
+
+playerCurrentHP = playerCurrentHP + 10;
+
+if (playerCurrentHP > playerMaxHP)
+{
+    playerCurrentHP = playerMaxHP;
+}
+
+Sleep(1000);
+printf("> You restore [10 Health].\n");
+Sleep(1000);
+printf("> You current health is: [%i].\n", playerCurrentHP);
+}
+
+
 //  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
 
 void decision() {
@@ -1457,5 +1525,10 @@ void regenerate() {
                 printf("> Sure! Better to save it for later.\n");
             }
         }
+        else
+        {
+            printf("> Wounded, you think about drinking a [Potion] but there is none in your backpack... Maybe next time.\n");
+        }
+        
     }
 }
