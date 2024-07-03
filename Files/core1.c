@@ -197,6 +197,7 @@ void whatsInTheBag();
 int addToBag(int itemID);
 void removeFromBag(int itemID);
 void foundItem(int itemID);
+void backpackFull(int itemID);
 
 //  Locations  ///////////////////////////////////////////////////////
 // Argument here is called location
@@ -249,14 +250,12 @@ int main() {
 
     // lets give some items for testing
     addToBag(13);
-    // addToBag(potion);
-    // addToBag(potion);
+    addToBag(potion);
+    addToBag(potion);
     addToBag(9);
     addToBag(9);
     addToBag(9);
     addToBag(9);
-    addToBag(9);
-
 
 
 
@@ -726,10 +725,63 @@ int addToBag(int itemID) {
         if (tempBackpack == 10)
         {
             printf("> Your backpack is full.\n");
+            backpackFull(itemID);
         }
     }
 
     return tempBackpack;
+}
+
+void backpackFull(int itemID) {
+    printf("> Would you like to replace one of the items?\n");
+    decision();
+    if (result == 0)
+    {
+        printf("> These are your items:\n");
+        printf("> ");
+
+        for (int i = 0; i < 10; i++)
+        {
+            Sleep(100);
+            printf(" [%i]. [%s]", i, backpack[i].iname);
+        }
+
+        printf("\n> Select one of the items to replace.\n> ");
+
+        int replacer;
+        while (1)
+        {
+            scanf(" %i", &replacer);
+
+            int replaceThis = backpack[replacer].id;
+
+            if (replacer >= 0 && replacer <= 10)
+            {
+                removeFromBag(replaceThis);
+                addToBag(itemID);
+                break;
+            }
+            else
+            {
+                Sleep(1000);
+                printf("Choose an actual item from the backpack!\n> ");
+                clearBuffer();
+            }
+        }
+    }
+    else
+    {
+        if (itemID == potion)
+        {
+            printf("> You decide to drink it anyway to avoid wasting it...\n");
+            Sleep(500);
+            instantHealingPotion();
+        }
+        else
+        {
+            printf("> You leave the item where it was.\n");
+        }
+    }
 }
 
 void removeFromBag(int itemID) {
@@ -770,12 +822,16 @@ void foundItem(int itemID) {
             // addToBag(itemID);
             // TRIVIA: I could comment out above addToBag cause having it in if worked
                 //  output all data in said function
-            if (addToBag(itemID) == 10)
-            {
-                printf("> You decide to drink it anyway to avoid wasting it...\n");
-                Sleep(500);
-                instantHealingPotion();
-            }
+
+            // if (addToBag(itemID) == 10)
+            // {
+            //     printf("> You decide to drink it anyway to avoid wasting it...\n");
+            //     Sleep(500);
+            //     instantHealingPotion();
+            // }
+
+            // code was changed here to reflect replacing items / drinking potions
+            addToBag(itemID);
         }
     }
     else
