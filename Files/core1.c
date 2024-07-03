@@ -171,7 +171,8 @@ struct item {
 
 //  Intro & Character Selection  ///////////////////////////////////////////////////////////////////
 void intro();
-void randomize();
+// Function used to kick off randomize
+void randomize();   
 void loading(int s);
 void chooseCharacter();
 void printCharacterSheet(int currentChar);
@@ -208,8 +209,10 @@ void attackRollOff(int equippedWeaponOff, int bonusDMG);
 void attackRollSpell(int equippedSpell, int bonusDMGspell);
 void itemSelect();
 void healingPotion();
-void instantHealingPotion();    // New for instant heal when potion is found and player has less than full HP
-void regenerate();      // NEW - asking if potions should be used after combat
+// if player founds a potion and has less than full HP it asks if drink immediately
+void instantHealingPotion();
+// asks if potion should be used after combat
+void regenerate();      
 
 //  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
 void decision();
@@ -229,7 +232,7 @@ void monsterAction(int monsterID);  // NEW
 int main() {
     randomize();
 
-    // intro();
+    intro();
 
     chooseCharacter();
     printCharacterSheet(currentChar);
@@ -654,7 +657,7 @@ void encounter(int monsterID) {
     Sleep(1000);
 
     while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
-    {   
+    {
         r++;
         printf("\nRound %i:\n", r);
         Sleep(500);
@@ -706,7 +709,6 @@ int addToBag(int itemID) {
         {
             tempBackpack++;
         }
-        
         if (tempBackpack == 10)
         {
             printf("> Your backpack is full.\n");
