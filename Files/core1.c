@@ -1,5 +1,5 @@
 #include <time.h>       // Copilot links it as required for randomizers
-#include <stdlib.h>     // StackOverflow says it is required to avoid "implicit declaration of function 'srand'" error while randomizing
+#include <stdlib.h>     // Copilot links it as required for randomizers
 #include <stdio.h>      // Standard library
 #include <stdbool.h>    // Library required to use booleans
 #include <string.h>     // Unlocks string functions
@@ -54,15 +54,17 @@
     int monsterCurrentHP;
     int monsterDmgDone;     // NEW
     int monsterDmgTaken;    // NEW
-    int specialMonsterAttack = 0;   // NEW  // required for monster to only use special attack once
-    char monsterRun[] = "Run";      // NEW  // required for monster Run check
+    // NEW  // required for monster to only use special attack once
+    int specialMonsterAttack = 0;
+    // NEW  // required for monster Run check
+    char monsterRun[] = "Run";
     int monsterDmgTakenLog;   // log testing to skip dmg logs if dmg = 0
 
     // ITEM Shortcuts
     int potion = 11;
 
 
-//// STRUCTS ///////////////////////////////////////////////////////////////////////////////////////
+//// STRUCTS /////////////////////////////////////////////////////////
 
 // Locations - global
     // Location IDs = 200-210
@@ -143,17 +145,21 @@ struct item {
         int monsterID;
         char monsterName[25];
         char monsterDescription[100];
-        int monsterBaseHP;          // required to initialize struct, will have a random value added to it to calculate MonsterMaxHP
+        // required to initialize struct,
+            // will have a random value added to it to calculate MonsterMaxHP
+        int monsterBaseHP;
         char monsterAttack1[20];
         int monsterAttack1minDMG;
         int monsterAttack1maxDMG;
         char monsterAttack2[20];
         int monsterAttack2minDMG;
         int monsterAttack2maxDMG;
-        char monsterAttack3[20];    // if threshold is triggered
+        // if threshold is triggered
+        char monsterAttack3[20];
         int monsterAttack3minDMG;
         int monsterAttack3maxDMG;
-        int monsterThreshold; // (if monsterCurrentHP <= monsterThreshold use special attack once and break;)
+        // (if monsterCurrentHP <= monsterThreshold use special attack once and break;)
+        int monsterThreshold;
     };
 
     // monsterIDs = 400 - 499
@@ -167,12 +173,12 @@ struct item {
     };
 
 
-////  FUNCTION DECLARATION  ////////////////////////////////////////////////////////////////////////
+////  FUNCTION DECLARATION  //////////////////////////////////////////
 
-//  Intro & Character Selection  ///////////////////////////////////////////////////////////////////
+//  Intro & Character Selection  /////////////////////////////////////
 void intro();
 // Function used to kick off randomize
-void randomize();   
+void randomize();
 void loading(int s);
 void chooseCharacter();
 void printCharacterSheet(int currentChar);
@@ -180,29 +186,33 @@ void archerSheet();
 void crusaderSheet();
 void sorcererSheet();
 
-//  Clear Buffer  //////////////////////////////////////////////////////////////////////////////////
+//  Clear Buffer  ////////////////////////////////////////////////////
 void clearBuffer();
 
-// Encounters //////////////////////////////////////////////////////////////////////////////////////
+// Encounters ////////////////////////////////////////////////////////
 void encounter(int monsterID);
 
-//  Backpack & Item Management  ////////////////////////////////////////////////////////////////////
+//  Backpack & Item Management  //////////////////////////////////////
 void whatsInTheBag();
 int addToBag(int itemID);
 void removeFromBag(int itemID);
 void foundItem(int itemID);
 
-//  Locations  /////////////////////////////////////////////////////////////////////////////////////
-void discoveredLocation(int location);      // Argument here is called location and should match one of the predefined location IDs
-void enterLocation(int location);           // Argument here is called location and should match one of the predefined location IDs
+//  Locations  ///////////////////////////////////////////////////////
+// Argument here is called location
+// and should match one of the predefined location IDs
+void discoveredLocation(int location);
+// Argument here is called location
+// and should match one of the predefined location IDs
+void enterLocation(int location);
 
-//  Player HP & Damage Roll  ///////////////////////////////////////////////////////////////////////
+//  Player HP & Damage Roll  /////////////////////////////////////////
 int playerDamage(int itemID, int bonusDMG);
 int damageConsumable(int itemID);
 int playerHP(int playerDmgTaken);
 int playerMaxHealth(int vitality, int classHPX);
 
-//  Player Actions in Combat  //////////////////////////////////////////////////////////////////////
+//  Player Actions in Combat  ////////////////////////////////////////
 void combatAction(int monsterID);
 void attackRollMain(int mainWeapon, int bonusDMG);
 void attackRollOff(int equippedWeaponOff, int bonusDMG);
@@ -212,14 +222,14 @@ void healingPotion();
 // if player founds a potion and has less than full HP it asks if drink immediately
 void instantHealingPotion();
 // asks if potion should be used after combat
-void regenerate();      
+void regenerate();
 
-//  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
+//  Decision Trees  //////////////////////////////////////////////////
 void decision();
 void selectionAB();
 void selectionABC();
 
-// Monsters ////////////////////////////////////////////////////////////////////////////////////////
+// Monsters //////////////////////////////////////////////////////////
 int monsterHP(int monsterDmgTaken, int monsterID);
 int monsterMaxHP(int monsterID);
 int monsterDamage1(int monsterID);
@@ -299,7 +309,6 @@ int main() {
         enterLocation(200);
 
         printf("> Would you like to go to the tavern?\n");
-        
         decision();
 
         if (result == 0)
@@ -313,16 +322,16 @@ int main() {
             printf("> You go home and rest for the day.\n");
         }
     }
-    
+
     printf("\n> EOF\n");
     Sleep(30000);
 
     return 0;               // Ends main function
 }
 
-////  FUNCTION DEFINITION  /////////////////////////////////////////////////////////////////////////
+////  FUNCTION DEFINITION  ///////////////////////////////////////////
 
-//  Intro & Character Selection  ///////////////////////////////////////////////////////////////////
+//  Intro & Character Selection  /////////////////////////////////////
 void randomize() {
     srand(time(NULL));
 }
@@ -348,7 +357,7 @@ void chooseCharacter() {
             Sleep(500);
             printf("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity\n");
         Sleep(1000);
-    
+
     char characterSelect;
     char currentCharacter[20];
     char archer[10] = "Archer";
@@ -359,8 +368,9 @@ void chooseCharacter() {
     {
         printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
         scanf("%c", &characterSelect);
-        
-        if (characterSelect == 'a' || characterSelect == 'A' || characterSelect == 'b' || characterSelect == 'B' || characterSelect == 'c' || characterSelect == 'C')
+                if (characterSelect == 'a' || characterSelect == 'A' ||
+                characterSelect == 'b' || characterSelect == 'B' ||
+                characterSelect == 'c' || characterSelect == 'C')
         {
             if (characterSelect == 'a' || characterSelect == 'A')
             {
@@ -377,18 +387,18 @@ void chooseCharacter() {
                 strcpy(currentCharacter, sorcerer);
                 currentChar = 902;
             }
-            
+
             if (characterSelect == 'a' || characterSelect == 'A')
             {
                 printf("> So you are an [%s]\n", currentCharacter);
             }
             else
             {
-                printf("> So you are a [%s]\n", currentCharacter);    
+                printf("> So you are a [%s]\n", currentCharacter);
             }
             break;
         }
-        else 
+        else
         {
             printf("> A, B or C. Please try again.\n");
 
@@ -396,7 +406,9 @@ void chooseCharacter() {
             int clearBuffer;
             while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
             // I don't get the above yet but:
-            // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
+            // The while loop with getchar()
+                // reads and discards characters until it encounters a newline ('\n')
+                // or end-of-file (EOF), effectively clearing the buffer.
         }
     }
     // char name[50];
@@ -433,7 +445,6 @@ void printCharacterSheet(int currentChar) {
     {
         sorcererSheet();
     }
-    
 }
 
 void intro() {
@@ -485,8 +496,9 @@ void intro() {
         printf("> Good Luck!\n\n");
 }
 
+// 10 element loading bar
+    // takes the argument in seconds to display this amount of loading time
 void loading(int s) {
-    // 10 element loading bar which takes the argument in seconds to display this amount of loading time
     int ms = s * 100;
     printf("\n> Loading: [");
     for (int i = 0; i < 10; i++)
@@ -509,7 +521,7 @@ void archerSheet() {
     playerCurrentHP = playerMaxHP;
 
     bonusDMG = (((DEX / 2) - 2) + lvl);
-    
+
     int attackMOD;
     int attackMODmain = ((DEX / 2) - 2);
     int attackMODoff = (attackMODmain - 1);
@@ -548,7 +560,7 @@ void crusaderSheet() {
     int VIT = 5;
     int MGC = 1;
     int classHPX = 12;
-    
+
     playerMaxHP = playerMaxHealth(VIT, classHPX);
     playerCurrentHP = playerMaxHP;
 
@@ -557,12 +569,12 @@ void crusaderSheet() {
     int attackMOD;
     int attackMODmain = ((STR / 2) - 2);
     int attackMODoff = (attackMODmain - 1);
-    
+
     // lets equip starting items:
     held[0] = items[3];
     held[1] = items[4];
     held[2] = items[7];
-    
+
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Level: [1]        |\n");
@@ -602,12 +614,12 @@ void sorcererSheet() {
     int attackMOD;
     int attackMODoff = (((DEX / 2) - 2) - 1);
     int attackMODspell = (attackMODoff - 1);
-    
+
     // lets equip starting items:
     held[0] = items[5];
     held[1] = items[9];
     held[2] = items[8];
-    
+
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Level: [1]        |\n");
@@ -630,21 +642,23 @@ void sorcererSheet() {
     printf("\n");
 }
 
-//  Clear Buffer  //////////////////////////////////////////////////////////////////////////////////
+//  Clear Buffer  ////////////////////////////////////////////////////
 
 void clearBuffer() {
     // Clear the input buffer
     int clearBuffer;
     while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
     // I don't get the above yet but:
-    // The while loop with getchar() reads and discards characters until it encounters a newline ('\n') or end-of-file (EOF), effectively clearing the buffer.
+    // The while loop with getchar()
+        // reads and discards characters until it encounters a newline ('\n')
+        // or end-of-file (EOF), effectively clearing the buffer.
 }
 
-//  Encounter  /////////////////////////////////////////////////////////////////////////////////////
+//  Encounter  ///////////////////////////////////////////////////////
 
 void encounter(int monsterID) {
     monsterCurrentHP = monsterMaxHP(monsterID);
-    
+
     int r = 0;
     combatEnd = 1;
 
@@ -661,7 +675,7 @@ void encounter(int monsterID) {
         r++;
         printf("\nRound %i:\n", r);
         Sleep(500);
-        
+
         combatAction(monsterID);
         Sleep(500);
 
@@ -678,13 +692,13 @@ void encounter(int monsterID) {
     {
         regenerate();
     }
-    
+
 }
 
-//  Backpack & Item Management  ////////////////////////////////////////////////////////////////////
+//  Backpack & Item Management  //////////////////////////////////////
 
 void whatsInTheBag() {
-    printf("> Current contents of your backpack: "); 
+    printf("> Current contents of your backpack: ");
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
@@ -742,7 +756,7 @@ void foundItem(int itemID) {
         printf("> Currently you have [%i/%i] Health.\n", playerCurrentHP, playerMaxHP);
         Sleep(500);
         printf("> Would you like to drink it immediately?\n");
-        
+
         decision();
 
         if (result == 0)
@@ -754,7 +768,8 @@ void foundItem(int itemID) {
             Sleep(500);
             printf("> You put it in the backpack for later use.\n");
             // addToBag(itemID);
-            // TRIVIA: I could comment out above addToBag cause having it in if worked and output all data in said function
+            // TRIVIA: I could comment out above addToBag cause having it in if worked
+                //  output all data in said function
             if (addToBag(itemID) == 10)
             {
                 printf("> You decide to drink it anyway to avoid wasting it...\n");
@@ -769,7 +784,7 @@ void foundItem(int itemID) {
     }
 }
 
-//  Locations  /////////////////////////////////////////////////////////////////////////////////////
+//  Locations  ///////////////////////////////////////////////////////
 
 void discoveredLocation(int location) {
     currentLocation = location;
@@ -803,7 +818,7 @@ void enterLocation(int location) {
     }
 }
 
-//  Player HP & Damage Roll  ///////////////////////////////////////////////////////////////////////
+//  Player HP & Damage Roll  /////////////////////////////////////////
 
 int playerHP(int playerDmgTaken) {
     playerCurrentHP = playerCurrentHP - playerDmgTaken;
@@ -848,7 +863,7 @@ int playerDamage(int itemID, int bonusDMG) {
     printf("> You Deal [%i] damage!\n", dmg);
 
     monsterDmgTaken = dmg;
-    
+
     monsterDmgTakenLog = dmg;
 
     return bonusDMG + randomDmgRoll;
@@ -861,15 +876,15 @@ int damageConsumable(int itemID) {
     dmg = x + rand() % y;
 
     printf("> You Deal [%i] damage!\n", dmg);
-    
+
     monsterDmgTaken = dmg;
 
     monsterDmgTakenLog = dmg;
-    
+
     return dmg;
 }
 
-//  Player Actions in Combat  //////////////////////////////////////////////////////////////////////
+//  Player Actions in Combat  ////////////////////////////////////////
 
 void combatAction(int monsterID) {
 
@@ -903,13 +918,13 @@ void combatAction(int monsterID) {
         {
             attackRollOff(offWeapon, bonusDMG);
         }
-        
+
     }
     else if (abcResult == 1)    // use item
     {
         whatsInTheBag();
         clearBuffer();
-        itemSelect(); 
+        itemSelect();
     }
     else if (abcResult == 2)    // run!
     {
@@ -920,20 +935,20 @@ void combatAction(int monsterID) {
         printf("> [%s] catches your skin with its attack while you run away!\n", monsters[monsterID].monsterName);
         Sleep(500);
         monsterDmgTakenLog = 0;
-        combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
+        combatEnd = 0;  // Variable to end the combat without using break; outside of loop
     }
 }
 
 void attackRollMain(int mainWeapon, int bonusDMG) {
     itemID = mainWeapon;
-    
+
     int random = 1 + rand() % 6;
 
     int hit;
     int attackMODmain;
     int attackMOD = attackMODmain;
     int attackRoll = 7 + attackMOD + random;
-    
+
     Sleep(1000);
     printf("\n> You attack with your [%s].\n", held[itemID].iname);
     Sleep(1000);
@@ -958,12 +973,12 @@ void attackRollOff(int offWeapon, int bonusDMG) {
     itemID = offWeapon;
 
     int random = 1 + rand() % 6;
-    
+
     int hit;
     int attackMODoff;
     int attackMOD = attackMODoff;
     int attackRoll = 7 + attackMOD + random;
-    
+
     Sleep(1000);
     printf("\n> You attack with your [%s].\n", held[itemID].iname);
     Sleep(1000);
@@ -980,7 +995,7 @@ void attackRollOff(int offWeapon, int bonusDMG) {
         hit = 0;
         printf("> HIT!\n");
         Sleep(1000);
-        
+
         int isDazed = 1 + rand() % 100;
         if (isDazed > 50)
         {
@@ -990,11 +1005,11 @@ void attackRollOff(int offWeapon, int bonusDMG) {
             case 900:
                 printf("> You strike deep, opening a big wound in your opponents guts rendering the creature shocked.\n");
                 break;
-                
+
                 case 901:
                 printf("> You strike with force so great that you daze your enemy.\n");
                 break;
-            
+
                 case 902:
                 printf("> You strike with such precision that your adversary is stunned.\n");
                 break;
@@ -1007,14 +1022,14 @@ void attackRollOff(int offWeapon, int bonusDMG) {
 }
 
 void attackRollSpell(int equippedSpell, int bonusDMGspell) {
-    int spellID; // <- placeholder befor I will built grimoirs
-    
+    int spellID; // <- placeholder befor I will built grimoires
+
     // missing text prompt
 
     spellID = equippedSpell;
-    
+
     int random = 1 + rand() % 6;
-    
+
     int hit;
     int attackMODspell;
     int attackMOD = attackMODspell;
@@ -1047,19 +1062,20 @@ void itemSelect() {
         Sleep(100);
         if (strcmp(backpack[i].iname, items[11].iname) != 0)
         {
-            backpackEmpty1 += 1; // wombo combo to check if there are any healing items in backpack 
+            // wombo combo to check if there are any healing items in backpack
+            backpackEmpty1 += 1;
             backpackArray[i] = 99;
             continue;
         }
         else
-        {   
+        {
             backpackArray[i] = i;
 
             Sleep(100);
             printf("%i. [%s]\n", i, backpack[i].iname);
         }
     }
-                
+
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
@@ -1071,14 +1087,15 @@ void itemSelect() {
             }
             else
             {
-                backpackEmpty2 += 1; // wombo combo to check if there are any damaging items in backpack 
+                // wombo combo to check if there are any damaging items in backpack
+                backpackEmpty2 += 1;
                 continue;
             }
         }
         else
-        {   
+        {
             backpackArray[i] = i;
-            
+
             if (backpackEmpty1 == 1)
             {
                 // do nothing
@@ -1121,8 +1138,9 @@ void itemSelect() {
         while (1)
         {
             scanf(" %i", &chosenItem);
-            
-            if (chosenItem == backpackArray[0] || chosenItem == backpackArray[1] || chosenItem == backpackArray[2] || chosenItem == backpackArray[3] ||
+
+            if (chosenItem == backpackArray[0] || chosenItem == backpackArray[1]||
+            chosenItem == backpackArray[2] || chosenItem == backpackArray[3] ||
             chosenItem == backpackArray[4] || chosenItem == backpackArray[5] || chosenItem == backpackArray[6] ||
             chosenItem == backpackArray[7] || chosenItem == backpackArray[8] || chosenItem == backpackArray[9])
             {
@@ -1147,8 +1165,8 @@ void itemSelect() {
                         {
                             break;
                         }
-                        
-                    }   
+
+                    }
                 }
                 for (int i = 0; i < 10; i++)
                 {
@@ -1158,7 +1176,6 @@ void itemSelect() {
                     }
                     else
                     {
-                        
                         if (strcmp(backpack[chosenItem].description, items[11].description) == 0)   // items[11].description IS healingPotion
                         {
                             Sleep(1000);
@@ -1171,7 +1188,7 @@ void itemSelect() {
                         {
                             break;
                         }
-                    }   
+                    }
                 }
                 break;
             }
@@ -1201,7 +1218,7 @@ void healingPotion() {
                 else
                 {
                     playerCurrentHP = playerCurrentHP + 10;
-                    
+
                     if (playerCurrentHP > playerMaxHP)
                     {
                         playerCurrentHP = playerMaxHP;
@@ -1236,7 +1253,7 @@ printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
 
 void regenerate() {
     int tempPotion = 0;
-    
+
     for (int i = 0; i < 10; i++)
     {
         if (strcmp(backpack[i].iname, items[11].iname) != 0)
@@ -1244,7 +1261,7 @@ void regenerate() {
             continue;
         }
         else
-        {   
+        {
             tempPotion++;
         }
     }
@@ -1270,20 +1287,21 @@ void regenerate() {
         }
         else
         {
-            printf("\n> Wounded, you think about drinking a [Healing Potion] but there is none in your backpack... Maybe next time.\n");
+            printf("\n> Wounded, you think about drinking a [Healing Potion].\n");
+            printf("> but there is none in your backpack... Maybe next time.\n");
         }
     }
 }
 
-//  Decision Trees  ////////////////////////////////////////////////////////////////////////////////
+//  Decision Trees  //////////////////////////////////////////////////
 
 void decision() {
     clearBuffer();
-    
+
     char q;
-    
+
     Sleep(500);
-    
+
     while (1)
     {
         printf("> [Y/N]: ");
@@ -1308,11 +1326,11 @@ void decision() {
 }
 
 void selectionAB() {
-    
+
     clearBuffer();
-    
+
     int ab;
-    
+
     Sleep(500);
     while (1)
     {
@@ -1329,7 +1347,7 @@ void selectionAB() {
             abResult = 1;
             break;
         }
-        else 
+        else
         {
         printf("> A, B. Please try again.\n");
 
@@ -1342,9 +1360,9 @@ void selectionABC() {
     clearBuffer();
 
     int abc;
-    
+
     Sleep(500);
-    
+
     while (1)
     {
         printf("> [A/B/C]: ");
@@ -1365,7 +1383,7 @@ void selectionABC() {
             abcResult = 2;
             break;
         }
-        else 
+        else
         {
         printf("> A, B. Please try again.\n");
 
@@ -1374,7 +1392,7 @@ void selectionABC() {
     }
 }
 
-// MONSTERS ////////////////////////////////////////////////////////////////////////////////////////
+// MONSTERS //////////////////////////////////////////////////////////
 
 int monsterHP(int monsterDmgTaken, int monsterID) {
     monsterCurrentHP = monsterCurrentHP - monsterDmgTaken;
@@ -1445,7 +1463,7 @@ int monsterDamage2(int monsterID) {
     printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
 
     playerDmgTaken = monsterDmgDone;
-    
+
     playerDmgTakenLog = monsterDmgDone;
 
     return randomDmgRoll;
@@ -1464,7 +1482,7 @@ int monsterDamage3(int monsterID) {
     playerDmgTaken = monsterDmgDone;
 
     specialMonsterAttack = 1;
-    
+
     playerDmgTakenLog = monsterDmgDone;
 
     return randomDmgRoll;
@@ -1487,10 +1505,10 @@ int monsterDamageOpportunity(int monsterID) {
 
 void monsterAction(int monsterID) {
     playerDmgTaken = 0;
-    
+
     int randomActionRoll = 1 + rand() % 100;
     int monsterAttackRoll = (1 + rand() % 20) - daze;
-    
+
     if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
         if (monsterAttackRoll < 4)
@@ -1560,7 +1578,7 @@ void monsterAction(int monsterID) {
                     printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
                     playerDmgTakenLog = 0;
                     monsterCurrentHP = 0;
-                    combatEnd = 0;  // TEMP Variable to end the combat without using break; outside of while loop
+                    combatEnd = 0;
                     daze = 0;
                 }
                 else
