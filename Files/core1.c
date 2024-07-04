@@ -10,7 +10,7 @@
 // Global variables
     int itemID;
     int combatEnd;
-    char name[50];
+    char name[51];
     int daze;
 
 
@@ -57,7 +57,7 @@
     // NEW  // required for monster to only use special attack once
     int specialMonsterAttack = 0;
     // NEW  // required for monster Run check
-    char monsterRun[] = "Run";
+    char* monsterRun = "Run";
     int monsterDmgTakenLog;   // log testing to skip dmg logs if dmg = 0
 
     // ITEM Shortcuts
@@ -87,8 +87,10 @@ struct location {
 // Global item management
 struct item {
     int id;
-    char iname[25];
-    char description[100];  // For weapons it will be used to specify damage type
+    char* iname;
+    // char iname[25];
+    char* description;  // For weapons it will be used to specify damage type
+    // char description[100];  // For weapons it will be used to specify damage type
     int minDMG;
     int maxDMG;
 };
@@ -143,19 +145,19 @@ struct item {
 // Monster structs
     struct monster {
         int monsterID;
-        char monsterName[25];
-        char monsterDescription[100];
+        char* monsterName;
+        char* monsterDescription;
         // required to initialize struct,
             // will have a random value added to it to calculate MonsterMaxHP
         int monsterBaseHP;
-        char monsterAttack1[20];
+        char* monsterAttack1;
         int monsterAttack1minDMG;
         int monsterAttack1maxDMG;
-        char monsterAttack2[20];
+        char* monsterAttack2;
         int monsterAttack2minDMG;
         int monsterAttack2maxDMG;
         // if threshold is triggered
-        char monsterAttack3[20];
+        char* monsterAttack3;
         int monsterAttack3minDMG;
         int monsterAttack3maxDMG;
         // (if monsterCurrentHP <= monsterThreshold use special attack once and break;)
@@ -358,18 +360,18 @@ void chooseCharacter() {
         Sleep(1000);
 
     char characterSelect;
-    char currentCharacter[20];
-    char archer[10] = "Archer";
-    char crusader[10] = "Crusader";
-    char sorcerer[10] = "Sorcerer";
+    char currentCharacter[10];
+    char* archer = "Archer";
+    char* crusader = "Crusader";
+    char* sorcerer = "Sorcerer";
 
     while (1)
     {
         printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
-        scanf("%c", &characterSelect);
-                if (characterSelect == 'a' || characterSelect == 'A' ||
-                characterSelect == 'b' || characterSelect == 'B' ||
-                characterSelect == 'c' || characterSelect == 'C')
+        scanf(" %c", &characterSelect);
+        if (characterSelect == 'a' || characterSelect == 'A' ||
+        characterSelect == 'b' || characterSelect == 'B' ||
+        characterSelect == 'c' || characterSelect == 'C')
         {
             if (characterSelect == 'a' || characterSelect == 'A')
             {
@@ -401,25 +403,16 @@ void chooseCharacter() {
         {
             printf("> A, B or C. Please try again.\n");
 
-            // Clear the input buffer
-            int clearBuffer;
-            while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
-            // I don't get the above yet but:
-            // The while loop with getchar()
-                // reads and discards characters until it encounters a newline ('\n')
-                // or end-of-file (EOF), effectively clearing the buffer.
+            clearBuffer();
         }
     }
-    // char name[50];
-    char surname[50];
 
     while (1)
     {
         Sleep(500);
         clearBuffer();
         printf("> What is your name Adventurer? ");
-        scanf(" %s", &name);
-        // scanf("%s", &surname);
+        scanf(" %50s", &name);
         Sleep(500);
         printf("\n> And thus your journey begins, brave [%s].\n\n", name);
         Sleep(1000);
