@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 c_cpp_properties.json
 tasks.json
+gitCheatSheet.md
+template.c
