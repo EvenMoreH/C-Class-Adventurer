@@ -10,6 +10,8 @@
 
 int main() {            // Main function
 
+    srand(time(NULL));
+
     char *myString1 = "";
     char *myString3 = "point test";
 
@@ -32,6 +34,19 @@ int main() {            // Main function
     printf("%s\n", myString3);
 
     printf("%i\n", strlen(myString3));
+
+    printf("\n\n");
+
+    int dmg;
+    int x;
+    x = 1;
+    int y;
+    y = 4;
+    int randomDmgRoll = x + rand() % y;
+
+    dmg = randomDmgRoll;
+
+    printf("> You Deal [%i] damage!\n", dmg);
 
 
 

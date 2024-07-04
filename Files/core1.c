@@ -9,10 +9,11 @@
 
 // Global variables
     int itemID;
+    int spellID;
     int combatEnd;
     char name[51];
     int daze;
-
+    int MGC;
 
     // selected character
         // 900 - Archer
@@ -43,7 +44,8 @@
     int bonusDMGspell;
     int playerDmgTaken;     // NEW
     int playerDmgTakenLog;  // log testing to skip dmg logs if dmg = 0
-
+    int SelectedSpellMinDMG;
+    int SelectedSpellMaxDMG;
 
     // for declaring initial MAX HP and calculating current HP (player)
     int playerMaxHP;
@@ -95,26 +97,37 @@ struct item {
     int maxDMG;
 };
     // item IDs = 0-99
+        //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
        {0, "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Piercing", 1, 8},            // base item do not alter (Archer)
-       {2, "Shortsword", "Slashing", 1, 6},     // base item do not alter (Archer)
-       {3, "Longsword", "Slashing", 1, 8},      // base item do not alter (Crusader)
-       {4, "Shield", "Bludgeoning", 1, 6},      // base item do not alter (Crusader)
-       {5, "Staff", "Bludgeoning", 1, 6},       // base item do not alter (Sorcerer)
+       {1, "Bow", "Piercing", 1, 7},            // base item do not alter (Archer)
+       {2, "Shortsword", "Slashing", 1, 5},     // base item do not alter (Archer)
+       {3, "Longsword", "Slashing", 1, 7},      // base item do not alter (Crusader)
+       {4, "Shield", "Bludgeoning", 1, 5},      // base item do not alter (Crusader)
+       {5, "Staff", "Bludgeoning", 1, 5},       // base item do not alter (Sorcerer)
        {6, "Leather Armor", "", 0, 0},          // base item do not alter (Archer)
        {7, "Plate Armor", "", 0, 0},            // base item do not alter (Crusader)
        {8, "Robes", "", 0, 0},                  // base item do not alter (Sorcerer)
-       {9, "Grimoire", "", 0, 0},                // base item do not alter (Sorcerer)
+
+        // for grimoirs min/max damage represent equipped spell
+            // 1 = Ice Lance
+            // 2 = Lightning Strike
+            // 3 = Acid Bomb
+            // 4 = Starburst
+       {9, "Grimoire", "", 1, 2},                // base item do not alter (Sorcerer)
 
        // story items:
        {10, "Stoneskull Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
 
        // consumables
        {11, "Healing Potion", "Heals for 10 Health", 0, 0},
-       {12, "Avalanche Rune", "Deals Damage", 5, 15},
-       {13, "Fireball Rune", "Deals Damage", 10, 25},
-       {14, "Magic Missile Rune", "Deals Damage", 1, 8},
+       {12, "Avalanche Rune", "Deals Damage", 6, 12},
+       {13, "Fireball Rune", "Deals Damage", 12, 24},
+       {14, "Magic Missile Rune", "Deals Damage", 4, 8},
+
+        // special grimoires
+       {15, "Grimoire of Druidcraft", "", 3, 4},
+       {16, "Grimoire of Wildfire", "", 5, 6},
     };
 
 // Global backpack management
@@ -131,6 +144,22 @@ struct item {
         {108, "", "", 0, 0},
         {109, "", "", 0, 0},
         {110, "", "", 0, 0},
+    };
+
+// Global backpack management
+    // backpack IDs = 400-110
+    struct item spells[] = {
+        {400, "", "", 0, 0},    // base empty spell slot
+        {401, "Ice Lance", "Cold", 2, 10},
+        {402, "Lightning Strike", "Lightning", 4, 4},
+        {403, "Acid Bomb", "Acid", 12, 12},
+        {404, "Starburst", "Fire", 20, 20},
+        {405, "Fireball", "", 12, 24},
+        {406, "Burning Hands", "", 18, 6},
+        {407, "", "", 0, 0},
+        {408, "", "", 0, 0},
+        {409, "", "", 0, 0},
+        {410, "", "", 0, 0},
     };
 
 // Global held items management
@@ -167,9 +196,9 @@ struct item {
     // monsterIDs = 400 - 499
     struct monster monsters[] = {
         {400, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0}, // empty monster to initialize the list
-        {401, "Giant Rat", "", 18, "Bite", 2, 7, "Scratch", 2, 5, "Run", 0, 0, 5},
-        {402, "Goblin", "", 28, "Knife", 2, 5, "Kick", 1, 4, "", 0, 0, 0},
-        {403, "Hobgoblin", "", 48, "Greatclub", 6, 14, "Headbutt", 4, 10, "Skullcrsher", 12, 24, 10},
+        {401, "Giant Rat", "", 18, "Bite", 2, 6, "Scratch", 2, 4, "Run", 0, 0, 5},
+        {402, "Goblin", "", 28, "Knife", 2, 4, "Kick", 1, 3, "", 0, 0, 0},
+        {403, "Hobgoblin", "", 48, "Greatclub", 6, 8, "Headbutt", 4, 6, "Skullcrsher", 12, 12, 10},
         {404, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
         {405, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
     };
@@ -211,6 +240,7 @@ void enterLocation(int location);
 
 //  Player HP & Damage Roll  /////////////////////////////////////////
 int playerDamage(int itemID, int bonusDMG);
+int playerSpellDamage(int SelectedSpellMinDMG, int SelectedSpellMaxDMG, int bonusDMGspell);
 int damageConsumable(int itemID);
 int playerHP(int playerDmgTaken);
 int playerMaxHealth(int vitality, int classHPX);
@@ -219,7 +249,7 @@ int playerMaxHealth(int vitality, int classHPX);
 void combatAction(int monsterID);
 void attackRollMain(int mainWeapon, int bonusDMG);
 void attackRollOff(int equippedWeaponOff, int bonusDMG);
-void attackRollSpell(int equippedSpell, int bonusDMGspell);
+void attackRollSpell(int bonusDMGspell);
 void itemSelect();
 void healingPotion();
 // if player founds a potion and has less than full HP it asks if drink immediately
@@ -256,10 +286,10 @@ int main() {
     addToBag(potion);
     addToBag(9);
     addToBag(9);
-    addToBag(9);
-    addToBag(9);
 
+    held[0] = items[16];
 
+    printf("\n\n");
 
     printf("> Would you like to enter this cave?\n");
 
@@ -282,7 +312,7 @@ int main() {
             printf("> You go deeper and find something lurking in the shadows!\n");
             Sleep(1000);
 
-            encounter(1);
+            encounter(3);
 
             Sleep(1000);
             if (monsterCurrentHP > 0)   // ergo monster still alive
@@ -335,6 +365,9 @@ int main() {
 //  Intro & Character Selection  /////////////////////////////////////
 void randomize() {
     srand(time(NULL));
+    // randomNumber = rand() % X
+    // random number from {0, X}
+    // rand() % 20 + 20 = random number from {20, 40}
 }
 
 void chooseCharacter() {
@@ -506,7 +539,7 @@ void archerSheet() {
     int STR = 5;
     int DEX = 7;
     int VIT = 5;
-    int MGC = 1;
+    MGC = 3;
     int classHPX = 10;
 
     playerMaxHP = playerMaxHealth(VIT, classHPX);
@@ -532,7 +565,7 @@ void archerSheet() {
     printf("|     - Strength: [5]     |\n");
     printf("|     - Dexterity: [7]    |\n");
     printf("|     - Vitality: [5]     |\n");
-    printf("|     - Magic: [1]        |\n");
+    printf("|     - Magic: [3]        |\n");
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
@@ -540,17 +573,17 @@ void archerSheet() {
     printf("|     - Bow               |\n");
     printf("|     - Shortsword        |\n");
     printf("|     - Leather Armor     |\n");
-    printf("|     - Backpack          |\n");
+    printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     printf("\n");
 }
 
 void crusaderSheet() {
     int lvl = 1;
-    int STR = 5;
-    int DEX = 7;
-    int VIT = 5;
-    int MGC = 1;
+    int STR = 7;
+    int DEX = 4;
+    int VIT = 6;
+    MGC = 3;
     int classHPX = 12;
 
     playerMaxHP = playerMaxHealth(VIT, classHPX);
@@ -574,9 +607,9 @@ void crusaderSheet() {
     printf("|  Your Max Health: [%i]  |\n", playerMaxHP);
     printf("|  Your Statistics:       |\n");
     printf("|     - Strength: [7]     |\n");
-    printf("|     - Dexterity: [3]    |\n");
-    printf("|     - Vitality: [7]     |\n");
-    printf("|     - Magic: [1]        |\n");
+    printf("|     - Dexterity: [4]    |\n");
+    printf("|     - Vitality: [6]     |\n");
+    printf("|     - Magic: [3]        |\n");
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
@@ -584,17 +617,17 @@ void crusaderSheet() {
     printf("|     - Longsword         |\n");
     printf("|     - Shield            |\n");
     printf("|     - Plate Armor       |\n");
-    printf("|     - Backpack          |\n");
+    printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     printf("\n");
 }
 
 void sorcererSheet() {
     int lvl = 1;
-    int STR = 5;
-    int DEX = 7;
-    int VIT = 5;
-    int MGC = 1;
+    int STR = 3;
+    int DEX = 6;
+    int VIT = 4;
+    MGC = 7;
     int classHPX = 8;
 
     playerMaxHP = playerMaxHealth(VIT, classHPX);
@@ -605,11 +638,11 @@ void sorcererSheet() {
 
     int attackMOD;
     int attackMODoff = (((DEX / 2) - 2) - 1);
-    int attackMODspell = (attackMODoff - 1);
+    int attackMODspell = ((DEX / 2) - 2);
 
     // lets equip starting items:
-    held[0] = items[5];
-    held[1] = items[9];
+    held[0] = items[9]; // grimoires are main hand
+    held[1] = items[5];
     held[2] = items[8];
 
     Sleep(500);
@@ -619,17 +652,17 @@ void sorcererSheet() {
     printf("|  Your Max Health: [%i]  |\n", playerMaxHP);
     printf("|  Your Statistics:       |\n");
     printf("|     - Strength: [3]     |\n");
-    printf("|     - Dexterity: [5]    |\n");
-    printf("|     - Vitality: [3]     |\n");
+    printf("|     - Dexterity: [6]    |\n");
+    printf("|     - Vitality: [4]     |\n");
     printf("|     - Magic: [7]        |\n");
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
-    printf("|     - Staff             |\n");
     printf("|     - Grimoire          |\n");
+    printf("|     - Staff             |\n");
     printf("|     - Robes             |\n");
-    printf("|     - Backpack          |\n");
+    printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     printf("\n");
 }
@@ -918,6 +951,22 @@ int playerDamage(int itemID, int bonusDMG) {
     return bonusDMG + randomDmgRoll;
 }
 
+int playerSpellDamage(int SelectedSpellMinDMG, int SelectedSpellMaxDMG, int bonusDMGspell) {
+    int x = SelectedSpellMinDMG;
+    int y = SelectedSpellMaxDMG;
+    int randomDmgRoll = x + rand() % y;
+
+    dmg = bonusDMG + randomDmgRoll;
+
+    printf("> You Deal [%i] damage!\n", dmg);
+
+    monsterDmgTaken = dmg;
+
+    monsterDmgTakenLog = dmg;
+
+    return bonusDMG + randomDmgRoll;
+}
+
 int damageConsumable(int itemID) {
     int x = items[itemID].minDMG;
     int y = items[itemID].maxDMG;
@@ -953,15 +1002,30 @@ void combatAction(int monsterID) {
     {
         printf("> Attack with:\n");
         Sleep(1000);
-        printf("> A. Main hand weapon.\n");
-        Sleep(500);
+        if (currentChar == 902)
+        {
+            printf("> A. Spell.\n");
+            Sleep(500);
+        }
+        else
+        {
+            printf("> A. Main hand weapon.\n");
+            Sleep(500);
+        }
         printf("> B. Off hand weapon.\n");
 
         selectionAB();
 
         if (abResult == 0)  // attack
         {
-            attackRollMain(mainWeapon, bonusDMG);
+            if (currentChar == 902)
+            {
+                attackRollSpell(bonusDMGspell);
+            }
+            else
+            {
+                attackRollMain(mainWeapon, bonusDMG);
+            }
         }
         else if (abResult == 1)
         {
@@ -991,7 +1055,7 @@ void combatAction(int monsterID) {
 void attackRollMain(int mainWeapon, int bonusDMG) {
     itemID = mainWeapon;
 
-    int random = 1 + rand() % 6;
+    int random = 1 + rand() % 5;
 
     int hit;
     int attackMODmain;
@@ -1021,7 +1085,7 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
 void attackRollOff(int offWeapon, int bonusDMG) {
     itemID = offWeapon;
 
-    int random = 1 + rand() % 6;
+    int random = 1 + rand() % 5;
 
     int hit;
     int attackMODoff;
@@ -1045,7 +1109,7 @@ void attackRollOff(int offWeapon, int bonusDMG) {
         printf("> HIT!\n");
         Sleep(1000);
 
-        int isDazed = 1 + rand() % 100;
+        int isDazed = 1 + rand() % 99;
         if (isDazed > 50)
         {
             daze = 100;
@@ -1070,14 +1134,34 @@ void attackRollOff(int offWeapon, int bonusDMG) {
     }
 }
 
-void attackRollSpell(int equippedSpell, int bonusDMGspell) {
-    int spellID; // <- placeholder befor I will built grimoires
+void attackRollSpell(int bonusDMGspell) {
 
-    // missing text prompt
+    printf("\n> Spells in your [%s]:\n", held[0].iname);
+    Sleep(500);
+    printf("> A. [%s].\n", spells[held[0].minDMG].iname);
+    Sleep(200);
+    printf("> B. [%s].\n", spells[held[0].maxDMG].iname);
+    Sleep(200);
 
-    spellID = equippedSpell;
+    printf("> Select which spell to use.\n");
+    selectionAB();
 
-    int random = 1 + rand() % 6;
+    if (abResult == 0)
+    {
+        SelectedSpellMinDMG = spells[held[0].minDMG].minDMG;
+        SelectedSpellMaxDMG = spells[held[0].minDMG].maxDMG;
+        printf("\nYou attack with [%s].\n", spells[held[0].minDMG].iname);
+        Sleep(500);
+    }
+    else if (abResult == 1)
+    {
+        SelectedSpellMinDMG = spells[held[0].maxDMG].minDMG;
+        SelectedSpellMaxDMG = spells[held[0].maxDMG].maxDMG;
+        printf("\nYou attack with [%s].\n", spells[held[0].maxDMG].iname);
+        Sleep(500);
+    }
+
+    int random = 1 + rand() % 5;
 
     int hit;
     int attackMODspell;
@@ -1096,6 +1180,7 @@ void attackRollSpell(int equippedSpell, int bonusDMGspell) {
         hit = 0;
         printf("> HIT!\n");
         Sleep(1000);
+        playerSpellDamage(SelectedSpellMinDMG, SelectedSpellMaxDMG, bonusDMGspell);
     }
 }
 
@@ -1262,11 +1347,14 @@ void healingPotion() {
                 {
                     Sleep(1000);
                     printf("> You can't use that you are at full health.\n");
+
+                    monsterDmgTakenLog = 0;
+
                     break;
                 }
                 else
                 {
-                    playerCurrentHP = playerCurrentHP + 10;
+                    playerCurrentHP = playerCurrentHP + (10 + MGC);
 
                     if (playerCurrentHP > playerMaxHP)
                     {
@@ -1274,9 +1362,12 @@ void healingPotion() {
                     }
 
                     Sleep(1000);
-                    printf("> You restore [10 Health].\n");
+                    printf("> You restore [%i] Health.\n", 10 + MGC);
                     Sleep(1000);
                     printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
+
+                    monsterDmgTakenLog = 0;
+
                     break;
                 }
             }
@@ -1287,7 +1378,7 @@ void healingPotion() {
 
 void instantHealingPotion() {
 
-playerCurrentHP = playerCurrentHP + 10;
+playerCurrentHP = playerCurrentHP + (10 + MGC);
 
 if (playerCurrentHP > playerMaxHP)
 {
@@ -1295,7 +1386,7 @@ if (playerCurrentHP > playerMaxHP)
 }
 
 Sleep(1000);
-printf("> You restore [10 Health].\n");
+printf("> You restore [%i] Health.\n", 10 + MGC);
 Sleep(1000);
 printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
 }
@@ -1478,7 +1569,7 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
 }
 
 int monsterMaxHP(int monsterID) {
-    int MHPRoll = 1 + rand() % 8;
+    int MHPRoll = 1 + rand() % 7;
     int monsterHpRoll = monsters[monsterID].monsterBaseHP + MHPRoll;
 
     return monsterHpRoll;
@@ -1555,8 +1646,8 @@ int monsterDamageOpportunity(int monsterID) {
 void monsterAction(int monsterID) {
     playerDmgTaken = 0;
 
-    int randomActionRoll = 1 + rand() % 100;
-    int monsterAttackRoll = (1 + rand() % 20) - daze;
+    int randomActionRoll = 1 + rand() % 99;
+    int monsterAttackRoll = (1 + rand() % 19) - daze;
 
     if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
@@ -1593,8 +1684,8 @@ void monsterAction(int monsterID) {
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
 
-            randomActionRoll = 1 + rand() % 100;
-            monsterAttackRoll = 1 + rand() % 20;
+            randomActionRoll = 1 + rand() % 99;
+            monsterAttackRoll = 1 + rand() % 19;
 
             if (monsterAttackRoll < 4)
             {
