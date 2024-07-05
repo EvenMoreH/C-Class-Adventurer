@@ -100,11 +100,11 @@ struct item {
         //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
        {0, "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Piercing", 1, 7},            // base item do not alter (Archer)
-       {2, "Shortsword", "Slashing", 1, 5},     // base item do not alter (Archer)
-       {3, "Longsword", "Slashing", 1, 7},      // base item do not alter (Crusader)
-       {4, "Shield", "Bludgeoning", 1, 5},      // base item do not alter (Crusader)
-       {5, "Staff", "Bludgeoning", 1, 5},       // base item do not alter (Sorcerer)
+       {1, "Bow", "Piercing", 1, 8},            // base item do not alter (Archer)
+       {2, "Shortsword", "Slashing", 1, 6},     // base item do not alter (Archer)
+       {3, "Longsword", "Slashing", 1, 8},      // base item do not alter (Crusader)
+       {4, "Shield", "Bludgeoning", 1, 6},      // base item do not alter (Crusader)
+       {5, "Staff", "Bludgeoning", 1, 6},       // base item do not alter (Sorcerer)
        {6, "Leather Armor", "", 0, 0},          // base item do not alter (Archer)
        {7, "Plate Armor", "", 0, 0},            // base item do not alter (Crusader)
        {8, "Robes", "", 0, 0},                  // base item do not alter (Sorcerer)
@@ -121,9 +121,9 @@ struct item {
 
        // consumables
        {11, "Healing Potion", "Heals for 10 Health", 0, 0},
-       {12, "Avalanche Rune", "Deals Damage", 6, 12},
-       {13, "Fireball Rune", "Deals Damage", 12, 24},
-       {14, "Magic Missile Rune", "Deals Damage", 4, 8},
+       {12, "Avalanche Rune", "Deals Damage", 6, 13},
+       {13, "Fireball Rune", "Deals Damage", 12, 25},
+       {14, "Magic Missile Rune", "Deals Damage", 4, 9},
 
         // special grimoires
        {15, "Grimoire of Druidcraft", "", 3, 4},
@@ -150,12 +150,12 @@ struct item {
     // backpack IDs = 400-110
     struct item spells[] = {
         {400, "", "", 0, 0},    // base empty spell slot
-        {401, "Ice Lance", "Cold", 2, 10},
-        {402, "Lightning Strike", "Lightning", 4, 4},
-        {403, "Acid Bomb", "Acid", 12, 12},
-        {404, "Starburst", "Fire", 20, 20},
-        {405, "Fireball", "", 12, 24},
-        {406, "Burning Hands", "", 18, 6},
+        {401, "Ice Lance", "Cold", 2, 11},
+        {402, "Lightning Strike", "Lightning", 4, 5},
+        {403, "Acid Bomb", "Acid", 12, 13},
+        {404, "Starburst", "Fire", 20, 21},
+        {405, "Fireball", "", 12, 25},
+        {406, "Burning Hands", "", 18, 7},
         {407, "", "", 0, 0},
         {408, "", "", 0, 0},
         {409, "", "", 0, 0},
@@ -366,8 +366,8 @@ int main() {
 void randomize() {
     srand(time(NULL));
     // randomNumber = rand() % X
-    // random number from {0, X}
-    // rand() % 20 + 20 = random number from {20, 40}
+    // random number from {0, X-1} as counting starts from 0 and array has X elements
+    // rand() % 20 + 21 = random number from {20, 40}
 }
 
 void chooseCharacter() {
@@ -1055,7 +1055,7 @@ void combatAction(int monsterID) {
 void attackRollMain(int mainWeapon, int bonusDMG) {
     itemID = mainWeapon;
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODmain;
@@ -1085,7 +1085,7 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
 void attackRollOff(int offWeapon, int bonusDMG) {
     itemID = offWeapon;
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODoff;
@@ -1109,7 +1109,7 @@ void attackRollOff(int offWeapon, int bonusDMG) {
         printf("> HIT!\n");
         Sleep(1000);
 
-        int isDazed = 1 + rand() % 99;
+        int isDazed = 1 + rand() % 100;
         if (isDazed > 50)
         {
             daze = 100;
@@ -1161,7 +1161,7 @@ void attackRollSpell(int bonusDMGspell) {
         Sleep(500);
     }
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODspell;
@@ -1569,7 +1569,7 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
 }
 
 int monsterMaxHP(int monsterID) {
-    int MHPRoll = 1 + rand() % 7;
+    int MHPRoll = 1 + rand() % 8;
     int monsterHpRoll = monsters[monsterID].monsterBaseHP + MHPRoll;
 
     return monsterHpRoll;
@@ -1646,8 +1646,8 @@ int monsterDamageOpportunity(int monsterID) {
 void monsterAction(int monsterID) {
     playerDmgTaken = 0;
 
-    int randomActionRoll = 1 + rand() % 99;
-    int monsterAttackRoll = (1 + rand() % 19) - daze;
+    int randomActionRoll = 1 + rand() % 100;
+    int monsterAttackRoll = (1 + rand() % 20) - daze;
 
     if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
@@ -1684,8 +1684,8 @@ void monsterAction(int monsterID) {
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
 
-            randomActionRoll = 1 + rand() % 99;
-            monsterAttackRoll = 1 + rand() % 19;
+            randomActionRoll = 1 + rand() % 100;
+            monsterAttackRoll = 1 + rand() % 20;
 
             if (monsterAttackRoll < 4)
             {

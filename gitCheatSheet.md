@@ -31,6 +31,9 @@ First, switch to the branch you want to merge into (e.g., main), then use the gi
 <!-- Once a branch is no longer needed, you can delete it using -->
 git branch -d <!-- branchName -->
 
+<!-- Once the pull request is reviewed and approved, it can be merged into the target branch -->
+git rebase <!-- feature-branch -->
+
 --------------------------------------------------
 
 # Branching Workflow Examples
@@ -46,3 +49,11 @@ git branch -d <!-- branchName -->
     git merge feature-xyz
 ### 4. Delete the feature branch:
     git branch -d feature-xyz
+
+--------------------------------------------------
+
+# Create a Pull Request:
+## 1. Go to the original repository on GitHub.
+## 2. Click on the “New Pull Request” button.
+## 3. Select the branch you want to merge into (e.g., main) and the branch you have created (feature-branch).
+## 4. Provide a title and description for your pull request and submit it.
