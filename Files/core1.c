@@ -10,12 +10,14 @@
 // Global variables
     int itemID;
     int spellID;
-    int combatEnd;
+    int combatEnd;          // sets combat flag on/off
     char name[51];
-    int daze;
-    int MGC;
-    int camping = 0;
-    int campVisit;
+    int daze;               // responsible for applying daze penalty to monsters
+    int MGC;                // global for Magic stat for characters
+    int camping = 0;        // sets flag if player would run to camp
+    int campVisit;          // sets flag if player was at a camp
+    char* lastLocation;     // pinter to string for manual control where combat had been placed
+    int regenerated = 0;    // sets flag if player regenerated in camp to not regenerate again after combat ends
 
     // selected character
         // 900 - Archer
@@ -131,6 +133,10 @@ struct item {
         // special grimoires
        {15, "Grimoire of Druidcraft", "", 3, 4},
        {16, "Grimoire of Wildfire", "", 5, 6},
+
+       // Weapons
+       {17, "Uller's Bow", "", 6, 15},
+       {18, "Sword of Light", "", 6, 15},
     };
 
 // Global backpack management
@@ -227,6 +233,7 @@ void clearBuffer();
 void encounter(int monsterID);
 void ambushEncounter(int monsterID);
 void camp();
+void fromCamp();
 
 //  Backpack & Item Management  //////////////////////////////////////
 void whatsInTheBag();
@@ -293,10 +300,11 @@ int main() {
     addToBag(9);
     addToBag(9);
 
-    held[0] = items[16];
+    held[0] = items[18];
 
     printf("\n\n");
 
+    lastLocation = "Road to the Mines";
 
     printf("> Would you like to enter this cave?\n");
 
@@ -308,6 +316,7 @@ int main() {
         Sleep(1000);
 
         discoveredLocation(204);
+        lastLocation = locations[204].locationName;
 
         printf("> Would you like to go deeper?\n");
 
@@ -320,7 +329,8 @@ int main() {
             Sleep(1000);
 
             encounter(3);
-            printf("\n TEST: between combats\n");
+            lastLocation = "Bottom of the cave";
+            fromCamp();
             ambushEncounter(3);
 
             Sleep(1000);
@@ -688,6 +698,7 @@ void clearBuffer() {
 void encounter(int monsterID) {
     monsterCurrentHP = monsterMaxHP(monsterID);
     camping = 0;
+    regenerated = 0;
 
     int r = 0;
     combatEnd = 1;
@@ -711,7 +722,11 @@ void encounter(int monsterID) {
 
         monsterHP(monsterDmgTaken, monsterID);
         Sleep(500);
-
+            // have to put this IF here for player to not get hit after killing monster
+            if (combatEnd == 0 && monsterCurrentHP <= 0)
+            {
+                break;
+            }
         monsterAction(monsterID);
         Sleep(500);
 
@@ -723,7 +738,7 @@ void encounter(int monsterID) {
         }
     }
 
-    if (playerCurrentHP > 0 && combatEnd == 0)
+    if (playerCurrentHP > 0 && combatEnd == 0 && regenerated == 0)
     {
         regenerate();
     }
@@ -1570,8 +1585,10 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
             printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
             Sleep(200);
             printf("-----------------------------\n");
-            Sleep(2000);
+            Sleep(1000);
 
+            printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
+            Sleep(1000);
         }
         else
         {
@@ -1768,8 +1785,6 @@ void camp() {
         printf("> You tend to your wounds and manage to regain some health.\n");
         Sleep(250);
         printf("> You feel ready to go back on the road.\n");
-
-        printf("> You return to [LAST LOCATION - TEMP]\n");
     }
     Sleep(250);
     printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
@@ -1778,6 +1793,7 @@ void camp() {
     if (playerCurrentHP < playerMaxHP)
     {
         regenerate();
+        regenerated = 1;
     }
     else
     {
@@ -1786,11 +1802,13 @@ void camp() {
 }
 
 void ambushEncounter(int monsterID) {
+    regenerated = 0;
+
     if (campVisit == 1)
     {
         int randomEncounter = 1 + rand() % 100;
 
-        if (randomEncounter > 50) // base 50
+        if (randomEncounter > 1) // base 50
         {
             monsterCurrentHP = monsterAmbushHP;
 
@@ -1822,6 +1840,14 @@ void ambushEncounter(int monsterID) {
             {
                 regenerate();
             }
+        }
+        else
+        {
+            printf("> It seems that [%s] moved away from this location.\n", monsters[monsterID].monsterName);
+            Sleep(250);
+            printf("> It feels safe and you start to look around for any leftover supplies\n");
+            Sleep(250);
+            printf("> getting ready to continue your journey...\n");
         }
     }
     campVisit = 0;
@@ -1879,5 +1905,12 @@ void combatActionAmbush(int monsterID) {
         whatsInTheBag();
         clearBuffer();
         itemSelect();
+    }
+}
+
+void fromCamp() {
+    if (campVisit == 1)
+    {
+        printf("\n> You pack up your camp and return to [%s]\n\n", lastLocation);
     }
 }
