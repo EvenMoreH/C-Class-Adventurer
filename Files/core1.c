@@ -10,10 +10,14 @@
 // Global variables
     int itemID;
     int spellID;
-    int combatEnd;
+    int combatEnd;          // sets combat flag on/off
     char name[51];
-    int daze;
-    int MGC;
+    int daze;               // responsible for applying daze penalty to monsters
+    int MGC;                // global for Magic stat for characters
+    int camping = 0;        // sets flag if player would run to camp
+    int campVisit;          // sets flag if player was at a camp
+    char* lastLocation;     // pinter to string for manual control where combat had been placed
+    int regenerated = 0;    // sets flag if player regenerated in camp to not regenerate again after combat ends
 
     // selected character
         // 900 - Archer
@@ -54,6 +58,7 @@
     // NEW: monster HP & DMG
     int monsterID;
     int monsterCurrentHP;
+    int monsterAmbushHP;
     int monsterDmgDone;     // NEW
     int monsterDmgTaken;    // NEW
     // NEW  // required for monster to only use special attack once
@@ -78,8 +83,8 @@ struct location {
     char locationDescription[200];
 };
     struct location locations[] = {
-       {200, "Town", ""},
-       {201, "Mountain Road", ""},
+       {200, "Village", ""},
+       {201, "Moonlight Den", ""},
        {202, "Tomb of the Forsaken", ""},
        {203, "Mountain Pass", ""},
        {204, "Mines", ""},
@@ -100,11 +105,11 @@ struct item {
         //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
        {0, "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Piercing", 1, 7},            // base item do not alter (Archer)
-       {2, "Shortsword", "Slashing", 1, 5},     // base item do not alter (Archer)
-       {3, "Longsword", "Slashing", 1, 7},      // base item do not alter (Crusader)
-       {4, "Shield", "Bludgeoning", 1, 5},      // base item do not alter (Crusader)
-       {5, "Staff", "Bludgeoning", 1, 5},       // base item do not alter (Sorcerer)
+       {1, "Bow", "Piercing", 1, 8},            // base item do not alter (Archer)
+       {2, "Shortsword", "Slashing", 1, 6},     // base item do not alter (Archer)
+       {3, "Longsword", "Slashing", 1, 8},      // base item do not alter (Crusader)
+       {4, "Shield", "Bludgeoning", 1, 6},      // base item do not alter (Crusader)
+       {5, "Staff", "Bludgeoning", 1, 6},       // base item do not alter (Sorcerer)
        {6, "Leather Armor", "", 0, 0},          // base item do not alter (Archer)
        {7, "Plate Armor", "", 0, 0},            // base item do not alter (Crusader)
        {8, "Robes", "", 0, 0},                  // base item do not alter (Sorcerer)
@@ -121,13 +126,17 @@ struct item {
 
        // consumables
        {11, "Healing Potion", "Heals for 10 Health", 0, 0},
-       {12, "Avalanche Rune", "Deals Damage", 6, 12},
-       {13, "Fireball Rune", "Deals Damage", 12, 24},
-       {14, "Magic Missile Rune", "Deals Damage", 4, 8},
+       {12, "Avalanche Rune", "Deals Damage", 6, 13},
+       {13, "Fireball Rune", "Deals Damage", 12, 25},
+       {14, "Magic Missile Rune", "Deals Damage", 4, 9},
 
         // special grimoires
        {15, "Grimoire of Druidcraft", "", 3, 4},
        {16, "Grimoire of Wildfire", "", 5, 6},
+
+       // Weapons
+       {17, "Uller's Bow", "", 6, 15},
+       {18, "Sword of Light", "", 6, 15},
     };
 
 // Global backpack management
@@ -150,12 +159,12 @@ struct item {
     // backpack IDs = 400-110
     struct item spells[] = {
         {400, "", "", 0, 0},    // base empty spell slot
-        {401, "Ice Lance", "Cold", 2, 10},
-        {402, "Lightning Strike", "Lightning", 4, 4},
-        {403, "Acid Bomb", "Acid", 12, 12},
-        {404, "Starburst", "Fire", 20, 20},
-        {405, "Fireball", "", 12, 24},
-        {406, "Burning Hands", "", 18, 6},
+        {401, "Ice Lance", "Cold", 2, 11},
+        {402, "Lightning Strike", "Lightning", 4, 5},
+        {403, "Acid Bomb", "Acid", 12, 13},
+        {404, "Starburst", "Fire", 20, 21},
+        {405, "Fireball", "", 12, 25},
+        {406, "Burning Hands", "", 18, 7},
         {407, "", "", 0, 0},
         {408, "", "", 0, 0},
         {409, "", "", 0, 0},
@@ -199,7 +208,7 @@ struct item {
         {401, "Giant Rat", "", 18, "Bite", 2, 6, "Scratch", 2, 4, "Run", 0, 0, 5},
         {402, "Goblin", "", 28, "Knife", 2, 4, "Kick", 1, 3, "", 0, 0, 0},
         {403, "Hobgoblin", "", 48, "Greatclub", 6, 8, "Headbutt", 4, 6, "Skullcrsher", 12, 12, 10},
-        {404, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
+        {404, "Wolf", "", 15, "Claw", 1, 5, "Bite", 2, 7, "Run", 0, 0, 5},
         {405, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
     };
 
@@ -222,6 +231,9 @@ void clearBuffer();
 
 // Encounters ////////////////////////////////////////////////////////
 void encounter(int monsterID);
+void ambushEncounter(int monsterID);
+void camp();
+void fromCamp();
 
 //  Backpack & Item Management  //////////////////////////////////////
 void whatsInTheBag();
@@ -247,6 +259,7 @@ int playerMaxHealth(int vitality, int classHPX);
 
 //  Player Actions in Combat  ////////////////////////////////////////
 void combatAction(int monsterID);
+void combatActionAmbush(int monsterID);
 void attackRollMain(int mainWeapon, int bonusDMG);
 void attackRollOff(int equippedWeaponOff, int bonusDMG);
 void attackRollSpell(int bonusDMGspell);
@@ -276,84 +289,61 @@ int main() {
     randomize();
 
     intro();
-
     chooseCharacter();
     printCharacterSheet(currentChar);
 
-    // lets give some items for testing
-    addToBag(13);
-    addToBag(potion);
-    addToBag(potion);
-    addToBag(9);
-    addToBag(9);
+// Act I - Sleeping Curse
+    printf("> Lets dive in...\n\n");
+    Sleep(500);
 
-    held[0] = items[16];
+    printf("> The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.\n");
+    Sleep(250);
+    printf("> The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.\n");
+    Sleep(250);
+    printf("> In a small clearing, illuminated by slivers of moonlight, [%s] is facing off against the snarling beast.\n", name);
+    Sleep(250);
 
-    printf("\n\n");
+    lastLocation = "Moonlight Den";
+    encounter(4);   // Wolf intro fight
+    fromCamp();     // Always in pair with encounter
 
-    printf("> Would you like to enter this cave?\n");
+    printf("\n> You hear a voice...\n");
+    Sleep(250);
+    printf("\n> \"Help! Please, help!\" A young girl, her face pale with fear, burst into the clearing.\n");
+    Sleep(250);
+    printf("> You see [Lila], a child from your village, her eyes wide with terror.\n");
+    Sleep(250);
+    printf("> She stumbles, breathless and desperate, as she reaches your side.\n");
+    Sleep(250);
+    printf("> \"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"\n");
+    Sleep(250);
+    printf("> \"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk...\"\n\n");
+    Sleep(250);
 
-    decision();
+    printf("> A. Try to calm down the girl.\n");
+    Sleep(250);
+    printf("> B. Run straight to the [Village]\n");
+    Sleep(250);
 
-    if (result == 0)
+    selectionAB();
+    printf("\n");
+    if (abResult == 1)
     {
-        printf("> You entered a cave.\n");
-        Sleep(1000);
-
-        discoveredLocation(204);
-
-        printf("> Would you like to go deeper?\n");
-
-        decision();
-
-        if (result == 0)
-        {
-            Sleep(1000);
-            printf("> You go deeper and find something lurking in the shadows!\n");
-            Sleep(1000);
-
-            encounter(3);
-
-            Sleep(1000);
-            if (monsterCurrentHP > 0)   // ergo monster still alive
-            {
-                printf("{TEMP}> You escaped and returned to the cave entrance in [Location].\n");
-            }
-            else
-            {
-                foundItem(4);  // shortcut for potions as int potions = 11
-                foundItem(11);  // shortcut for potions as int potions = 11
-                whatsInTheBag();
-            }
-        }
-        else
-        {
-            Sleep(1000);
-            printf("> You turn back and head home to rest.\n");
-        }
+        printf("> There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\n");
+        Sleep(500);
+        printf("> Girl wipes her eyes, grabs your hand and together you walk towards the [Village]\n");
+        Sleep(250);
     }
     else
     {
-        printf("> You went back to town.\n");
-        Sleep(1000);
-
-        enterLocation(200);
-
-        printf("> Would you like to go to the tavern?\n");
-        decision();
-
-        if (result == 0)
-        {
-            Sleep(1000);
-            printf("> You drink till you pass out...\n");
-        }
-        else
-        {
-            Sleep(1000);
-            printf("> You go home and rest for the day.\n");
-        }
+        printf("> You grab crying [Lila] and run to the [Village] as fast as you can.\n");
+        Sleep(250);
     }
 
+    enterLocation(200);
+    lastLocation = "Village";
+
+////////////////////////////////////////////
     printf("\n> EOF\n");
     Sleep(30000);
 
@@ -366,8 +356,8 @@ int main() {
 void randomize() {
     srand(time(NULL));
     // randomNumber = rand() % X
-    // random number from {0, X}
-    // rand() % 20 + 20 = random number from {20, 40}
+    // random number from {0, X-1} as counting starts from 0 and array has X elements
+    // rand() % 20 + 21 = random number from {20, 40}
 }
 
 void chooseCharacter() {
@@ -683,6 +673,8 @@ void clearBuffer() {
 
 void encounter(int monsterID) {
     monsterCurrentHP = monsterMaxHP(monsterID);
+    camping = 0;
+    regenerated = 0;
 
     int r = 0;
     combatEnd = 1;
@@ -706,14 +698,23 @@ void encounter(int monsterID) {
 
         monsterHP(monsterDmgTaken, monsterID);
         Sleep(500);
-
+            // have to put this IF here for player to not get hit after killing monster
+            if (combatEnd == 0 && monsterCurrentHP <= 0)
+            {
+                break;
+            }
         monsterAction(monsterID);
         Sleep(500);
 
         playerHP(playerDmgTaken);
+
+        if (camping == 1 && playerCurrentHP > 0)
+        {
+            camp();
+        }
     }
 
-    if (playerCurrentHP > 0 && combatEnd == 0)
+    if (playerCurrentHP > 0 && combatEnd == 0 && regenerated == 0)
     {
         regenerate();
     }
@@ -761,7 +762,7 @@ int addToBag(int itemID) {
 void backpackFull(int itemID) {
     printf("> Would you like to replace one of the items?\n");
     decision();
-    if (result == 0)
+    if (result == 1)
     {
         printf("> These are your items:\n");
         printf("> ");
@@ -837,11 +838,11 @@ void foundItem(int itemID) {
 
         decision();
 
-        if (result == 0)
+        if (result == 1)
         {
             instantHealingPotion();
         }
-        else if (result = 1)
+        else if (result == 0)
         {
             Sleep(500);
             printf("> You put it in the backpack for later use.\n");
@@ -985,7 +986,7 @@ int damageConsumable(int itemID) {
 //  Player Actions in Combat  ////////////////////////////////////////
 
 void combatAction(int monsterID) {
-
+    monsterAmbushHP = 0;
     monsterDmgTaken = 0;
 
     printf("> Choose your action:\n");
@@ -998,7 +999,7 @@ void combatAction(int monsterID) {
 
     selectionABC();
 
-    if (abcResult == 0)
+    if (abcResult == 1)
     {
         printf("> Attack with:\n");
         Sleep(1000);
@@ -1016,7 +1017,7 @@ void combatAction(int monsterID) {
 
         selectionAB();
 
-        if (abResult == 0)  // attack
+        if (abResult == 1)  // attack
         {
             if (currentChar == 902)
             {
@@ -1027,35 +1028,37 @@ void combatAction(int monsterID) {
                 attackRollMain(mainWeapon, bonusDMG);
             }
         }
-        else if (abResult == 1)
+        else if (abResult == 0)
         {
             attackRollOff(offWeapon, bonusDMG);
         }
 
     }
-    else if (abcResult == 1)    // use item
+    else if (abcResult == 2)    // use item
     {
         whatsInTheBag();
         clearBuffer();
         itemSelect();
     }
-    else if (abcResult == 2)    // run!
+    else if (abcResult == 3)    // run!
     {
         Sleep(500);
-        printf("> You retreat and run back to the Town!\n");
+        printf("> You run for your life!\n");
         Sleep(500);
 
         printf("> [%s] catches your skin with its attack while you run away!\n", monsters[monsterID].monsterName);
         Sleep(500);
         monsterDmgTakenLog = 0;
         combatEnd = 0;  // Variable to end the combat without using break; outside of loop
+        monsterAmbushHP = monsterCurrentHP;
+        camping = 1;
     }
 }
 
 void attackRollMain(int mainWeapon, int bonusDMG) {
     itemID = mainWeapon;
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODmain;
@@ -1085,7 +1088,7 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
 void attackRollOff(int offWeapon, int bonusDMG) {
     itemID = offWeapon;
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODoff;
@@ -1109,7 +1112,7 @@ void attackRollOff(int offWeapon, int bonusDMG) {
         printf("> HIT!\n");
         Sleep(1000);
 
-        int isDazed = 1 + rand() % 99;
+        int isDazed = 1 + rand() % 100;
         if (isDazed > 50)
         {
             daze = 100;
@@ -1146,14 +1149,14 @@ void attackRollSpell(int bonusDMGspell) {
     printf("> Select which spell to use.\n");
     selectionAB();
 
-    if (abResult == 0)
+    if (abResult == 1)
     {
         SelectedSpellMinDMG = spells[held[0].minDMG].minDMG;
         SelectedSpellMaxDMG = spells[held[0].minDMG].maxDMG;
         printf("\nYou attack with [%s].\n", spells[held[0].minDMG].iname);
         Sleep(500);
     }
-    else if (abResult == 1)
+    else if (abResult == 0)
     {
         SelectedSpellMinDMG = spells[held[0].maxDMG].minDMG;
         SelectedSpellMaxDMG = spells[held[0].maxDMG].maxDMG;
@@ -1161,7 +1164,7 @@ void attackRollSpell(int bonusDMGspell) {
         Sleep(500);
     }
 
-    int random = 1 + rand() % 5;
+    int random = 1 + rand() % 6;
 
     int hit;
     int attackMODspell;
@@ -1414,7 +1417,7 @@ void regenerate() {
 
             printf("> Would you like to use one?\n");
             decision();
-            if (result == 0)
+            if (result == 1)
             {
                 healingPotion();
                 removeFromBag(potion);
@@ -1448,12 +1451,12 @@ void decision() {
         scanf(" %c", &q);
         if (q == 'Y' || q == 'y')
         {
-            result = 0;
+            result = 1;
             break;
         }
         else if (q == 'N' || q == 'n')
         {
-            result = 1;
+            result = 0;
             break;
         }
         else
@@ -1479,12 +1482,12 @@ void selectionAB() {
 
         if (ab == 'A' || ab == 'a')
         {
-            abResult = 0;
+            abResult = 1;
             break;
         }
         if (ab == 'B' || ab == 'b')
         {
-            abResult = 1;
+            abResult = 0;
             break;
         }
         else
@@ -1510,17 +1513,17 @@ void selectionABC() {
 
         if (abc == 'A' || abc == 'a')
         {
-            abcResult = 0;
+            abcResult = 1;
             break;
         }
         if (abc == 'B' || abc == 'b')
         {
-            abcResult = 1;
+            abcResult = 2;
             break;
         }
         if (abc == 'C' || abc == 'c')
         {
-            abcResult = 2;
+            abcResult = 3;
             break;
         }
         else
@@ -1558,8 +1561,10 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
             printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
             Sleep(200);
             printf("-----------------------------\n");
-            Sleep(2000);
+            Sleep(1000);
 
+            printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
+            Sleep(1000);
         }
         else
         {
@@ -1569,7 +1574,7 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
 }
 
 int monsterMaxHP(int monsterID) {
-    int MHPRoll = 1 + rand() % 7;
+    int MHPRoll = 1 + rand() % 8;
     int monsterHpRoll = monsters[monsterID].monsterBaseHP + MHPRoll;
 
     return monsterHpRoll;
@@ -1646,8 +1651,8 @@ int monsterDamageOpportunity(int monsterID) {
 void monsterAction(int monsterID) {
     playerDmgTaken = 0;
 
-    int randomActionRoll = 1 + rand() % 99;
-    int monsterAttackRoll = (1 + rand() % 19) - daze;
+    int randomActionRoll = 1 + rand() % 100;
+    int monsterAttackRoll = (1 + rand() % 20) - daze;
 
     if (monsterCurrentHP > monsters[monsterID].monsterThreshold)
     {
@@ -1684,8 +1689,8 @@ void monsterAction(int monsterID) {
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
 
-            randomActionRoll = 1 + rand() % 99;
-            monsterAttackRoll = 1 + rand() % 19;
+            randomActionRoll = 1 + rand() % 100;
+            monsterAttackRoll = 1 + rand() % 20;
 
             if (monsterAttackRoll < 4)
             {
@@ -1716,6 +1721,16 @@ void monsterAction(int monsterID) {
                 {
                     playerDmgTaken = 0;
                     printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
+                    Sleep(500);
+                    printf("-----------------------------\n");
+                    Sleep(200);
+                    printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
+                    Sleep(200);
+                    printf("-----------------------------\n");
+                    Sleep(500);
+
+                    printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
+                    Sleep(500);
                     playerDmgTakenLog = 0;
                     monsterCurrentHP = 0;
                     combatEnd = 0;
@@ -1733,5 +1748,151 @@ void monsterAction(int monsterID) {
                 daze = 0;
             }
         }
+    }
+}
+
+void camp() {
+    printf("\n> You run away to find a safe place to set up a camp to rest and heal.\n");
+    int campHP = floor(playerMaxHP * 0.7);
+    campVisit = 1;
+    combatEnd = 0;
+
+    if (playerCurrentHP > campHP)
+    {
+        printf("> You catch a breath away from danger.\n");
+        Sleep(250);
+        printf("> You ready yourself to go back on the road\n");
+    }
+    else
+    {
+        playerCurrentHP = campHP;
+        printf("> You catch a breath away from danger.\n");
+        Sleep(250);
+        printf("> You tend to your wounds and manage to regain some health.\n");
+        Sleep(250);
+        printf("> You feel ready to go back on the road.\n");
+    }
+    Sleep(250);
+    printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
+    camping = 0;
+
+    if (playerCurrentHP < playerMaxHP)
+    {
+        regenerate();
+        regenerated = 1;
+    }
+}
+
+void ambushEncounter(int monsterID) {
+    regenerated = 0;
+
+    if (campVisit == 1)
+    {
+        int randomEncounter = 1 + rand() % 100;
+
+        if (randomEncounter > 1) // base 50
+        {
+            monsterCurrentHP = monsterAmbushHP;
+
+            int r = 0;
+            combatEnd = 1;
+
+            printf("\n> ---------------------------------------------\n");
+            printf("> It is an ambush! There is no way to run!\n");
+            printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
+            printf("> ---------------------------------------------\n");
+            printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
+            whatsInTheBag();
+            Sleep(1000);
+            while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
+            {
+                r++;
+                printf("\nRound %i:\n", r);
+                monsterAction(monsterID);
+                Sleep(500);
+                playerHP(playerDmgTaken);
+                Sleep(500);
+                printf("\n");
+                combatActionAmbush(monsterID);
+                Sleep(500);
+                monsterHP(monsterDmgTaken, monsterID);
+                Sleep(500);
+            }
+            if (playerCurrentHP > 0 && combatEnd == 0)
+            {
+                regenerate();
+            }
+        }
+        else
+        {
+            printf("> It seems that [%s] moved away from this location.\n", monsters[monsterID].monsterName);
+            Sleep(250);
+            printf("> It feels safe and you start to look around for any leftover supplies\n");
+            Sleep(250);
+            printf("> getting ready to continue your journey...\n");
+        }
+    }
+    campVisit = 0;
+    monsterAmbushHP = 0;
+}
+
+void combatActionAmbush(int monsterID) {
+    monsterDmgTaken = 0;
+
+    printf("> Choose your action:\n");
+    Sleep(1000);
+    printf("A. Attack\n");
+    Sleep(500);
+    printf("B. Use Item\n");
+
+    selectionAB();
+
+    if (abResult == 1)
+    {
+        printf("> Attack with:\n");
+        Sleep(1000);
+        if (currentChar == 902)
+        {
+            printf("> A. Spell.\n");
+            Sleep(500);
+        }
+        else
+        {
+            printf("> A. Main hand weapon.\n");
+            Sleep(500);
+        }
+        printf("> B. Off hand weapon.\n");
+
+        selectionAB();
+
+        if (abResult == 1)  // attack
+        {
+            if (currentChar == 902)
+            {
+                attackRollSpell(bonusDMGspell);
+            }
+            else
+            {
+                attackRollMain(mainWeapon, bonusDMG);
+            }
+        }
+        else if (abResult == 0)
+        {
+            attackRollOff(offWeapon, bonusDMG);
+        }
+
+    }
+    else if (abResult == 0)    // use item
+    {
+        whatsInTheBag();
+        clearBuffer();
+        itemSelect();
+    }
+}
+
+void fromCamp() {
+    if (campVisit == 1)
+    {
+        printf("\n> You pack up your camp and return to [%s]\n\n", lastLocation);
     }
 }
