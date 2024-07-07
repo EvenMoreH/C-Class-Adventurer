@@ -83,8 +83,8 @@ struct location {
     char locationDescription[200];
 };
     struct location locations[] = {
-       {200, "Town", ""},
-       {201, "Mountain Road", ""},
+       {200, "Village", ""},
+       {201, "Moonlight Den", ""},
        {202, "Tomb of the Forsaken", ""},
        {203, "Mountain Pass", ""},
        {204, "Mines", ""},
@@ -208,7 +208,7 @@ struct item {
         {401, "Giant Rat", "", 18, "Bite", 2, 6, "Scratch", 2, 4, "Run", 0, 0, 5},
         {402, "Goblin", "", 28, "Knife", 2, 4, "Kick", 1, 3, "", 0, 0, 0},
         {403, "Hobgoblin", "", 48, "Greatclub", 6, 8, "Headbutt", 4, 6, "Skullcrsher", 12, 12, 10},
-        {404, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
+        {404, "Wolf", "", 15, "Claw", 1, 5, "Bite", 2, 7, "Run", 0, 0, 5},
         {405, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
     };
 
@@ -289,85 +289,61 @@ int main() {
     randomize();
 
     intro();
-
     chooseCharacter();
     printCharacterSheet(currentChar);
 
-    // lets give some items for testing
-    addToBag(13);
-    addToBag(potion);
-    addToBag(potion);
-    addToBag(9);
-    addToBag(9);
+// Act I - Sleeping Curse
+    printf("> Lets dive in...\n\n");
+    Sleep(500);
 
-    held[0] = items[18];
+    printf("> The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.\n");
+    Sleep(250);
+    printf("> The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.\n");
+    Sleep(250);
+    printf("> In a small clearing, illuminated by slivers of moonlight, [%s] is facing off against the snarling beast.\n", name);
+    Sleep(250);
 
-    printf("\n\n");
+    lastLocation = "Moonlight Den";
+    encounter(4);   // Wolf intro fight
+    fromCamp();     // Always in pair with encounter
 
-    lastLocation = "Road to the Mines";
+    printf("\n> You hear a voice...\n");
+    Sleep(250);
+    printf("\n> \"Help! Please, help!\" A young girl, her face pale with fear, burst into the clearing.\n");
+    Sleep(250);
+    printf("> You see [Lila], a child from your village, her eyes wide with terror.\n");
+    Sleep(250);
+    printf("> She stumbles, breathless and desperate, as she reaches your side.\n");
+    Sleep(250);
+    printf("> \"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"\n");
+    Sleep(250);
+    printf("> \"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk...\"\n\n");
+    Sleep(250);
 
-    printf("> Would you like to enter this cave?\n");
+    printf("> A. Try to calm down the girl.\n");
+    Sleep(250);
+    printf("> B. Run straight to the [Village]\n");
+    Sleep(250);
 
-    decision();
-
-    if (result == 1)
+    selectionAB();
+    printf("\n");
+    if (abResult == 1)
     {
-        printf("> You entered a cave.\n");
-        Sleep(1000);
-
-        discoveredLocation(204);
-        lastLocation = locations[204].locationName;
-
-        printf("> Would you like to go deeper?\n");
-
-        decision();
-
-        if (result == 1)
-        {
-            Sleep(1000);
-            printf("> You go deeper and find something lurking in the shadows!\n");
-            Sleep(1000);
-
-            encounter(3);
-            lastLocation = "Bottom of the cave";
-            fromCamp();
-            ambushEncounter(3);
-
-            Sleep(1000);
-
-            foundItem(4);  // shortcut for potions as int potions = 11
-            foundItem(11);  // shortcut for potions as int potions = 11
-            whatsInTheBag();
-
-        }
-        else
-        {
-            Sleep(1000);
-            printf("> You turn back and head home to rest.\n");
-        }
+        printf("> There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\n");
+        Sleep(500);
+        printf("> Girl wipes her eyes, grabs your hand and together you walk towards the [Village]\n");
+        Sleep(250);
     }
     else
     {
-        printf("> You went back to town.\n");
-        Sleep(1000);
-
-        enterLocation(200);
-
-        printf("> Would you like to go to the tavern?\n");
-        decision();
-
-        if (result == 1)
-        {
-            Sleep(1000);
-            printf("> You drink till you pass out...\n");
-        }
-        else
-        {
-            Sleep(1000);
-            printf("> You go home and rest for the day.\n");
-        }
+        printf("> You grab crying [Lila] and run to the [Village] as fast as you can.\n");
+        Sleep(250);
     }
 
+    enterLocation(200);
+    lastLocation = "Village";
+
+////////////////////////////////////////////
     printf("\n> EOF\n");
     Sleep(30000);
 
@@ -1745,6 +1721,16 @@ void monsterAction(int monsterID) {
                 {
                     playerDmgTaken = 0;
                     printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
+                    Sleep(500);
+                    printf("-----------------------------\n");
+                    Sleep(200);
+                    printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
+                    Sleep(200);
+                    printf("-----------------------------\n");
+                    Sleep(500);
+
+                    printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
+                    Sleep(500);
                     playerDmgTakenLog = 0;
                     monsterCurrentHP = 0;
                     combatEnd = 0;
@@ -1794,10 +1780,6 @@ void camp() {
     {
         regenerate();
         regenerated = 1;
-    }
-    else
-    {
-        // do nothing and continue
     }
 }
 
