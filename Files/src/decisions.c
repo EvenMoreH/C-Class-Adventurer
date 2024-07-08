@@ -6,6 +6,7 @@
 #include <limits.h>     // Allows to see max values for integers etc
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
+#include <ctype.h>      // allows for tolower() funtion
 
 
 #include "../include/decisions.h"
@@ -17,22 +18,20 @@
 //  Decision Trees  //////////////////////////////////////////////////
 
 void decision() {
-    clearBuffer();
-
     char q;
-
     Sleep(500);
-
     while (1)
     {
         printf("> [Y/N]: ");
         scanf(" %c", &q);
-        if (q == 'Y' || q == 'y')
+        q = tolower(q);
+
+        if (q == 'y')
         {
             result = 1;
             break;
         }
-        else if (q == 'N' || q == 'n')
+        else if (q == 'n')
         {
             result = 0;
             break;
@@ -40,30 +39,26 @@ void decision() {
         else
         {
             printf("> Y or N. Please try again.\n");
-
             clearBuffer();
         }
     }
 }
 
 void selectionAB() {
-
-    clearBuffer();
-
     int ab;
-
     Sleep(500);
     while (1)
     {
         printf("> [A/B]: ");
         scanf(" %c", &ab);
+        ab = tolower(ab);
 
-        if (ab == 'A' || ab == 'a')
+        if (ab == 'a')
         {
             abResult = 1;
             break;
         }
-        if (ab == 'B' || ab == 'b')
+        if (ab == 'b')
         {
             abResult = 0;
             break;
@@ -71,44 +66,38 @@ void selectionAB() {
         else
         {
         printf("> A, B. Please try again.\n");
-
         clearBuffer();
         }
     }
 }
 
 void selectionABC() {
-    clearBuffer();
-
     int abc;
-
+    int loop = 0;
     Sleep(500);
-
-    while (1)
-    {
+    do {
         printf("> [A/B/C]: ");
         scanf(" %c", &abc);
+        abc = tolower(abc);
 
-        if (abc == 'A' || abc == 'a')
+        switch (abc)
         {
+        case 'a':
             abcResult = 1;
+            loop = 1;
             break;
-        }
-        if (abc == 'B' || abc == 'b')
-        {
+        case 'b':
             abcResult = 2;
+            loop = 1;
             break;
-        }
-        if (abc == 'C' || abc == 'c')
-        {
+        case 'c':
             abcResult = 3;
+            loop = 1;
+            break;
+        default:
+            printf("> A, B. Please try again.\n");
+            clearBuffer();
             break;
         }
-        else
-        {
-        printf("> A, B. Please try again.\n");
-
-        clearBuffer();
-        }
-    }
+    } while (loop != 1);
 }

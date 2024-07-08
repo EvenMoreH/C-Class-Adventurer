@@ -15,6 +15,7 @@
 
 #include "../include/decisions.h"
 #include "../include/equipment.h"
+#include "../include/intro.h"
 #include "../include/monsters.h"
 #include "../include/playerActions.h"
 
@@ -159,12 +160,40 @@ void ambushEncounter(int monsterID) {
 void fromCamp() {
     if (campVisit == 1)
     {
-        // printf("\n> You pack up your camp and return to [%s]\n\n", lastLocation);
-        printf("\n> You pack up your camp and go back...\n");
-        Sleep(500);
-        printf("-----------------------------------\n");
-        printf("> You enter the [%s]\n", lastLocation);
-        printf("-----------------------------------\n");
-        Sleep(1000);
+        printf("\n> Would you like to continue your journey?\n");
+        decision();
+        if (result == 1)
+        {
+            printf("\n> You pack up your camp and go back...\n");
+            loading(3);
+            printf("-----------------------------------\n");
+            printf("> You enter the [%s]\n", lastLocation);
+            printf("-----------------------------------\n");
+            Sleep(1000);
+        }
+        else
+        {
+            printf("\n> Do you really want to end your adventure here?\n");
+            decision();
+
+            if (result == 1)
+            {
+                Sleep(1000);
+                printf("-------------------------\n");
+                printf("> You journey ends here.\n");
+                printf("-------------------------\n");
+                Sleep(5000);
+                exit(0);
+            }
+            else
+            {
+                printf("\n> You pack up your camp and go back...\n");
+                loading(3);
+                printf("-----------------------------------\n");
+                printf("> You enter the [%s]\n", lastLocation);
+                printf("-----------------------------------\n");
+                Sleep(1000);
+            }
+        }
     }
 }

@@ -364,10 +364,17 @@ void itemSelect() {
         {
             scanf(" %i", &chosenItem);
 
-            if (chosenItem == backpackArray[0] || chosenItem == backpackArray[1]||
-            chosenItem == backpackArray[2] || chosenItem == backpackArray[3] ||
-            chosenItem == backpackArray[4] || chosenItem == backpackArray[5] || chosenItem == backpackArray[6] ||
-            chosenItem == backpackArray[7] || chosenItem == backpackArray[8] || chosenItem == backpackArray[9])
+            if
+            (chosenItem == backpackArray[0] ||
+            chosenItem == backpackArray[1] ||
+            chosenItem == backpackArray[2] ||
+            chosenItem == backpackArray[3] ||
+            chosenItem == backpackArray[4] ||
+            chosenItem == backpackArray[5] ||
+            chosenItem == backpackArray[6] ||
+            chosenItem == backpackArray[7] ||
+            chosenItem == backpackArray[8] ||
+            chosenItem == backpackArray[9])
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -546,7 +553,8 @@ int playerHP(int playerDmgTaken) {
             printf("----------------------------------------\n");
             printf("> You have died. You journey ends here.\n");
             printf("----------------------------------------\n");
-            Sleep(2000);
+            Sleep(5000);
+            exit(0);
         }
         else
         {

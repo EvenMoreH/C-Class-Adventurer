@@ -24,6 +24,7 @@ int main() {
     randomize();
 
     intro();
+    skip();
     chooseCharacter();
     printCharacterSheet(currentChar);
 
@@ -50,7 +51,7 @@ int main() {
     {
         printf("\n> You hear a voice...\n");
         Sleep(500);
-        printf("\n> Someone was waiting for you.\n");
+        printf("\n> Someone was looking for you.\n");
     }
     else
     {

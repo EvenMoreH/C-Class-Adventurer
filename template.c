@@ -6,6 +6,8 @@
 #include <limits.h>     // Allows to see max values for integers etc
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
+#include <ctype.h>      // allows for tolower() funtion
+
 
 
 int main() {            // Main function

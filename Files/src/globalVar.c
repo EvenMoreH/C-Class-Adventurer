@@ -6,6 +6,7 @@
 #include <limits.h>     // Allows to see max values for integers etc
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
+#include <ctype.h>      // allows for tolower() funtion
 
 
 #include "../include/globalVar.h"
@@ -24,6 +25,7 @@
     int campVisit;          // sets flag if player was at a camp
     char* lastLocation;     // pointer to string for manual control where player is (basically a save point)
     int regenerated = 0;    // sets flag if player regenerated in camp to not regenerate again after combat ends
+    int s;
 
     // selected character
         // 900 - Archer
@@ -97,24 +99,25 @@ void clearBuffer() {
 }
 
 void skip() {
-    clearBuffer();
-    printf("\n> Press C to continue...\n");
+    Sleep(500);
+    printf("\n> Press C to continue... ");
     int ch2;
     while (1)
     {
-        ch2 = getchar();
-
+        scanf(" %c", &ch2);
+        ch2 = tolower(ch2);
         if (ch2 == 'c')
         {
-            break;
-        }
-        else if (ch2 == 'C')
-        {
+            printf("\n\n");
             break;
         }
         else
         {
             clearBuffer();
+            printf("> It supposed to be C but anyway...");
+            printf("\n\n");
+            break;
         }
     }
+    Sleep(500);
 }

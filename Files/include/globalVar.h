@@ -14,6 +14,7 @@
     extern int campVisit;          // sets flag if player was at a camp
     extern char* lastLocation;     // pinter to string for manual control where combat had been placed
     extern int regenerated;    // sets flag if player regenerated in camp to not regenerate again after combat ends
+    extern int s;
 
     // selected character
         // 900 - Archer
