@@ -7,13 +7,17 @@
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
 
-#include "../include/globalVar.h"
-#include "../include/globalStruct.h"
+
 #include "../include/encounter.h"
-#include "../include/playerActions.h"
+
+#include "../include/globalStruct.h"
+#include "../include/globalVar.h"
+
+#include "../include/decisions.h"
 #include "../include/equipment.h"
 #include "../include/monsters.h"
-#include "../include/decisions.h"
+#include "../include/playerActions.h"
+
 
 
 void encounter(int monsterID) {

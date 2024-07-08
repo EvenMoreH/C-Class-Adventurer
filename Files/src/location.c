@@ -8,10 +8,13 @@
 #include <windows.h>    // Unlocks windows functionalities
 
 
-#include "../include/globalVar.h"
-#include "../include/globalStruct.h"
-#include "../include/intro.h"
 #include "../include/location.h"
+
+#include "../include/globalStruct.h"
+#include "../include/globalVar.h"
+
+#include "../include/intro.h"
+
 
 //  Locations  ///////////////////////////////////////////////////////
 

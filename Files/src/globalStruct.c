@@ -7,6 +7,7 @@
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
 
+
 #include "../include/globalStruct.h"
 #include "../include/globalVar.h"
 

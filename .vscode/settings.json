@@ -10,6 +10,8 @@
         "test2.h": "c",
         "math.h": "c",
         "globalvar.h": "c",
-        "globalstruct.h": "c"
+        "globalstruct.h": "c",
+        "encounter.h": "c",
+        "location.h": "c"
     }
 }
