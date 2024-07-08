@@ -54,3 +54,5 @@ c_cpp_properties.json
 tasks.json
 gitCheatSheet.md
 template.c
+# ignoring testing folder
+files/testing/
