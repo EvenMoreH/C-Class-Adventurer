@@ -15,6 +15,55 @@
 #include "../include/playerActions.h"
 
 
+void intro() {
+        printf("************************************************\n");
+        Sleep(250);
+        printf("****************                ****************\n");
+        Sleep(250);
+        printf("**************     WELCOME TO     **************\n");
+        Sleep(250);
+        printf("***********    C-CLASS ADVENTURER    ***********\n");
+        Sleep(250);
+        printf("*********                              *********\n");
+        Sleep(250);
+        printf("******    Journey Through Memory Leaks    ******\n");
+        Sleep(250);
+        printf("****                                        ****\n");
+        Sleep(300);
+        printf("************************************************\n\n\n");
+        Sleep(1500);
+
+        printf("> Throughout this game you will be making a lot of decisions\n");
+        Sleep(500);
+        printf("> To control your actions you will be answering prompts by typing:\n");
+        Sleep(250);
+        printf("> Y for Yes\n");
+        Sleep(250);
+        printf("> N for No\n");
+        Sleep(250);
+        printf("> A to select 1st option\n");
+        Sleep(250);
+        printf("> B to select 2nd option\n");
+        Sleep(250);
+        printf("> C to select 3rd option\n");
+        Sleep(250);
+        printf("> When managing your backpack you will be selecting items by pressing correct number\n");
+        Sleep(250);
+        printf("> You can confirm all your inputs by pressing Enter\n\n");
+
+        printf("> When attacking there is a chance to miss your opponents.\n");
+        Sleep(250);
+        printf("> Attacking with off hand weapon has even lower chance to hit but can daze your enemy forcing them to miss.\n");
+        Sleep(250);
+        printf("> When your bag is empty and you would try to use items in combat you will waste your turn so beware.\n");
+        Sleep(250);
+        printf("> Anyway!\n\n");
+        Sleep(250);
+
+        Sleep(1000);
+        printf("> Good Luck!\n\n");
+}
+
 void chooseCharacter() {
         printf("> Who are you, brave adventurer?\n");
         Sleep(1000);
@@ -115,55 +164,6 @@ void printCharacterSheet(int currentChar) {
     {
         sorcererSheet();
     }
-}
-
-void intro() {
-        printf("************************************************\n");
-        Sleep(250);
-        printf("****************                ****************\n");
-        Sleep(250);
-        printf("**************     WELCOME TO     **************\n");
-        Sleep(250);
-        printf("***********    C-CLASS ADVENTURER    ***********\n");
-        Sleep(250);
-        printf("*********                              *********\n");
-        Sleep(250);
-        printf("******    Journey Through Memory Leaks    ******\n");
-        Sleep(250);
-        printf("****                                        ****\n");
-        Sleep(300);
-        printf("************************************************\n\n\n");
-        Sleep(1500);
-
-        printf("> Throughout this game you will be making a lot of decisions\n");
-        Sleep(500);
-        printf("> To control your actions you will be answering prompts by typing:\n");
-        Sleep(250);
-        printf("> Y for Yes\n");
-        Sleep(250);
-        printf("> N for No\n");
-        Sleep(250);
-        printf("> A to select 1st option\n");
-        Sleep(250);
-        printf("> B to select 2nd option\n");
-        Sleep(250);
-        printf("> C to select 3rd option\n");
-        Sleep(250);
-        printf("> When managing your backpack you will be selecting items by pressing correct number\n");
-        Sleep(250);
-        printf("> All of your inputs you can confirm by pressing Enter\n\n");
-
-        printf("> When attacking there is a chance to miss your opponents.\n");
-        Sleep(250);
-        printf("> Attacking with off hand weapon has even lower chance to hit but can daze your enemy forcing it to miss.\n");
-        Sleep(250);
-        printf("> When your bag is empty and you would try to use items in combat you will waste your turn so beware.\n");
-        Sleep(250);
-        printf("> Anyway!\n\n");
-        Sleep(250);
-
-        Sleep(1000);
-        printf("> Good Luck!\n\n");
 }
 
 // 10 element loading bar

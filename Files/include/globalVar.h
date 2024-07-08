@@ -72,4 +72,6 @@ void randomize();
 
 void clearBuffer();
 
+void skip();
+
 #endif

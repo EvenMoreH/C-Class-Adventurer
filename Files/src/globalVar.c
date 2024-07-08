@@ -21,7 +21,7 @@
     int MGC;                // global for Magic stat for characters
     int camping = 0;        // sets flag if player would run to camp
     int campVisit;          // sets flag if player was at a camp
-    char* lastLocation;     // pinter to string for manual control where combat had been placed
+    char* lastLocation;     // pointer to string for manual control where player is (basically a save point)
     int regenerated = 0;    // sets flag if player regenerated in camp to not regenerate again after combat ends
 
     // selected character
@@ -93,4 +93,27 @@ void clearBuffer() {
     // The while loop with getchar()
         // reads and discards characters until it encounters a newline ('\n')
         // or end-of-file (EOF), effectively clearing the buffer.
+}
+
+void skip() {
+    clearBuffer();
+    printf("\n> Press C to continue...\n");
+    int ch2;
+    while (1)
+    {
+        ch2 = getchar();
+
+        if (ch2 == 'c')
+        {
+            break;
+        }
+        else if (ch2 == 'C')
+        {
+            break;
+        }
+        else
+        {
+            clearBuffer();
+        }
+    }
 }

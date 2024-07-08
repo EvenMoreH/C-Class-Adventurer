@@ -36,11 +36,24 @@ int main() {
     printf("> In a small clearing, illuminated by slivers of moonlight, [%s] is facing off against the snarling beast.\n", name);
     Sleep(1000);
 
+    skip();
+
     lastLocation = "Moonlight Den";
     encounter(4);   // Wolf intro fight
     fromCamp();     // Always in pair with encounter
 
-    printf("\n> You hear a voice...\n");
+    skip();
+
+    if (campVisit == 1)
+    {
+        printf("\n> You hear a voice...\n");
+        Sleep(500);
+        printf("\n> Someone was waiting for you.\n");
+    }
+    else
+    {
+        printf("\n> You hear a voice...\n");
+    }
     Sleep(250);
     printf("\n> \"Help! Please, help!\" A young girl, her face pale with fear, burst into the clearing.\n");
     Sleep(250);
@@ -72,6 +85,8 @@ int main() {
         printf("> You grab crying [Lila] and run to the [Village] as fast as you can.\n");
         Sleep(250);
     }
+
+    skip();
 
     enterLocation(200);
     lastLocation = "Village";
