@@ -34,6 +34,13 @@ git branch -d <!-- branchName -->
 <!-- Once the pull request is reviewed and approved, it can be merged into the target branch -->
 git rebase <!-- feature-branch -->
 
+---
+<!-- Ammend the commit with new message -->
+git commit --amend
+
+<!-- Ammend the commit without editing the message -->
+git commit --amend --no-edit
+
 --------------------------------------------------
 
 # Branching Workflow Examples
