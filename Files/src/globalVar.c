@@ -39,15 +39,15 @@
     int equippedArmor = 2;
 
     // for yes or no questions
-    int q;
+    char q;
     int result;
 
     // for A or B decisions
-    int ab;
+    char ab;
     int abResult;
 
     // for A or B or C decisions
-    int abc;
+    char abc;
     int abcResult;
 
     // for dealing and receiving damage (player)

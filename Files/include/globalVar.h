@@ -28,15 +28,15 @@
     extern int equippedArmor;
 
     // for yes or no questions
-    extern int q;
+    extern char q;
     extern int result;
 
     // for A or B decisions
-    extern int ab;
+    extern char ab;
     extern int abResult;
 
     // for A or B or C decisions
-    extern int abc;
+    extern char abc;
     extern int abcResult;
 
     // for dealing and receiving damage (player)

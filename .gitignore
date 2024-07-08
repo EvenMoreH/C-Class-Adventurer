@@ -61,3 +61,4 @@ files/testing/
 files/obsolete/
 notes.md
 buildInstructions.md
+minunitExample.c

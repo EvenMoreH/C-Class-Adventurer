@@ -12,6 +12,10 @@
         "globalvar.h": "c",
         "globalstruct.h": "c",
         "encounter.h": "c",
-        "location.h": "c"
+        "location.h": "c",
+        "ctype.h": "c",
+        "stdio.h": "c",
+        "stdbool.h": "c",
+        "minunit.h": "c"
     }
 }
