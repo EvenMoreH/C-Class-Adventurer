@@ -100,7 +100,7 @@ void clearBuffer() {
 
 void skip() {
     Sleep(500);
-    printf("\n> Press C to continue... ");
+    printf("\n[Press C to continue...] ");
     int ch2;
     while (1)
     {
@@ -117,47 +117,47 @@ void skip() {
             int quip1 = rand() % 130;
             if (quip1 > 30 && quip1 < 40)
             {
-                printf("> Oops, it seems like your fingers took a detour. They must be sightseeing!\n");
+                printf("[Oops, it seems like your fingers took a detour. They must be sightseeing!]\n");
             }
             else if (quip1 > 40 && quip1 < 50)
             {
-                printf("> Looks like you discovered the hidden Easter egg. Congrats!\n");
+                printf("[Looks like you discovered the hidden Easter egg. Congrats!]\n");
             }
             else if (quip1 > 50 && quip1 < 60)
             {
-                printf("> Well, someone is feeling a bit rebellious today, huh?\n");
+                printf("[Well, someone is feeling a bit rebellious today, huh?]\n");
             }
             else if (quip1 > 60 && quip1 < 70)
             {
-                printf("> C is for cookie, but it seems you are craving a different flavor!\n");
+                printf("[C is for cookie, but it seems you are craving a different flavor!]\n");
             }
             else if (quip1 > 70 && quip1 < 80)
             {
-                printf("> Your fingers have a mind of their own. They must be geniuses!\n");
+                printf("[Your fingers have a mind of their own. They must be geniuses!]\n");
             }
             else if (quip1 > 80 && quip1 < 90)
             {
-                printf("> Ah, an accidental jazz note! You're improvising already.\n");
+                printf("[Ah, an accidental jazz note! You're improvising already.]\n");
             }
             else if (quip1 > 90 && quip1 < 100)
             {
-                printf("> Is that a creative interpretation of the letter C I see?\n");
+                printf("[Is that a creative interpretation of the letter C I see?]\n");
             }
             else if (quip1 > 100 && quip1 < 110)
             {
-                printf("> Looks like your keyboard has a mischievous streak. I like it!\n");
+                printf("[Looks like your keyboard has a mischievous streak. I like it!]\n");
             }
             else if (quip1 > 110 && quip1 < 120)
             {
-                printf("> I see you have found the scenic route on the keyboard. Nice one!\n");
+                printf("[I see you have found the scenic route on the keyboard. Nice one!]\n");
             }
             else if (quip1 > 120 && quip1 < 130)
             {
-                printf("> C? Who needs C when you have got your own unique style!\n");
+                printf("[C? Who needs C when you have got your own unique style!]\n");
             }
             else
             {
-                printf("> It supposed to be C but anyway...");
+                printf("[It supposed to be C but anyway...]");
             }
             printf("\n");
             break;

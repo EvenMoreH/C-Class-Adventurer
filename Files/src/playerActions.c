@@ -24,11 +24,11 @@ void combatAction(int monsterID) {
     monsterDmgTaken = 0;
 
     printf("> Choose your action:\n");
-    Sleep(1000);
+    Sleep(700);
     printf("A. Attack\n");
-    Sleep(500);
+    Sleep(250);
     printf("B. Use Item\n");
-    Sleep(500);
+    Sleep(250);
     printf("C. Run Away\n");
 
     selectionABC();
@@ -36,16 +36,16 @@ void combatAction(int monsterID) {
     if (abcResult == 1)
     {
         printf("> Attack with:\n");
-        Sleep(1000);
+        Sleep(700);
         if (currentChar == 902)
         {
             printf("> A. Spell.\n");
-            Sleep(500);
+            Sleep(250);
         }
         else
         {
             printf("> A. Main hand weapon.\n");
-            Sleep(500);
+            Sleep(250);
         }
         printf("> B. Off hand weapon.\n");
 
@@ -93,9 +93,9 @@ void combatActionAmbush(int monsterID) {
     monsterDmgTaken = 0;
 
     printf("> Choose your action:\n");
-    Sleep(1000);
+    Sleep(700);
     printf("A. Attack\n");
-    Sleep(500);
+    Sleep(250);
     printf("B. Use Item\n");
 
     selectionAB();
@@ -103,16 +103,16 @@ void combatActionAmbush(int monsterID) {
     if (abResult == 1)
     {
         printf("> Attack with:\n");
-        Sleep(1000);
+        Sleep(700);
         if (currentChar == 902)
         {
             printf("> A. Spell.\n");
-            Sleep(500);
+            Sleep(250);
         }
         else
         {
             printf("> A. Main hand weapon.\n");
-            Sleep(500);
+            Sleep(250);
         }
         printf("> B. Off hand weapon.\n");
 

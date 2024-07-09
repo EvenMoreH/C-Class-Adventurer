@@ -135,18 +135,13 @@ void chooseCharacter() {
             clearBuffer();
         }
     }
-
-    while (1)
-    {
-        Sleep(500);
-        clearBuffer();
-        printf("> What is your name Adventurer? ");
-        scanf(" %50s", &name);
-        Sleep(500);
-        printf("\n> And thus your journey begins, brave [%s].\n\n", name);
-        Sleep(1000);
-        break;
-    }
+    Sleep(500);
+    clearBuffer();
+    printf("> What is your name Adventurer?\n> ");
+    scanf(" %50s", &name);
+    Sleep(500);
+    printf("\n> And thus your journey begins, brave [%s].\n\n", name);
+    Sleep(1000);
 }
 
 void printCharacterSheet(int currentChar) {
