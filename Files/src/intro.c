@@ -63,7 +63,7 @@ void intro() {
         Sleep(250);
 
         Sleep(1000);
-        printf("> Good Luck!\n\n");
+        printf("> Good Luck!\n");
 }
 
 void chooseCharacter() {

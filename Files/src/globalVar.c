@@ -157,7 +157,7 @@ void skip() {
             }
             else
             {
-                printf("[It supposed to be C but anyway...]");
+                printf("[It supposed to be C but anyway...]\n");
             }
             printf("\n");
             break;

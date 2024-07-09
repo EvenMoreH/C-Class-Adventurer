@@ -27,6 +27,7 @@ int main() {
     skip();
     chooseCharacter();
     printCharacterSheet(currentChar);
+    skip();
 
 // Act I - Sleeping Curse
     printf("> Lets dive in...\n\n");
@@ -66,7 +67,7 @@ int main() {
     Sleep(1000);
     printf("> \"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"\n");
     Sleep(1000);
-    printf("> \"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk...\"\n\n");
+    printf("> \"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"\n\n");
     Sleep(1000);
 
     printf("> A. Try to calm down the girl.\n");
@@ -78,7 +79,7 @@ int main() {
     printf("\n");
     if (abResult == 1)
     {
-        printf("> There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\n");
+        printf("> \"There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\"\n");
         Sleep(1000);
         printf("> Girl wipes her eyes, grabs your hand and together you walk towards the [Village]\n");
         Sleep(1000);
@@ -93,6 +94,99 @@ int main() {
 
     enterLocation(200);
     lastLocation = "Village";
+
+    printf("> As you step into the village, a haunting stillness blankets the air,\n");
+    Sleep(1000);
+    printf("  the frozen figures of its inhabitants suspended in time like statues of forgotten dreams.\n");
+    Sleep(1000);
+    printf("> Each person appears caught in a moment of daily life,\n");
+    Sleep(1000);
+    printf("  their expressions etched with surprise or weariness,\n");
+    Sleep(1000);
+    printf("  as if sleep had claimed them where they stood.\n");
+    Sleep(1000);
+
+    skip();
+
+    printf("> As you reach Dane, you can see the worry in his eyes.\n");
+    Sleep(1000);
+    printf("> He quickly fills you in on what happened while you were out in the [Moonlight Den].\n");
+    Sleep(1000);
+    printf("> Dane explains to you that the village has been struck by a powerful curse from the Hag.\n\n");
+    Sleep(1000);
+    printf("> \"She had promised to help us with our crops in exchange for some of our livestock,\n");
+    Sleep(1000);
+    printf("  but she double-crossed us, she took the animals and cursed the whole village afterwards.\"\n");
+    Sleep(1000);
+
+    skip();
+
+    printf("> \"The only reason why me and Lila were not affected is because we were out tending to a sick cow at the time.\"\n");
+    Sleep(1000);
+    printf("> \"But now... I guess we are the only ones left to take care of the entire village.\"\n");
+    Sleep(1000);
+    printf("\n> You feel rising determination in your heart, you wont let your fiends and family suffer such fate!\n");
+    Sleep(1000);
+    printf("\n> \"Let's head over to the Hag's hut first. Maybe we'll find some clues there, or items that could help break the curse.\"\n");
+    Sleep(1000);
+    printf("  Dane instructed, looking at you.\n\n");
+    Sleep(1000);
+    printf("> \"[%s]... You have to investigate, I'll stay here with Lila and keep them safe and comfortable.\"\n", name);
+    Sleep(1000);
+    printf("  Dane reassured you.\n");
+    Sleep(1000);
+
+    skip();
+
+    printf("> You gather any food and supplies that you can find in [Sleeping Village] and head towards [Gloomy Forest].\n\n");
+    Sleep(500);
+
+    if (playerCurrentHP < playerMaxHP)
+    {
+        Sleep(500);
+        printf("> You manage to find some runes and potions, you drink a bit to heal your wounds, and you place the rest in your bag\n");
+        Sleep(250);
+        addToBag(potion);
+        Sleep(250);
+        addToBag(potion);
+        Sleep(250);
+        addToBag(14);
+        Sleep(250);
+        addToBag(14);
+        Sleep(250);
+        whatsInTheBag();
+        Sleep(250);
+        playerCurrentHP = playerMaxHP;
+    }
+    else
+    {
+        Sleep(500);
+        printf("> You manage to find some runes and potions, you put them in your bag\n");
+        Sleep(250);
+        addToBag(potion);
+        Sleep(250);
+        addToBag(potion);
+        Sleep(250);
+        addToBag(potion);
+        Sleep(250);
+        addToBag(14);
+        Sleep(250);
+        addToBag(14);
+        Sleep(250);
+        whatsInTheBag();
+        Sleep(250);
+    }
+
+    lastLocation = "Woodcarvers Road";
+
+    printf("\n> As you leave you look back and see Dane and Lila scavenge for food and blankets in the surrounding houses,\n");
+    Sleep(1000);
+    printf("  ensuring that each villager is snug and taken care of during their slumber.\n");
+    Sleep(1000);
+
+    skip();
+
+    enterLocation(202);
 
 ////////////////////////////////////////////
     printf("\n> EOF\n");

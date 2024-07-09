@@ -23,7 +23,7 @@ int currentLocation;    // Used in decision trees to move between locations
     struct location locations[] = {
        {200, "Village", ""},
        {201, "Moonlight Den", ""},
-       {202, "Tomb of the Forsaken", ""},
+       {202, "Woodcarvers Road", ""},
        {203, "Mountain Pass", ""},
        {204, "Mines", ""},
        {205, "Graveyard", ""},
