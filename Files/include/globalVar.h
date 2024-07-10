@@ -73,6 +73,6 @@ void randomize();
 
 void clearBuffer();
 
-void skip();
+void pressC();
 
 #endif

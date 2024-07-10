@@ -98,27 +98,27 @@ void chooseCharacter() {
     {
         printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
         scanf(" %c", &characterSelect);
-        if (characterSelect == 'a' || characterSelect == 'A' ||
-        characterSelect == 'b' || characterSelect == 'B' ||
-        characterSelect == 'c' || characterSelect == 'C')
+        characterSelect = tolower(characterSelect);
+
+        if (characterSelect == 'a' || characterSelect == 'b' || characterSelect == 'c')
         {
-            if (characterSelect == 'a' || characterSelect == 'A')
+            if (characterSelect == 'a')
             {
                 strcpy(currentCharacter, archer);
                 currentChar = 900;
             }
-            if (characterSelect == 'b' || characterSelect == 'B')
+            if (characterSelect == 'b')
             {
                 strcpy(currentCharacter, crusader);
                 currentChar = 901;
             }
-            if (characterSelect == 'c' || characterSelect == 'C')
+            if (characterSelect == 'c')
             {
                 strcpy(currentCharacter, sorcerer);
                 currentChar = 902;
             }
-
-            if (characterSelect == 'a' || characterSelect == 'A')
+            // output depending first letter a/an
+            if (characterSelect == 'a')
             {
                 printf("> So you are an [%s]\n", currentCharacter);
             }

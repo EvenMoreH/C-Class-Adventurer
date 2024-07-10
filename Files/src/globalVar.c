@@ -98,7 +98,7 @@ void clearBuffer() {
         // or end-of-file (EOF), effectively clearing the buffer.
 }
 
-void skip() {
+void pressC() {
     Sleep(500);
     printf("\n[Press C to continue...] ");
     int ch2;

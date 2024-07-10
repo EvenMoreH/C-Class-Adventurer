@@ -24,10 +24,10 @@ int main() {
     randomize();
 
     intro();
-    skip();
+    pressC();
     chooseCharacter();
     printCharacterSheet(currentChar);
-    skip();
+    pressC();
 
 // Act I - Sleeping Curse
     printf("> Lets dive in...\n\n");
@@ -40,13 +40,13 @@ int main() {
     printf("> In a small clearing, illuminated by slivers of moonlight, [%s] is facing off against the snarling beast.\n", name);
     Sleep(1000);
 
-    skip();
+    pressC();
 
     lastLocation = "Moonlight Den";
     encounter(4);   // Wolf intro fight
     fromCamp();     // Always in pair with encounter
 
-    skip();
+    pressC();
 
     if (campVisit == 1)
     {
@@ -90,7 +90,7 @@ int main() {
         Sleep(1000);
     }
 
-    skip();
+    pressC();
 
     enterLocation(200);
     lastLocation = "Village";
@@ -106,7 +106,7 @@ int main() {
     printf("  as if sleep had claimed them where they stood.\n");
     Sleep(1000);
 
-    skip();
+    pressC();
 
     printf("> As you reach Dane, you can see the worry in his eyes.\n");
     Sleep(1000);
@@ -119,7 +119,7 @@ int main() {
     printf("  but she double-crossed us, she took the animals and cursed the whole village afterwards.\"\n");
     Sleep(1000);
 
-    skip();
+    pressC();
 
     printf("> \"The only reason why me and Lila were not affected is because we were out tending to a sick cow at the time.\"\n");
     Sleep(1000);
@@ -136,7 +136,7 @@ int main() {
     printf("  Dane reassured you.\n");
     Sleep(1000);
 
-    skip();
+    pressC();
 
     printf("> You gather any food and supplies that you can find in [Sleeping Village] and head towards [Gloomy Forest].\n\n");
     Sleep(500);
@@ -184,7 +184,7 @@ int main() {
     printf("  ensuring that each villager is snug and taken care of during their slumber.\n");
     Sleep(1000);
 
-    skip();
+    pressC();
 
     enterLocation(202);
 
