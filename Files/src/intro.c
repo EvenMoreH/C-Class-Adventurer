@@ -165,8 +165,8 @@ void printCharacterSheet(int currentChar) {
 
 // 10 element loading bar
     // takes the argument in seconds to display this amount of loading time
-void loading(int s) {
-    int ms = s * 100;
+void loading(float s) {
+    float ms = s * 100;
     printf("\n> Loading: [");
     for (int i = 0; i < 10; i++)
     {
