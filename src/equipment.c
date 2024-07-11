@@ -161,3 +161,64 @@ void foundItem(int itemID) {
         addToBag(itemID);
     }
 }
+
+void equipItem(int itemID) {
+    char* mainItem = "Main";
+    char* offItem = "Off";
+    char* armorItem = "Armor";
+
+    if (strcmp(items[itemID].description, mainItem) == 0)
+    {
+        equipItemMain(itemID);
+    }
+    else if (strcmp(items[itemID].description, offItem) == 0)
+    {
+        equipItemOff(itemID);
+    }
+    else if (strcmp(items[itemID].description, armorItem) == 0)
+    {
+        equipItemArmor(itemID);
+    }
+}
+
+void equipItemMain(int itemID) {
+    held[0] = items[itemID];
+
+    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    Sleep(1000);
+    printf("> Your damage with main weapon increases!\n\n");
+    Sleep(1000);
+}
+
+void equipItemOff(int itemID) {
+    held[1] = items[itemID];
+
+    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    Sleep(1000);
+    printf("> Your damage with off hand weapon increases!\n\n");
+    Sleep(1000);
+}
+
+void equipItemArmor(int itemID) {
+    int resistanceIncrease = items[itemID].minDMG - held[2].minDMG;
+    int healthIncrease = items[itemID].maxDMG - held[2].maxDMG;
+    globalResistance = resistanceIncrease;
+
+    held[2] = items[itemID];
+
+    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    Sleep(1000);
+    printf("> Your resistance increases by [%i].\n", resistanceIncrease);
+    Sleep(1000);
+    printf("> Your health increases by [%i].\n", healthIncrease);
+    Sleep(1000);
+
+    playerCurrentHP = playerCurrentHP + healthIncrease;
+    playerMaxHP = playerMaxHP + healthIncrease;
+
+    if (playerCurrentHP > playerMaxHP)
+    {
+        playerCurrentHP = playerMaxHP;
+    }
+    printf("> Your current health is [%i]/[%i].\n\n", playerCurrentHP, playerMaxHP);
+}

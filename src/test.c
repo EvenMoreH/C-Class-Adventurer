@@ -29,6 +29,10 @@ int main() {
     printCharacterSheet(currentChar);
     pressC();
 
+    // playerCurrentHP = 27;    // testing
+    // equipItem(17);           // testing
+    // equipItem(23);           // testing
+
 // Act I - Sleeping Curse
     printf("> Lets dive in...\n\n");
     Sleep(1000);
@@ -150,9 +154,9 @@ int main() {
         Sleep(250);
         addToBag(potion);
         Sleep(250);
-        addToBag(14);
+        addToBag(13);
         Sleep(250);
-        addToBag(14);
+        addToBag(13);
         Sleep(250);
         whatsInTheBag();
         Sleep(250);

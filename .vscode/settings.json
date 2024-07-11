@@ -17,5 +17,14 @@
         "stdio.h": "c",
         "stdbool.h": "c",
         "minunit.h": "c"
-    }
+    },
+    "makefile.makefilePath": "Makefile",
+    "makefile.makeDirectory": "E:/Repositories/LearnC/C-Class-Adventurer",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "e:\\Repositories\\LearnC\\C-Class-Adventurer\\build",
+            "binaryPath": "e:\\Repositories\\LearnC\\C-Class-Adventurer\\build\\alpha_C_Class",
+            "binaryArgs": []
+        }
+    ],
 }

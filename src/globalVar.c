@@ -62,6 +62,7 @@
     // for declaring initial MAX HP and calculating current HP (player)
     int playerMaxHP;
     int playerCurrentHP;
+    int globalResistance;
 
     // NEW: monster HP & DMG
     int monsterID;
@@ -76,7 +77,7 @@
     int monsterDmgTakenLog;   // log testing to skip dmg logs if dmg = 0
 
     // ITEM Shortcuts
-    int potion = 11;
+    int potion = 10;
 
 
 void randomize() {

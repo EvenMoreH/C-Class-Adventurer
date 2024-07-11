@@ -39,7 +39,7 @@ int currentLocation;    // Used in decision trees to move between locations
        {4, "Shield", "Bludgeoning", 1, 6},      // base item do not alter (Crusader)
        {5, "Staff", "Bludgeoning", 1, 6},       // base item do not alter (Sorcerer)
        {6, "Leather Armor", "", 0, 0},          // base item do not alter (Archer)
-       {7, "Plate Armor", "", 0, 0},            // base item do not alter (Crusader)
+       {7, "Chain Mail", "", 0, 0},             // base item do not alter (Crusader)
        {8, "Robes", "", 0, 0},                  // base item do not alter (Sorcerer)
 
         // for grimoirs min/max damage represent equipped spell
@@ -47,24 +47,41 @@ int currentLocation;    // Used in decision trees to move between locations
             // 2 = Lightning Strike
             // 3 = Acid Bomb
             // 4 = Starburst
+            // 5 - Eldritch Blast
+            // 6 - Fire Bolt
        {9, "Grimoire", "", 1, 2},                // base item do not alter (Sorcerer)
 
-       // story items:
-       {10, "Stoneskull Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
-
        // consumables
-       {11, "Healing Potion", "Heals for 10 Health", 0, 0},
-       {12, "Avalanche Rune", "Deals Damage", 6, 13},
-       {13, "Fireball Rune", "Deals Damage", 12, 25},
-       {14, "Magic Missile Rune", "Deals Damage", 4, 9},
+       {10, "Healing Potion", "Heals for 10 Health", 0, 0},
+       {11, "Avalanche Rune", "Deals Damage", 6, 13},
+       {12, "Fireball Rune", "Deals Damage", 12, 25},
+       {13, "Magic Missile Rune", "Deals Damage", 4, 9},
 
         // special grimoires
-       {15, "Grimoire of Druidcraft", "", 3, 4},
-       {16, "Grimoire of Wildfire", "", 5, 6},
+       {14, "Scholar's Grimoire", "Main", 5, 6},
+       {15, "Grimoire of Druidcraft", "Main", 3, 4},
+       {16, "Grimoire of Wildfire", "Main", 7, 8},
 
        // Weapons
-       {17, "Uller's Bow", "", 6, 15},
-       {18, "Sword of Light", "", 6, 15},
+       {17, "Longbow", "Main", 3, 11},
+       {18, "Warhammer", "Main", 3, 11},
+       {19, "Uller's Bow", "Main", 6, 15},
+       {20, "Sword of Light", "Main", 6, 15},
+       {21, "placeholder", "Main", 1, 8},
+       {22, "placeholder", "Main", 1, 8},
+
+       // Armors
+        // minDMG = damage reduction
+        // maxDMG = bonus to HP MAX
+       {23, "Studded Leather Armor", "Armor", 2, 5},
+       {24, "Steel Breastplate", "Armor", 3, 3},
+       {25, "Scholar's Robes", "Armor", 0, 10},
+       {26, "placeholder", "Armor", 6, 15},
+       {27, "placeholder", "Armor", 6, 15},
+       {28, "placeholder", "Armor", 6, 15},
+
+       // story items:
+       {29, "Stoneskull Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
     };
 
     // Global backpack management
@@ -83,18 +100,18 @@ int currentLocation;    // Used in decision trees to move between locations
         {110, "", "", 0, 0},
     };
 
-// Global backpack management
-    // backpack IDs = 400-110
+// Global Spells
+    // backpack IDs = 400-410
     struct item spells[] = {
         {400, "", "", 0, 0},    // base empty spell slot
-        {401, "Ice Lance", "Cold", 2, 11},
-        {402, "Lightning Strike", "Lightning", 4, 5},
+        {401, "Ice Lance", "Cold", 2, 11},              // base
+        {402, "Lightning Strike", "Lightning", 4, 5},   // weaker but less RNG
         {403, "Acid Bomb", "Acid", 12, 13},
         {404, "Starburst", "Fire", 20, 21},
         {405, "Fireball", "", 12, 25},
         {406, "Burning Hands", "", 18, 7},
-        {407, "", "", 0, 0},
-        {408, "", "", 0, 0},
+        {407, "Eldritch Blast", "", 4, 13},             // base
+        {408, "Fire Bolt", "", 5, 7},                   // weaker but less RNG
         {409, "", "", 0, 0},
         {410, "", "", 0, 0},
     };

@@ -56,9 +56,9 @@ gitCheatSheet.md
 template.c
 template.h
 # ignoring testing folder
-files/testing/
-# ignoring obsolete folder
-files/obsolete/
+additional_files/
 notes.md
 buildInstructions.md
 minunitExample.c
+gitCheatSheet.md
+makeCheatSheet.md

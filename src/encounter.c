@@ -71,7 +71,8 @@ void encounter(int monsterID) {
 }
 
 void camp() {
-    printf("\n> You run away to find a safe place to set up a camp to rest and heal.\n");
+    loading(3);
+    printf("> You run away to find a safe place to set up a camp to rest and heal.\n");
     int campHP = floor(playerMaxHP * 0.7);
     campVisit = 1;
     combatEnd = 0;
