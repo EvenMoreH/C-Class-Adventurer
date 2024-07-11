@@ -62,7 +62,7 @@
     // for declaring initial MAX HP and calculating current HP (player)
     int playerMaxHP;
     int playerCurrentHP;
-    int globalResistance;
+    int globalResistance = 0;
 
     // NEW: monster HP & DMG
     int monsterID;

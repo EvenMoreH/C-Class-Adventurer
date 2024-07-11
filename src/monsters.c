@@ -68,15 +68,21 @@ int monsterDamage1(int monsterID) {
 
     int randomDmgRoll = x + rand() % y;
 
-    monsterDmgDone = randomDmgRoll;
-
-    printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
-
+    monsterDmgDone = randomDmgRoll - globalResistance;
+    if (monsterDmgDone <= 0)
+    {
+        monsterDmgDone = 0;
+        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+    }
+    else
+    {
+        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
+    }
     playerDmgTaken = monsterDmgDone;
 
     playerDmgTakenLog = monsterDmgDone;
 
-    return randomDmgRoll;
+    return monsterDmgDone;
 }
 
 int monsterDamage2(int monsterID) {
@@ -85,15 +91,21 @@ int monsterDamage2(int monsterID) {
 
     int randomDmgRoll = x + rand() % y;
 
-    monsterDmgDone = randomDmgRoll;
-
-    printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
-
+    monsterDmgDone = randomDmgRoll - globalResistance;
+    if (monsterDmgDone <= 0)
+    {
+        monsterDmgDone = 0;
+        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+    }
+    else
+    {
+        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
+    }
     playerDmgTaken = monsterDmgDone;
 
     playerDmgTakenLog = monsterDmgDone;
 
-    return randomDmgRoll;
+    return monsterDmgDone;
 }
 
 int monsterDamage3(int monsterID) {
@@ -102,17 +114,23 @@ int monsterDamage3(int monsterID) {
 
     int randomDmgRoll = x + rand() % y;
 
-    monsterDmgDone = randomDmgRoll;
-
-    printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack3, monsterDmgDone);
-
+    monsterDmgDone = randomDmgRoll - globalResistance;
+    if (monsterDmgDone <= 0)
+    {
+        monsterDmgDone = 0;
+        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+    }
+    else
+    {
+        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack3, monsterDmgDone);
+    }
     playerDmgTaken = monsterDmgDone;
 
     specialMonsterAttack = 1;
 
     playerDmgTakenLog = monsterDmgDone;
 
-    return randomDmgRoll;
+    return monsterDmgDone;
 }
 
 int monsterDamageOpportunity(int monsterID) {
@@ -121,11 +139,16 @@ int monsterDamageOpportunity(int monsterID) {
 
     int randomDmgRoll = x + rand() % y;
 
-    monsterDmgDone = randomDmgRoll;
+    monsterDmgDone = randomDmgRoll - globalResistance;
+    if (monsterDmgDone < 0)
+    {
+        monsterDmgDone = 0;
+        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n");
+    }
 
     playerDmgTaken = monsterDmgDone;
 
-    return randomDmgRoll;
+    return monsterDmgDone;
 
     playerDmgTakenLog = monsterDmgDone;
 }

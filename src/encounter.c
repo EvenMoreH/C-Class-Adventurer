@@ -33,6 +33,7 @@ void encounter(int monsterID) {
     printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
     printf("> ---------------------------------------------\n");
     printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
+    printf("> Your Damage Reduction from [%s] is [%i].\n", held[2].iname, globalResistance);
     whatsInTheBag();
 
     Sleep(1000);
@@ -124,6 +125,7 @@ void ambushEncounter(int monsterID) {
             printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
             printf("> ---------------------------------------------\n");
             printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
+            printf("> Your Damage Reduction from [%s] is [%i].\n", held[2].iname, globalResistance);
             whatsInTheBag();
             Sleep(1000);
             while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
