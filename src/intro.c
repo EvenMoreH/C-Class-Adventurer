@@ -142,6 +142,7 @@ void chooseCharacter() {
     Sleep(500);
     printf("\n> And thus your journey begins, brave [%s].\n\n", name);
     Sleep(1000);
+    clearBuffer();
 }
 
 void printCharacterSheet(int currentChar) {
