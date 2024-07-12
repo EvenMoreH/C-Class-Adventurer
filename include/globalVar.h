@@ -76,4 +76,7 @@ void clearBuffer();
 
 void pressC();
 
+void formattedText(char* printout);
+
+void newLine (int lines);
 #endif

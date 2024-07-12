@@ -4,7 +4,7 @@
 //put your function headers here
 
 // Monsters //////////////////////////////////////////////////////////
-int monsterHP(int monsterDmgTaken, int monsterID);
+void monsterHP(int monsterDmgTaken, int monsterID);
 int monsterMaxHP(int monsterID);
 int monsterDamage1(int monsterID);
 int monsterDamage2(int monsterID);

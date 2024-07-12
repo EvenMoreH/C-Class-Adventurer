@@ -102,7 +102,7 @@ void clearBuffer() {
 void pressC() {
     Sleep(500);
     printf("\n[Press C to continue...] ");
-    int ch2;
+    char ch2;
     while (1)
     {
         scanf(" %c", &ch2);
@@ -165,4 +165,19 @@ void pressC() {
         }
     }
     Sleep(500);
+}
+
+// Text only, no variables
+    // contains Sleep(1000)
+void formattedText(char* printout) {
+    printf("> %s\n", printout);
+    Sleep(1000);
+}
+
+// \n
+void newLine (int lines) {
+    for (int i = 0; i < lines; i++)
+    {
+        printf("\n");
+    }
 }

@@ -1,41 +1,44 @@
 # C-Class-Adventurer
+
 I want to try a text base "game": C-Class Adventurer: Journey Through Memory Leaks
 
-📦C-Class-Adventurer  
- ┣━ 📂build  
- ┃ ┣━ 📜alpha_C_Class.exe  
- ┃ ┣━ 📜decisions.o  
- ┃ ┣━ 📜encounter.o  
- ┃ ┣━ 📜equipment.o  
- ┃ ┣━ 📜globalStruct.o  
- ┃ ┣━ 📜globalVar.o  
- ┃ ┣━ 📜intro.o  
- ┃ ┣━ 📜location.o  
- ┃ ┣━ 📜monsters.o  
- ┃ ┣━ 📜playerActions.o  
- ┃ ┗━ 📜test.o  
- ┣━ 📂include  
- ┃ ┣━ 📜decisions.h  
- ┃ ┣━ 📜encounter.h  
- ┃ ┣━ 📜equipment.h  
- ┃ ┣━ 📜globalStruct.h  
- ┃ ┣━ 📜globalVar.h  
- ┃ ┣━ 📜intro.h  
- ┃ ┣━ 📜location.h  
- ┃ ┣━ 📜minunit.h  
- ┃ ┣━ 📜monsters.h  
- ┃ ┗━ 📜playerActions.h  
- ┣━ 📂src  
- ┃ ┣━ 📜decisions.c  
- ┃ ┣━ 📜encounter.c  
- ┃ ┣━ 📜equipment.c  
- ┃ ┣━ 📜globalStruct.c  
- ┃ ┣━ 📜globalVar.c  
- ┃ ┣━ 📜intro.c  
- ┃ ┣━ 📜location.c  
- ┃ ┣━ 📜monsters.c  
- ┃ ┣━ 📜playerActions.c  
- ┃ ┗━ 📜test.c  
- ┣━ 📜.gitignore  
- ┣━ 📜Makefile  
- ┗━ 📜README.md  
+## Project Tree
+
+📦C-Class-Adventurer<br>
+┣━ 📂build<br>
+┃ ┣━ 📜alpha_C_Class.exe<br>
+┃ ┣━ 📜decisions.o<br>
+┃ ┣━ 📜encounter.o<br>
+┃ ┣━ 📜equipment.o<br>
+┃ ┣━ 📜globalStruct.o<br>
+┃ ┣━ 📜globalVar.o<br>
+┃ ┣━ 📜intro.o<br>
+┃ ┣━ 📜location.o<br>
+┃ ┣━ 📜monsters.o<br>
+┃ ┣━ 📜playerActions.o<br>
+┃ ┗━ 📜test.o<br>
+┣━ 📂include<br>
+┃ ┣━ 📜decisions.h<br>
+┃ ┣━ 📜encounter.h<br>
+┃ ┣━ 📜equipment.h<br>
+┃ ┣━ 📜globalStruct.h<br>
+┃ ┣━ 📜globalVar.h<br>
+┃ ┣━ 📜intro.h<br>
+┃ ┣━ 📜location.h<br>
+┃ ┣━ 📜minunit.h<br>
+┃ ┣━ 📜monsters.h<br>
+┃ ┗━ 📜playerActions.h<br>
+┣━ 📂src<br>
+┃ ┣━ 📜decisions.c<br>
+┃ ┣━ 📜encounter.c<br>
+┃ ┣━ 📜equipment.c<br>
+┃ ┣━ 📜globalStruct.c<br>
+┃ ┣━ 📜globalVar.c<br>
+┃ ┣━ 📜intro.c<br>
+┃ ┣━ 📜location.c<br>
+┃ ┣━ 📜monsters.c<br>
+┃ ┣━ 📜playerActions.c<br>
+┃ ┗━ 📜test.c<br>
+┣━ 📜.gitignore<br>
+┣━ 📜Makefile<br>
+┗━ 📜README.md<br>

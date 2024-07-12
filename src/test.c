@@ -34,13 +34,11 @@ int main() {
     // equipItem(23);           // testing
 
 // Act I - Sleeping Curse
-    printf("> Lets dive in...\n\n");
-    Sleep(1000);
+    formattedText("Lets dive in...");
+    newLine(1);
+    formattedText("The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.");
+    formattedText("The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.");
 
-    printf("> The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.\n");
-    Sleep(1000);
-    printf("> The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.\n");
-    Sleep(1000);
     printf("> In a small clearing, illuminated by slivers of moonlight, [%s] is facing off against the snarling beast.\n", name);
     Sleep(1000);
 
@@ -54,25 +52,23 @@ int main() {
 
     if (campVisit == 1)
     {
-        printf("\n> You hear a voice...\n");
-        Sleep(1000);
-        printf("\n> Someone was looking for you.\n");
+        newLine(1);
+        formattedText("You hear a voice...");
+        newLine(1);
+        formattedText("Someone was looking for you.");
     }
     else
     {
-        printf("\n> You hear a voice...\n");
+        newLine(1);
+        formattedText("You hear a voice...");
     }
-    Sleep(1000);
-    printf("\n> \"Help! Please, help!\" A young girl, her face pale with fear, burst into the clearing.\n");
-    Sleep(1000);
-    printf("> You see [Lila], a child from your village, her eyes wide with terror.\n");
-    Sleep(1000);
-    printf("> She stumbles, breathless and desperate, as she reaches your side.\n");
-    Sleep(1000);
-    printf("> \"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"\n");
-    Sleep(1000);
-    printf("> \"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"\n\n");
-    Sleep(1000);
+    newLine(1);
+    formattedText("\"Help! Please, help!\" A young girl, her face pale with fear, burst into the clearing.");
+    formattedText("You see [Lila], a child from your village, her eyes wide with terror.");
+    formattedText("She stumbles, breathless and desperate, as she reaches your side.");
+    formattedText("\"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"");
+    formattedText("\"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"");
+    newLine(1);
 
     printf("> A. Try to calm down the girl.\n");
     Sleep(250);
@@ -80,18 +76,15 @@ int main() {
     Sleep(250);
 
     selectionAB();
-    printf("\n");
+    newLine(1);
     if (abResult == 1)
     {
-        printf("> \"There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\"\n");
-        Sleep(1000);
-        printf("> Girl wipes her eyes, grabs your hand and together you walk towards the [Village]\n");
-        Sleep(1000);
+        formattedText("\"There, there [Lila]. Do not worry, we will figure this out, lets get back to the village.\"");
+        formattedText("Girl wipes her eyes, grabs your hand and together you walk towards the [Village].");
     }
     else
     {
-        printf("> You grab crying [Lila] and run to the [Village] as fast as you can.\n");
-        Sleep(1000);
+        formattedText("You grab crying [Lila] and run to the [Village] as fast as you can.");
     }
 
     pressC();
@@ -99,51 +92,36 @@ int main() {
     enterLocation(200);
     lastLocation = "Village";
 
-    printf("> As you step into the village, a haunting stillness blankets the air,\n");
-    Sleep(1000);
-    printf("  the frozen figures of its inhabitants suspended in time like statues of forgotten dreams.\n");
-    Sleep(1000);
-    printf("> Each person appears caught in a moment of daily life,\n");
-    Sleep(1000);
-    printf("  their expressions etched with surprise or weariness,\n");
-    Sleep(1000);
-    printf("  as if sleep had claimed them where they stood.\n");
-    Sleep(1000);
+    formattedText("As you step into the village, a haunting stillness blankets the air,");
+    formattedText("the frozen figures of its inhabitants suspended in time like statues of forgotten dreams.");
+    formattedText("Each person appears caught in a moment of daily life,");
+    formattedText("their expressions etched with surprise or weariness, as if sleep had claimed them where they stood.");
 
     pressC();
 
-    printf("> As you reach Dane, you can see the worry in his eyes.\n");
-    Sleep(1000);
-    printf("> He quickly fills you in on what happened while you were out in the [Moonlight Den].\n");
-    Sleep(1000);
-    printf("> Dane explains to you that the village has been struck by a powerful curse from the Hag.\n\n");
-    Sleep(1000);
-    printf("> \"She had promised to help us with our crops in exchange for some of our livestock,\n");
-    Sleep(1000);
-    printf("  but she double-crossed us, she took the animals and cursed the whole village afterwards.\"\n");
-    Sleep(1000);
+    formattedText("As you reach Dane, you can see the worry in his eyes.");
+    formattedText("He quickly fills you in on what happened while you were out in the [Moonlight Den].");
+    formattedText("Dane explains to you that the village has been struck by a powerful curse from the Hag.");
+    formattedText("\"She had promised to help us with our crops in exchange for some of our livestock,");
+    formattedText("but she double-crossed us, she took the animals and cursed the whole village afterwards.\"");
 
     pressC();
 
-    printf("> \"The only reason why me and Lila were not affected is because we were out tending to a sick cow at the time.\"\n");
-    Sleep(1000);
-    printf("> \"But now... I guess we are the only ones left to take care of the entire village.\"\n");
-    Sleep(1000);
-    printf("\n> You feel rising determination in your heart, you wont let your fiends and family suffer such fate!\n");
-    Sleep(1000);
-    printf("\n> \"Let's head over to the Hag's hut first. Maybe we'll find some clues there, or items that could help break the curse.\"\n");
-    Sleep(1000);
-    printf("  Dane instructed, looking at you.\n\n");
-    Sleep(1000);
+    formattedText("\"The only reason why me and Lila were not affected is because we were out tending to a sick cow at the time.\"");
+    formattedText("\"But now... I guess we are the only ones left to take care of the entire village.\"");
+    newLine(1);
+    formattedText("You feel rising determination in your heart, you wont let your fiends and family suffer such fate!");
+    newLine(1);
+    formattedText("\"Let's head over to the Hag's hut first. Maybe we'll find some clues there, or items that could help break the curse.\"");
+    formattedText("Dane instructed, looking at you.");
     printf("> \"[%s]... You have to investigate, I'll stay here with Lila and keep them safe and comfortable.\"\n", name);
     Sleep(1000);
-    printf("  Dane reassured you.\n");
-    Sleep(1000);
+    formattedText("Dane reassured you.");
 
     pressC();
 
-    printf("> You gather any food and supplies that you can find in [Sleeping Village] and head towards [Gloomy Forest].\n\n");
-    Sleep(500);
+    formattedText("You gather any food and supplies that you can find in [Sleeping Village] and head towards [Gloomy Forest].");
+    newLine(1);
 
     if (playerCurrentHP < playerMaxHP)
     {
@@ -183,14 +161,13 @@ int main() {
 
     lastLocation = "Woodcarvers Road";
 
-    printf("\n> As you leave you look back and see Dane and Lila scavenge for food and blankets in the surrounding houses,\n");
-    Sleep(1000);
-    printf("  ensuring that each villager is snug and taken care of during their slumber.\n");
-    Sleep(1000);
+    newLine(1);
+    formattedText("As you leave you look back and see Dane and Lila scavenge for food and blankets in the surrounding houses,");
+    formattedText("ensuring that each villager is snug and taken care of during their slumber.");
 
     pressC();
 
-    enterLocation(202);
+    enterLocation(202); // Woodcarvers Road
 
 ////////////////////////////////////////////
     printf("\n> EOF\n");

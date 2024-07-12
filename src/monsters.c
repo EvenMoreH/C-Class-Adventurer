@@ -19,7 +19,7 @@
 
 // MONSTERS //////////////////////////////////////////////////////////
 
-int monsterHP(int monsterDmgTaken, int monsterID) {
+void monsterHP(int monsterDmgTaken, int monsterID) {
     monsterCurrentHP = monsterCurrentHP - monsterDmgTaken;
 
     if (monsterDmgTakenLog == 0)
@@ -39,9 +39,7 @@ int monsterHP(int monsterDmgTaken, int monsterID) {
             combatEnd = 0;
             Sleep(1000);
             printf("-----------------------------\n");
-            Sleep(200);
             printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
-            Sleep(200);
             printf("-----------------------------\n");
             Sleep(1000);
 
@@ -143,7 +141,7 @@ int monsterDamageOpportunity(int monsterID) {
     if (monsterDmgDone < 0)
     {
         monsterDmgDone = 0;
-        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n");
+        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
     }
 
     playerDmgTaken = monsterDmgDone;
@@ -168,7 +166,7 @@ void monsterAction(int monsterID) {
             playerDmgTakenLog = 0;
             if (daze == 100)
             {
-                printf("\n> [%s] is no longer dazed!\n", monsters[monsterID].monsterName);
+                printf("> [%s] is no longer dazed!\n", monsters[monsterID].monsterName);
 
             }
             daze = 0;
@@ -226,13 +224,11 @@ void monsterAction(int monsterID) {
                 {
                     playerDmgTaken = 0;
                     printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
-                    Sleep(500);
+                    Sleep(1000);
                     printf("-----------------------------\n");
-                    Sleep(200);
                     printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
-                    Sleep(200);
                     printf("-----------------------------\n");
-                    Sleep(500);
+                    Sleep(1000);
 
                     printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
                     Sleep(500);
