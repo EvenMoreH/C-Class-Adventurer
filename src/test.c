@@ -29,9 +29,9 @@ int main() {
     printCharacterSheet(currentChar);
     pressC();
 
-    playerCurrentHP = 27;    // testing
-    equipItem(17);           // testing
-    equipItem(23);           // testing
+    // playerCurrentHP = 27;    // testing
+    // equipItem(17);           // testing
+    // equipItem(23);           // testing
 
 // Act I - Sleeping Curse
     printf("> Lets dive in...\n\n");
@@ -47,7 +47,7 @@ int main() {
     pressC();
 
     lastLocation = "Moonlight Den";
-    encounter(1);   // 4 = Wolf intro fight
+    encounter(4);   // 4 = Wolf intro fight
     fromCamp();     // Always in pair with encounter
 
     pressC();
