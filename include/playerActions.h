@@ -20,7 +20,7 @@ void regenerate();
 int playerDamage(int itemID, int bonusDMG);
 int playerSpellDamage(int SelectedSpellMinDMG, int SelectedSpellMaxDMG, int bonusDMGspell);
 int damageConsumable(int itemID);
-int playerHP(int playerDmgTaken);
+void playerHP(int playerDmgTaken);
 int playerMaxHealth(int vitality, int classHPX);
 
 #endif

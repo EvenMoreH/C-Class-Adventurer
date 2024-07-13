@@ -38,7 +38,7 @@ void decision() {
         }
         else
         {
-            printf("> Y or N. Please try again.\n");
+            customText("Y or N. Please try again.", 10, 10);
             clearBuffer();
         }
     }
@@ -65,7 +65,7 @@ void selectionAB() {
         }
         else
         {
-        printf("> A, B. Please try again.\n");
+        customText("A, B. Please try again.", 10, 10);
         clearBuffer();
         }
     }
@@ -95,7 +95,7 @@ void selectionABC() {
             loop = 1;
             break;
         default:
-            printf("> A, B. Please try again.\n");
+            customText("A, B, C. Please try again.", 10, 10);
             clearBuffer();
             break;
         }

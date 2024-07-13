@@ -46,7 +46,7 @@ int addToBag(int itemID) {
         }
         if (tempBackpack == 10)
         {
-            printf("> Your backpack is full.\n");
+            customText("Your backpack is full.", 10, 10);
             backpackFull(itemID);
         }
     }
@@ -95,13 +95,12 @@ void backpackFull(int itemID) {
     {
         if (itemID == potion)
         {
-            printf("> You decide to drink it anyway to avoid wasting it...\n");
-            Sleep(500);
+            customText("You decide to drink it anyway to avoid wasting it...", 10, 500);
             instantHealingPotion();
         }
         else
         {
-            printf("> You leave the item where it was.\n");
+            customText("You leave the item where it was.", 250, 250);
         }
     }
 }
@@ -118,8 +117,8 @@ void removeFromBag(int itemID) {
 }
 
 void foundItem(int itemID) {
+    newLine(1);
     Sleep(1000);
-    printf("\n");
     printf("-----------------------------------\n");
     printf("> You found [%s]\n", items[itemID].iname);
     printf("-----------------------------------\n");
@@ -128,8 +127,7 @@ void foundItem(int itemID) {
     if (itemID == potion && playerCurrentHP < playerMaxHP)
     {
         printf("> Currently you have [%i/%i] Health.\n", playerCurrentHP, playerMaxHP);
-        Sleep(500);
-        printf("> Would you like to drink it immediately?\n");
+        customText("Would you like to drink it immediately?", 500, 50);
 
         decision();
 
@@ -139,20 +137,7 @@ void foundItem(int itemID) {
         }
         else if (result == 0)
         {
-            Sleep(500);
-            printf("> You put it in the backpack for later use.\n");
-            // addToBag(itemID);
-            // TRIVIA: I could comment out above addToBag cause having it in if worked
-                //  output all data in said function
-
-            // if (addToBag(itemID) == 10)
-            // {
-            //     printf("> You decide to drink it anyway to avoid wasting it...\n");
-            //     Sleep(500);
-            //     instantHealingPotion();
-            // }
-
-            // code was changed here to reflect replacing items / drinking potions
+            customText("You put it in the backpack for later use.", 500, 50);
             addToBag(itemID);
         }
     }
@@ -186,8 +171,8 @@ void equipItemMain(int itemID) {
 
     printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
     Sleep(1000);
-    printf("> Your damage with main weapon increases!\n\n");
-    Sleep(1000);
+    formattedText("Your damage with main weapon increase!");
+    newLine(1);
 }
 
 void equipItemOff(int itemID) {
@@ -195,8 +180,8 @@ void equipItemOff(int itemID) {
 
     printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
     Sleep(1000);
-    printf("> Your damage with off hand weapon increases!\n\n");
-    Sleep(1000);
+    formattedText("Your damage off hand weapon increase!");
+    newLine(1);
 }
 
 void equipItemArmor(int itemID) {

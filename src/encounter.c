@@ -35,7 +35,6 @@ void encounter(int monsterID) {
     printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
     printf("> Your bonus Damage Reduction from [%s] is [%i].\n", held[2].iname, globalResistance);
     whatsInTheBag();
-
     Sleep(1000);
 
     while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
@@ -81,15 +80,15 @@ void camp() {
 
     if (playerCurrentHP > campHP)
     {
-        customText("You catch a breath away from danger.", 1, 500);
-        customText("You ready yourself to go back on the road.", 1, 250);
+        customText("You catch a breath away from danger.", 10, 500);
+        customText("You ready yourself to go back on the road.", 10, 250);
     }
     else
     {
         playerCurrentHP = campHP;
-        customText("You catch a breath away from danger.", 1, 500);
-        customText("You tend to your wounds and manage to regain some health.", 1, 500);
-        customText("You feel ready to go back on the road.", 1, 250);
+        customText("You catch a breath away from danger.", 10, 500);
+        customText("You tend to your wounds and manage to regain some health.", 10, 500);
+        customText("You feel ready to go back on the road.", 10, 250);
     }
     printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
     camping = 0;
@@ -147,7 +146,7 @@ void ambushEncounter(int monsterID) {
         {
             printf("> It seems that [%s] moved away from this location.\n", monsters[monsterID].monsterName);
             customText("It feels safe and you start to look around for any leftover supplies.", 250, 250);
-            customText("Getting ready to continue your journey...", 1, 250);
+            customText("Getting ready to continue your journey...", 10, 250);
         }
     }
     campVisit = 0;
@@ -158,12 +157,12 @@ void fromCamp() {
     if (campVisit == 1)
     {
         newLine(1);
-        customText("Would you like to continue your journey?", 1, 1);
+        customText("Would you like to continue your journey?", 10, 10);
         decision();
         if (result == 1)
         {
             newLine(1);
-            customText("You pack up your camp and go back...", 1, 1);
+            customText("You pack up your camp and go back...", 10, 10);
             loading(3);
             printf("-----------------------------------\n");
             printf("> You enter the [%s]\n", lastLocation);
@@ -173,7 +172,7 @@ void fromCamp() {
         else
         {
             newLine(1);
-            customText("Do you really want to end your adventure here?", 1, 1);
+            customText("Do you really want to end your adventure here?", 10, 10);
             decision();
 
             if (result == 1)
@@ -188,7 +187,7 @@ void fromCamp() {
             else
             {
                 newLine(1);
-                customText("You pack up your camp and go back...", 1, 1);
+                customText("You pack up your camp and go back...", 10, 10);
                 loading(3);
                 printf("-----------------------------------\n");
                 printf("> You enter the [%s]\n", lastLocation);

@@ -23,31 +23,26 @@ void combatAction(int monsterID) {
     monsterAmbushHP = 0;
     monsterDmgTaken = 0;
 
-    printf("> Choose your action:\n");
-    Sleep(700);
-    printf("A. Attack\n");
-    Sleep(250);
-    printf("B. Use Item\n");
-    Sleep(250);
-    printf("C. Run Away\n");
+    customText("Choose your action:", 10, 700);
+    customText("A. Attack.", 10, 250);
+    customText("B. Use Item.", 10, 250);
+    customText("C. Run Away.", 10, 10);
 
     selectionABC();
 
     if (abcResult == 1)
     {
-        printf("> Attack with:\n");
-        Sleep(700);
+        customText("Attack with:", 10, 700);
         if (currentChar == 902)
         {
-            printf("> A. Spell.\n");
-            Sleep(250);
+            customText("A. Spell.", 10, 250);
         }
         else
         {
-            printf("> A. Main hand weapon.\n");
-            Sleep(250);
+            customText("A. Main hand weapon.", 10, 250);
         }
-        printf("> B. Off hand weapon.\n");
+
+        customText("B. Off hand weapon.", 10, 50);
 
         selectionAB();
 
@@ -76,9 +71,7 @@ void combatAction(int monsterID) {
     }
     else if (abcResult == 3)    // run!
     {
-        Sleep(500);
-        printf("> You run for your life!\n");
-        Sleep(500);
+        customText("You run for your life!", 500, 500);
 
         printf("> [%s] catches your skin with its attack while you run away!\n", monsters[monsterID].monsterName);
         Sleep(500);
@@ -92,29 +85,25 @@ void combatAction(int monsterID) {
 void combatActionAmbush(int monsterID) {
     monsterDmgTaken = 0;
 
-    printf("> Choose your action:\n");
-    Sleep(700);
-    printf("A. Attack\n");
-    Sleep(250);
-    printf("B. Use Item\n");
+    customText("Choose your action:", 10, 700);
+    customText("A. Attack.", 10, 250);
+    customText("B. Use Item.", 10, 250);
 
     selectionAB();
 
     if (abResult == 1)
     {
-        printf("> Attack with:\n");
-        Sleep(700);
+        customText("Attack with:", 10, 700);
         if (currentChar == 902)
         {
-            printf("> A. Spell.\n");
-            Sleep(250);
+            customText("A. Spell.", 10, 250);
         }
         else
         {
-            printf("> A. Main hand weapon.\n");
-            Sleep(250);
+            customText("A. Main hand weapon.", 10, 250);
         }
-        printf("> B. Off hand weapon.\n");
+
+        customText("B. Off hand weapon.", 10, 50);
 
         selectionAB();
 
@@ -148,7 +137,6 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
 
     int random = 1 + rand() % 6;
 
-    int hit;
     int attackMODmain;
     int attackMOD = attackMODmain;
     int attackRoll = 7 + attackMOD + random;
@@ -159,16 +147,12 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
 
     if (attackRoll < 11)
     {
-        hit = 1;
         monsterDmgTakenLog = 0;
-        printf("> MISS!\n");
-        Sleep(1000);
+        formattedText("MISS!");
     }
     else
     {
-        hit = 0;
-        printf("> HIT!\n");
-        Sleep(1000);
+        formattedText("HIT!");
         playerDamage(itemID, bonusDMG);
     }
 }
@@ -178,7 +162,6 @@ void attackRollOff(int offWeapon, int bonusDMG) {
 
     int random = 1 + rand() % 6;
 
-    int hit;
     int attackMODoff;
     int attackMOD = attackMODoff;
     int attackRoll = 7 + attackMOD + random;
@@ -189,16 +172,12 @@ void attackRollOff(int offWeapon, int bonusDMG) {
 
     if (attackRoll < 11)
     {
-        hit = 1;
         monsterDmgTakenLog = 0;
-        printf("> MISS!\n");
-        Sleep(1000);
+        formattedText("MISS!");
     }
     else
     {
-        hit = 0;
-        printf("> HIT!\n");
-        Sleep(1000);
+        formattedText("HIT!");
 
         int isDazed = 1 + rand() % 100;
         if (isDazed > 50)
@@ -207,21 +186,19 @@ void attackRollOff(int offWeapon, int bonusDMG) {
             switch (currentChar)
             {
             case 900:
-                printf("> You strike deep, opening a big wound in your opponents guts rendering the creature shocked.\n");
+                customText("You strike deep, opening a big wound in your opponents guts rendering the creature shocked.", 10, 10);
                 break;
 
                 case 901:
-                printf("> You strike with force so great that you daze your enemy.\n");
+                customText("You strike with force so great that you daze your enemy.", 10, 10);
                 break;
 
                 case 902:
-                printf("> You strike with such precision that your adversary is stunned.\n");
+                customText("You strike with such precision that your adversary is stunned.", 10, 10);
                 break;
             }
         }
-
         playerDamage(itemID, bonusDMG);
-
     }
 }
 
@@ -254,23 +231,18 @@ void attackRollSpell(int bonusDMGspell) {
 
     int random = 1 + rand() % 6;
 
-    int hit;
     int attackMODspell;
     int attackMOD = attackMODspell;
     int attackRoll = 7 + attackMOD + random;
 
     if (attackRoll < 11)
     {
-        hit = 1;
         monsterDmgTakenLog = 0;
-        printf("> MISS!\n");
-        Sleep(1000);
+        formattedText("MISS!");
     }
     else
     {
-        hit = 0;
-        printf("> HIT!\n");
-        Sleep(1000);
+        formattedText("HIT!");
         playerSpellDamage(SelectedSpellMinDMG, SelectedSpellMaxDMG, bonusDMGspell);
     }
 }
@@ -340,8 +312,7 @@ void itemSelect() {
     {
         monsterDmgTakenLog = 0;
 
-        printf("> Backpack is either empty or these are not consumable items...\n");
-        Sleep(250);
+        customText("Backpack is either empty or these are not consumable items...", 10, 250);
         printf("> Dont waste your turns [%s].\n", name);
         Sleep(1000);
     }
@@ -443,8 +414,7 @@ void healingPotion() {
             {
                 if (playerCurrentHP >= playerMaxHP)
                 {
-                    Sleep(1000);
-                    printf("> You can't use that you are at full health.\n");
+                    customText("You can't use that you are at full health.", 1000, 10);
 
                     monsterDmgTakenLog = 0;
 
@@ -476,17 +446,17 @@ void healingPotion() {
 
 void instantHealingPotion() {
 
-playerCurrentHP = playerCurrentHP + (10 + MGC);
+    playerCurrentHP = playerCurrentHP + (10 + MGC);
 
-if (playerCurrentHP > playerMaxHP)
-{
-    playerCurrentHP = playerMaxHP;
-}
+    if (playerCurrentHP > playerMaxHP)
+    {
+        playerCurrentHP = playerMaxHP;
+    }
 
-Sleep(1000);
-printf("> You restore [%i] Health.\n", 10 + MGC);
-Sleep(1000);
-printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
+    Sleep(1000);
+    printf("> You restore [%i] Health.\n", 10 + MGC);
+    Sleep(1000);
+    printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
 }
 
 void regenerate() {
@@ -510,8 +480,9 @@ void regenerate() {
             printf("\n> Your current Health is: [%i/%i]\n", playerCurrentHP, playerMaxHP);
             printf("> You have [%i]x [%s] in your backpack.\n", tempPotion, items[11].iname);
 
-            printf("> Would you like to use one?\n");
+            customText("Would you like to use one?", 10, 10);
             decision();
+
             if (result == 1)
             {
                 healingPotion();
@@ -520,13 +491,14 @@ void regenerate() {
             }
             else
             {
-                printf("> Sure! Better to save it for later.\n");
+                customText("> Sure! Better to save it for later.", 10, 10);
             }
         }
         else
         {
-            printf("\n> Wounded, you think about drinking a [Healing Potion].\n");
-            printf("> but there is none in your backpack... Maybe next time.\n");
+            newLine(1);
+            customText("Wounded, you think about drinking a [Healing Potion].", 10, 10);
+            customText("but there is none in your backpack... Maybe next time.", 10, 10);
         }
     }
 }
@@ -534,7 +506,7 @@ void regenerate() {
 
 //  Player HP & Damage Roll  /////////////////////////////////////////
 
-int playerHP(int playerDmgTaken) {
+void playerHP(int playerDmgTaken) {
     playerCurrentHP = playerCurrentHP - playerDmgTaken;
 
     if (playerDmgTakenLog == 0)
@@ -614,4 +586,3 @@ int damageConsumable(int itemID) {
 
     return dmg;
 }
-

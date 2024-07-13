@@ -182,7 +182,9 @@ void newLine (int lines) {
     }
 }
 
-// Text with arg for sleepBefore(in ms) & sleepAfter(in ms) the Text
+// "Formatted Text"
+    // INT 1: sleepBefore(in ms)
+    // INT 2: sleepAfter(in ms)
 void customText(char* printout, int sleepBefore, int sleepAfter) {
     Sleep(sleepBefore);
     printf("> %s\n", printout);

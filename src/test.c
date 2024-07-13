@@ -69,12 +69,6 @@ int main() {
     formattedText("\"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"");
     formattedText("\"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"");
     newLine(1);
-
-    // printf("> A. Try to calm down the girl.\n");
-    // Sleep(250);
-    // printf("> B. Run straight to the [Village]\n");
-    // Sleep(250);
-
     customText("A. Try to calm down the girl.", 1, 250);
     customText("B. Run straight to the [Village]", 1, 250);
 
