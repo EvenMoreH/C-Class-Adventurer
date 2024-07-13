@@ -70,10 +70,13 @@ int main() {
     formattedText("\"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"");
     newLine(1);
 
-    printf("> A. Try to calm down the girl.\n");
-    Sleep(250);
-    printf("> B. Run straight to the [Village]\n");
-    Sleep(250);
+    // printf("> A. Try to calm down the girl.\n");
+    // Sleep(250);
+    // printf("> B. Run straight to the [Village]\n");
+    // Sleep(250);
+
+    customText("A. Try to calm down the girl.", 1, 250);
+    customText("B. Run straight to the [Village]", 1, 250);
 
     selectionAB();
     newLine(1);
@@ -125,9 +128,7 @@ int main() {
 
     if (playerCurrentHP < playerMaxHP)
     {
-        Sleep(500);
-        printf("> You manage to find some runes and potions, you drink a bit to heal your wounds, and you place the rest in your bag\n");
-        Sleep(250);
+        formattedText("You manage to find some runes and potions, you drink a bit to heal your wounds, and you place the rest in your bag.");
         addToBag(potion);
         Sleep(250);
         addToBag(potion);
@@ -142,9 +143,7 @@ int main() {
     }
     else
     {
-        Sleep(500);
-        printf("> You manage to find some runes and potions, you put them in your bag\n");
-        Sleep(250);
+        formattedText("You manage to find some runes and potions, you put them in your bag.");
         addToBag(potion);
         Sleep(250);
         addToBag(potion);
@@ -162,7 +161,7 @@ int main() {
     lastLocation = "Woodcarvers Road";
 
     newLine(1);
-    formattedText("As you leave you look back and see Dane and Lila scavenge for food and blankets in the surrounding houses,");
+    formattedText("As you leave, you look back and see Dane and Lila scavenge for food and blankets in the surrounding houses,");
     formattedText("ensuring that each villager is snug and taken care of during their slumber.");
 
     pressC();

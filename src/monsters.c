@@ -44,8 +44,8 @@ void monsterHP(int monsterDmgTaken, int monsterID) {
             printf("-----------------------------\n");
             Sleep(1000);
 
-            printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
-            Sleep(1000);
+            newLine(1);
+            formattedText("You tend to your wounds and start looking around for any leftover items.");
         }
         else
         {
@@ -168,7 +168,6 @@ void monsterAction(int monsterID) {
             if (daze == 100)
             {
                 printf("> [%s] is no longer dazed!\n", monsters[monsterID].monsterName);
-
             }
             daze = 0;
         }
@@ -232,8 +231,8 @@ void monsterAction(int monsterID) {
                     printf("-----------------------------\n");
                     Sleep(1000);
 
-                    printf("\n> You tend to your wounds and start looking around for any leftover items.\n");
-                    Sleep(500);
+                    newLine(1);
+                    formattedText("You tend to your wounds and start looking around for any leftover items.");
                     playerDmgTakenLog = 0;
                     monsterCurrentHP = 0;
                     combatEnd = 0;

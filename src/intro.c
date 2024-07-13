@@ -18,75 +18,52 @@
 
 
 void intro() {
-        printf("************************************************\n");
-        Sleep(250);
-        printf("****************                ****************\n");
-        Sleep(250);
-        printf("**************     WELCOME TO     **************\n");
-        Sleep(250);
-        printf("***********    C-CLASS ADVENTURER    ***********\n");
-        Sleep(250);
-        printf("*********                              *********\n");
-        Sleep(250);
-        printf("******    Journey Through Memory Leaks    ******\n");
-        Sleep(250);
-        printf("****                                        ****\n");
-        Sleep(300);
-        printf("************************************************\n\n\n");
-        Sleep(1500);
+    printf("************************************************\n");
+    Sleep(250);
+    printf("****************                ****************\n");
+    Sleep(250);
+    printf("**************     WELCOME TO     **************\n");
+    Sleep(250);
+    printf("***********    C-CLASS ADVENTURER    ***********\n");
+    Sleep(250);
+    printf("*********                              *********\n");
+    Sleep(250);
+    printf("******    Journey Through Memory Leaks    ******\n");
+    Sleep(250);
+    printf("****                                        ****\n");
+    Sleep(300);
+    printf("************************************************\n\n\n");
+    Sleep(1500);
 
-        printf("> Throughout this game you will be making a lot of decisions\n");
-        Sleep(500);
-        printf("> To control your actions you will be answering prompts by typing:\n");
-        Sleep(250);
-        printf("> Y for Yes\n");
-        Sleep(250);
-        printf("> N for No\n");
-        Sleep(250);
-        printf("> A to select 1st option\n");
-        Sleep(250);
-        printf("> B to select 2nd option\n");
-        Sleep(250);
-        printf("> C to select 3rd option\n");
-        Sleep(250);
-        printf("> When managing your backpack you will be selecting items by pressing correct number\n");
-        Sleep(250);
-        printf("> You can confirm all your inputs by pressing Enter\n\n");
-
-        printf("> When attacking there is a chance to miss your opponents.\n");
-        Sleep(250);
-        printf("> Attacking with off hand weapon has even lower chance to hit but can daze your enemy forcing them to miss.\n");
-        Sleep(250);
-        printf("> When your bag is empty and you would try to use items in combat you will waste your turn so beware.\n");
-        Sleep(250);
-        printf("> Anyway!\n\n");
-        Sleep(250);
-
-        Sleep(1000);
-        printf("> Good Luck!\n");
+    customText("Throughout this game you will be making a lot of decisions.", 1, 500);
+    customText("To control your actions you will be answering prompts by typing:", 1, 250);
+    customText("Y for Yes.", 1, 250);
+    customText("N for No.", 1, 250);
+    customText("A to select 1st option.", 1, 250);
+    customText("B to select 2nd option.", 1, 250);
+    customText("C to select 3rd option.", 1, 250);
+    customText("When managing your backpack you will be selecting items by pressing correct number.", 1, 250);
+    customText("You can confirm all your inputs by pressing Enter.", 1, 250);
+    newLine(1);
+    customText("When attacking there is a chance to miss your opponents.", 1, 250);
+    customText("Attacking with off hand weapon has even lower chance to hit but can daze your enemy forcing them to miss.", 1, 250);
+    customText("When your bag is empty and you would try to use items in combat you will waste your turn so beware.", 1, 250);
+    customText("Anyway!", 1, 1500);
+    newLine(1);
+    customText("Good Luck!", 1, 250);
 }
 
 void chooseCharacter() {
-        printf("> Who are you, brave adventurer?\n");
-        Sleep(1000);
-        printf("> A. Archer\n");
-            Sleep(500);
-            printf("\tNimble and agile fighter relying on Bows, Shortswords and light armor.\n");
-            Sleep(500);
-            printf("\tArchers have average resiliency, and their combat capabilities rely on Dexterity\n");
-            Sleep(500);
-        printf("> B. Crusader\n");
-            Sleep(500);
-            printf("\tStrong and durable fighter relying on Swords, Shields and heavy armor.\n");
-            Sleep(500);
-            printf("\tCrusaders have high resiliency, and their combat capabilities rely on Strength\n");
-            Sleep(500);
-        printf("> C. Sorcerer\n");
-            Sleep(500);
-            printf("\tMasters of the dark arts, relying on Grimoires filled with spells, Staves and robes.\n");
-            Sleep(500);
-            printf("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity\n");
-        Sleep(1000);
+        formattedText("Who are you, brave adventurer?");
+        customText("A. Archer", 1, 500);
+            customText("\tNimble and agile fighter relying on Bows, Shortswords and light armor.", 1, 500);
+            customText("\tArchers have average resiliency, and their combat capabilities rely on Dexterity.", 1, 500);
+        customText("B. Crusader", 1, 500);
+            customText("\tStrong and durable fighter relying on Swords, Shields and heavy armor.", 1, 500);
+            customText("\tCrusaders have high resiliency, and their combat capabilities rely on Strength.", 1, 500);
+        customText("C. Sorcerer", 1, 500);
+            customText("\tMaster of the dark arts, relying on Grimoires filled with spells, Staves and robes.", 1, 500);
+            customText("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity.", 1, 1250);
 
     char characterSelect;
     char currentCharacter[10];
@@ -146,9 +123,7 @@ void chooseCharacter() {
 }
 
 void printCharacterSheet(int currentChar) {
-    Sleep(1000);
-    printf("> This is you and your equipment:\n");
-    Sleep(1000);
+    customText("This is you and your equipment:", 1000, 1000);
 
     if (currentChar == 900)
     {
@@ -218,7 +193,7 @@ void archerSheet() {
     printf("|     - Leather Armor     |\n");
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
-    printf("\n");
+    newLine(1);
 }
 
 void crusaderSheet() {
@@ -262,7 +237,7 @@ void crusaderSheet() {
     printf("|     - Plate Armor       |\n");
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
-    printf("\n");
+    newLine(1);
 }
 
 void sorcererSheet() {
@@ -307,5 +282,5 @@ void sorcererSheet() {
     printf("|     - Robes             |\n");
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
-    printf("\n");
+    newLine(1);
 }

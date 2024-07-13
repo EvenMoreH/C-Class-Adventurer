@@ -73,7 +73,7 @@ void encounter(int monsterID) {
 
 void camp() {
     loading(3);
-    printf("> You run away to find a safe place to set up a camp to rest and heal.\n");
+    customText("You run away to find a safe place to set up a camp to rest and heal.", 50, 50);
     int campHP = floor(playerMaxHP * 0.7);
     campVisit = 1;
     combatEnd = 0;
@@ -81,20 +81,16 @@ void camp() {
 
     if (playerCurrentHP > campHP)
     {
-        printf("> You catch a breath away from danger.\n");
-        Sleep(500);
-        printf("> You ready yourself to go back on the road.\n");
+        customText("You catch a breath away from danger.", 1, 500);
+        customText("You ready yourself to go back on the road.", 1, 250);
     }
     else
     {
         playerCurrentHP = campHP;
-        printf("> You catch a breath away from danger.\n");
-        Sleep(500);
-        printf("> You tend to your wounds and manage to regain some health.\n");
-        Sleep(500);
-        printf("> You feel ready to go back on the road.\n");
+        customText("You catch a breath away from danger.", 1, 500);
+        customText("You tend to your wounds and manage to regain some health.", 1, 500);
+        customText("You feel ready to go back on the road.", 1, 250);
     }
-    Sleep(250);
     printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
     camping = 0;
 
@@ -150,10 +146,8 @@ void ambushEncounter(int monsterID) {
         else
         {
             printf("> It seems that [%s] moved away from this location.\n", monsters[monsterID].monsterName);
-            Sleep(250);
-            printf("> It feels safe and you start to look around for any leftover supplies\n");
-            Sleep(250);
-            printf("> getting ready to continue your journey...\n");
+            customText("It feels safe and you start to look around for any leftover supplies.", 250, 250);
+            customText("Getting ready to continue your journey...", 1, 250);
         }
     }
     campVisit = 0;
@@ -163,11 +157,13 @@ void ambushEncounter(int monsterID) {
 void fromCamp() {
     if (campVisit == 1)
     {
-        printf("\n> Would you like to continue your journey?\n");
+        newLine(1);
+        customText("Would you like to continue your journey?", 1, 1);
         decision();
         if (result == 1)
         {
-            printf("\n> You pack up your camp and go back...\n");
+            newLine(1);
+            customText("You pack up your camp and go back...", 1, 1);
             loading(3);
             printf("-----------------------------------\n");
             printf("> You enter the [%s]\n", lastLocation);
@@ -176,7 +172,8 @@ void fromCamp() {
         }
         else
         {
-            printf("\n> Do you really want to end your adventure here?\n");
+            newLine(1);
+            customText("Do you really want to end your adventure here?", 1, 1);
             decision();
 
             if (result == 1)
@@ -190,7 +187,8 @@ void fromCamp() {
             }
             else
             {
-                printf("\n> You pack up your camp and go back...\n");
+                newLine(1);
+                customText("You pack up your camp and go back...", 1, 1);
                 loading(3);
                 printf("-----------------------------------\n");
                 printf("> You enter the [%s]\n", lastLocation);

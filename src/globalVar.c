@@ -168,7 +168,7 @@ void pressC() {
 }
 
 // Text only, no variables
-    // contains Sleep(1000)
+    // Sleep(1000) included
 void formattedText(char* printout) {
     printf("> %s\n", printout);
     Sleep(1000);
@@ -180,4 +180,11 @@ void newLine (int lines) {
     {
         printf("\n");
     }
+}
+
+// Text with arg for sleepBefore(in ms) & sleepAfter(in ms) the Text
+void customText(char* printout, int sleepBefore, int sleepAfter) {
+    Sleep(sleepBefore);
+    printf("> %s\n", printout);
+    Sleep(sleepAfter);
 }
