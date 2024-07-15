@@ -29,7 +29,8 @@ void monsterHP(int monsterDmgTaken, int monsterID) {
     else
     {
         Sleep(1000);
-        printf("> [%s] have taken: [%i] damage.\n", monsters[monsterID].monsterName, monsterDmgTaken);
+        printf("> [%s] have taken: [%i] damage.", monsters[monsterID].monsterName, monsterDmgTaken);
+        newLine(1);
 
         if (monsterCurrentHP <= 0)
         {
@@ -49,7 +50,8 @@ void monsterHP(int monsterDmgTaken, int monsterID) {
         }
         else
         {
-            printf("> [%s] current HP: [%i]\n", monsters[monsterID].monsterName, monsterCurrentHP);
+            printf("> [%s] current HP: [%i]", monsters[monsterID].monsterName, monsterCurrentHP);
+            newLine(1);
         }
     }
 }
@@ -71,11 +73,15 @@ int monsterDamage1(int monsterID) {
     if (monsterDmgDone <= 0)
     {
         monsterDmgDone = 0;
-        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+        newLine(1);
+        printf("> [%s] attacked but the hit was entirely blocked by your armor!", monsters[monsterID].monsterName);
+        newLine(1);
     }
     else
     {
-        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
+        newLine(1);
+        printf("> [%s] used [%s] and deals [%i] damage!", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack1, monsterDmgDone);
+        newLine(1);
     }
     playerDmgTaken = monsterDmgDone;
 
@@ -94,11 +100,15 @@ int monsterDamage2(int monsterID) {
     if (monsterDmgDone <= 0)
     {
         monsterDmgDone = 0;
-        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+        newLine(1);
+        printf("> [%s] attacked but the hit was entirely blocked by your armor!", monsters[monsterID].monsterName);
+        newLine(1);
     }
     else
     {
-        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
+        newLine(1);
+        printf("> [%s] used [%s] and deals [%i] damage!", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack2, monsterDmgDone);
+        newLine(1);
     }
     playerDmgTaken = monsterDmgDone;
 
@@ -117,11 +127,15 @@ int monsterDamage3(int monsterID) {
     if (monsterDmgDone <= 0)
     {
         monsterDmgDone = 0;
-        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+        newLine(1);
+        printf("> [%s] attacked but the hit was entirely blocked by your armor!", monsters[monsterID].monsterName);
+        newLine(1);
     }
     else
     {
-        printf("\n> [%s] used [%s] and deals [%i] damage!\n", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack3, monsterDmgDone);
+        newLine(1);
+        printf("> [%s] used [%s] and deals [%i] damage!", monsters[monsterID].monsterName, monsters[monsterID].monsterAttack3, monsterDmgDone);
+        newLine(1);
     }
     playerDmgTaken = monsterDmgDone;
 
@@ -142,7 +156,9 @@ int monsterDamageOpportunity(int monsterID) {
     if (monsterDmgDone < 0)
     {
         monsterDmgDone = 0;
-        printf("\n> [%s] attacked but the hit was entirely blocked by your armor!\n", monsters[monsterID].monsterName);
+        newLine(1);
+        printf("> [%s] attacked but the hit was entirely blocked by your armor!", monsters[monsterID].monsterName);
+        newLine(1);
     }
 
     playerDmgTaken = monsterDmgDone;
@@ -162,12 +178,15 @@ void monsterAction(int monsterID) {
     {
         if (monsterAttackRoll < 4)
         {
-            printf("\n> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+            newLine(1);
+            printf("> [%s] tries to attack you but misses!", monsters[monsterID].monsterName);
+            newLine(1);
             playerDmgTaken = 0;
             playerDmgTakenLog = 0;
             if (daze == 100)
             {
-                printf("> [%s] is no longer dazed!\n", monsters[monsterID].monsterName);
+                printf("> [%s] is no longer dazed!", monsters[monsterID].monsterName);
+                newLine(1);
             }
             daze = 0;
         }
@@ -197,7 +216,8 @@ void monsterAction(int monsterID) {
 
             if (monsterAttackRoll < 4)
             {
-                printf("> [%s] tries to attack you but misses!\n", monsters[monsterID].monsterName);
+                printf("> [%s] tries to attack you but misses!", monsters[monsterID].monsterName);
+                newLine(1);
                 playerDmgTaken = 0;
                 playerDmgTakenLog = 0;
                 daze = 0;

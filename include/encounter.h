@@ -6,5 +6,6 @@ void encounter(int monsterID);
 void ambushEncounter(int monsterID);
 void camp();
 void fromCamp();
+void fullEncounter(int monsterID, bool ambushChance);
 
 #endif

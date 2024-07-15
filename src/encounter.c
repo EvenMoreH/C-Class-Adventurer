@@ -29,8 +29,9 @@ void encounter(int monsterID) {
     int r = 0;
     combatEnd = 1;
 
-    printf("\n> ---------------------------------------------\n");
-    printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
+    newLine(1);
+    printf("> ---------------------------------------------\n");
+    printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, playerName);
     printf("> ---------------------------------------------\n");
     printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
     printf("> Your bonus Damage Reduction from [%s] is [%i].\n", held[2].iname, globalResistance);
@@ -40,7 +41,8 @@ void encounter(int monsterID) {
     while (monsterCurrentHP > 0 && playerCurrentHP > 0 && combatEnd > 0)
     {
         r++;
-        printf("\nRound %i:\n", r);
+        newLine(1);
+        printf("Round %i:\n", r);
         Sleep(500);
 
         combatAction(monsterID);
@@ -115,9 +117,10 @@ void ambushEncounter(int monsterID) {
             int r = 0;
             combatEnd = 1;
 
-            printf("\n> ---------------------------------------------\n");
+            newLine(1);
+            printf("> ---------------------------------------------\n");
             printf("> It is an ambush! There is no way to run!\n");
-            printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, name);
+            printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, playerName);
             printf("> ---------------------------------------------\n");
             printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
             printf("> Your bonus Damage Reduction from [%s] is [%i].\n", held[2].iname, globalResistance);
@@ -144,7 +147,8 @@ void ambushEncounter(int monsterID) {
         }
         else
         {
-            printf("> It seems that [%s] moved away from this location.\n", monsters[monsterID].monsterName);
+            printf("> It seems that [%s] moved away from this location.", monsters[monsterID].monsterName);
+            newLine(1);
             customText("It feels safe and you start to look around for any leftover supplies.", 250, 250);
             customText("Getting ready to continue your journey...", 10, 250);
         }
@@ -195,5 +199,15 @@ void fromCamp() {
                 Sleep(1000);
             }
         }
+    }
+}
+
+// Takes in argument for monsterID and TRUE/FALSE for possible ambush
+void fullEncounter(int monsterID, bool ambushChance) {
+    encounter(monsterID);
+    fromCamp();
+    if (ambushChance == true)
+    {
+        ambushEncounter(monsterID);
     }
 }

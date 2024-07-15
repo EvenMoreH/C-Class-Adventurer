@@ -114,10 +114,12 @@ void chooseCharacter() {
     }
     Sleep(500);
     clearBuffer();
-    printf("> What is your name Adventurer?\n> ");
-    scanf(" %50s", &name);
+    printf("> What is your Name Adventurer?\n> ");
+    scanf(" %50s", &playerName);
     Sleep(500);
-    printf("\n> And thus your journey begins, brave [%s].\n\n", name);
+    newLine(1);
+    printf("> And thus your journey begins, brave [%s].", playerName);
+    newLine(2);
     Sleep(1000);
     clearBuffer();
 }
@@ -143,13 +145,15 @@ void printCharacterSheet(int currentChar) {
     // takes the argument in seconds to display this amount of loading time
 void loading(float s) {
     float ms = s * 100;
-    printf("\n> Loading: [");
+    newLine(1);
+    printf("> Loading: [");
     for (int i = 0; i < 10; i++)
     {
         printf("+");
         Sleep(ms);
     }
-    printf("]\n\n");
+    printf("]");
+    newLine(2);
 }
 
 void archerSheet() {

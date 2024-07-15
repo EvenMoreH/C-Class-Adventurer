@@ -37,7 +37,8 @@ int addToBag(int itemID) {
         if (strcmp(backpack[i].iname, items[0].iname) == 0)
         {
             backpack[i] = items[itemID];
-            printf("> [%s] was added to your bag.\n", items[itemID].iname);
+            printf("> [%s] was added to your bag.", items[itemID].iname);
+            newLine(1);
             break;
         }
         else
@@ -59,7 +60,8 @@ void backpackFull(int itemID) {
     decision();
     if (result == 1)
     {
-        printf("> These are your items:\n");
+        printf("> These are your items:");
+        newLine(1);
         printf("> ");
 
         for (int i = 0; i < 10; i++)
@@ -67,8 +69,8 @@ void backpackFull(int itemID) {
             Sleep(100);
             printf(" [%i]. [%s]", i, backpack[i].iname);
         }
-
-        printf("\n> Select one of the items to replace.\n> ");
+        newLine(1);
+        printf("> Select one of the items to replace.\n> ");
 
         int replacer;
         while (1)
@@ -126,7 +128,8 @@ void foundItem(int itemID) {
 
     if (itemID == potion && playerCurrentHP < playerMaxHP)
     {
-        printf("> Currently you have [%i/%i] Health.\n", playerCurrentHP, playerMaxHP);
+        printf("> Currently you have [%i/%i] Health.", playerCurrentHP, playerMaxHP);
+        newLine(1);
         customText("Would you like to drink it immediately?", 500, 50);
 
         decision();
@@ -169,7 +172,8 @@ void equipItem(int itemID) {
 void equipItemMain(int itemID) {
     held[0] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    newLine(1);
     Sleep(1000);
     formattedText("Your damage with main weapon increase!");
     newLine(1);
@@ -178,7 +182,8 @@ void equipItemMain(int itemID) {
 void equipItemOff(int itemID) {
     held[1] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    newLine(1);
     Sleep(1000);
     formattedText("Your damage off hand weapon increase!");
     newLine(1);
@@ -191,11 +196,14 @@ void equipItemArmor(int itemID) {
 
     held[2] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!\n", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    newLine(1);
     Sleep(1000);
-    printf("> Your resistance increases by [%i].\n", resistanceIncrease);
+    printf("> Your resistance increases by [%i].", resistanceIncrease);
+    newLine(1);
     Sleep(1000);
-    printf("> Your health increases by [%i].\n", healthIncrease);
+    printf("> Your health increases by [%i].", healthIncrease);
+    newLine(1);
     Sleep(1000);
 
     playerCurrentHP = playerCurrentHP + healthIncrease;
@@ -205,5 +213,6 @@ void equipItemArmor(int itemID) {
     {
         playerCurrentHP = playerMaxHP;
     }
-    printf("> Your current health is [%i]/[%i].\n\n", playerCurrentHP, playerMaxHP);
+    printf("> Your current health is [%i]/[%i].", playerCurrentHP, playerMaxHP);
+    newLine(2);
 }

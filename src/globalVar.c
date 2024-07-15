@@ -18,7 +18,7 @@
     int itemID;
     int spellID;
     int combatEnd;          // sets combat flag on/off
-    char name[51];
+    char playerName[51];
     int daze;               // responsible for applying daze penalty to monsters
     int MGC;                // global for Magic stat for characters
     int camping = 0;        // sets flag if player would run to camp
@@ -26,6 +26,9 @@
     char* lastLocation;     // pointer to string for manual control where player is (basically a save point)
     int regenerated = 0;    // sets flag if player regenerated in camp to not regenerate again after combat ends
     int s;
+
+    char parsed[51];
+
 
     // selected character
         // 900 - Archer
@@ -191,7 +194,11 @@ void customText(char* printout, int sleepBefore, int sleepAfter) {
     Sleep(sleepAfter);
 }
 
-void typeWriter(char textToWrite[]) {
+// Streams letter-by-letter with:
+    // Start line '>'
+    // End line '\n'
+    // Sleep(1000)
+void storyText(char textToWrite[]) {
     int len = strlen(textToWrite);
 
     printf("> ");
@@ -202,4 +209,34 @@ void typeWriter(char textToWrite[]) {
     }
     printf("\n");
     Sleep(1000);
+}
+
+// Streams letter-by-letter without any formatting
+void storyTextUnformatted(char textToWrite[]) {
+    int len = strlen(textToWrite);
+
+    for (int i = 0; i < len; i++)
+    {
+        printf("%c", textToWrite[i]);
+        Sleep(35);
+    }
+}
+
+// outputs variable named parsed
+    // adds padding and brackets
+void parser(char string[]) {
+    char padL[54] = " [";
+    char padR[54] = "] ";
+    sprintf(parsed, "%s", string);
+    strcat(padL, parsed);
+    strcat(padL, padR);
+    strcpy(parsed, padL);
+}
+
+// Takes string variable and converts to unformatted letter-by-letter format
+void storyTextToString(char variableToParse[]) {
+    parser(variableToParse);
+    char textToWrite[54];
+    strcpy(textToWrite, parsed);
+    storyTextUnformatted(textToWrite);
 }

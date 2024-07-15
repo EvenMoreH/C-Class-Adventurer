@@ -7,7 +7,7 @@
     extern int itemID;
     extern int spellID;
     extern int combatEnd;          // sets combat flag on/off
-    extern char name[51];
+    extern char playerName[51];
     extern int daze;               // responsible for applying daze penalty to monsters
     extern int MGC;                // global for Magic stat for characters
     extern int camping;        // sets flag if player would run to camp
@@ -15,6 +15,9 @@
     extern char* lastLocation;     // pinter to string for manual control where combat had been placed
     extern int regenerated;    // sets flag if player regenerated in camp to not regenerate again after combat ends
     extern int s;
+
+    extern char parsed[51];
+
 
     // selected character
         // 900 - Archer
@@ -82,5 +85,11 @@ void customText(char* printout, int sleepBefore, int sleepAfter);
 
 void newLine (int lines);
 
-void typeWriter(char textToWrite[]);
+void storyText(char textToWrite[]);
+
+void storyTextUnformatted(char textToWrite[]);
+
+void parser(char string[]);
+
+void storyTextToString(char variableToParse[]);
 #endif

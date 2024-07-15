@@ -73,7 +73,8 @@ void combatAction(int monsterID) {
     {
         customText("You run for your life!", 500, 500);
 
-        printf("> [%s] catches your skin with its attack while you run away!\n", monsters[monsterID].monsterName);
+        printf("> [%s] catches your skin with its attack while you run away!", monsters[monsterID].monsterName);
+        newLine(1);
         Sleep(500);
         monsterDmgTakenLog = 0;
         combatEnd = 0;  // Variable to end the combat without using break; outside of loop
@@ -142,7 +143,9 @@ void attackRollMain(int mainWeapon, int bonusDMG) {
     int attackRoll = 7 + attackMOD + random;
 
     Sleep(1000);
-    printf("\n> You attack with your [%s].\n", held[itemID].iname);
+    newLine(1);
+    printf("> You attack with your [%s].", held[itemID].iname);
+    newLine(1);
     Sleep(1000);
 
     if (attackRoll < 11)
@@ -167,7 +170,9 @@ void attackRollOff(int offWeapon, int bonusDMG) {
     int attackRoll = 7 + attackMOD + random;
 
     Sleep(1000);
-    printf("\n> You attack with your [%s].\n", held[itemID].iname);
+    newLine(1);
+    printf("> You attack with your [%s].", held[itemID].iname);
+    newLine(1);
     Sleep(1000);
 
     if (attackRoll < 11)
@@ -204,28 +209,37 @@ void attackRollOff(int offWeapon, int bonusDMG) {
 
 void attackRollSpell(int bonusDMGspell) {
 
-    printf("\n> Spells in your [%s]:\n", held[0].iname);
+    newLine(1);
+    printf("> Spells in your [%s]:", held[0].iname);
+    newLine(1);
     Sleep(500);
-    printf("> A. [%s].\n", spells[held[0].minDMG].iname);
+    printf("> A. [%s].", spells[held[0].minDMG].iname);
+    newLine(1);
     Sleep(200);
-    printf("> B. [%s].\n", spells[held[0].maxDMG].iname);
+    printf("> B. [%s].", spells[held[0].maxDMG].iname);
+    newLine(1);
     Sleep(200);
 
-    printf("> Select which spell to use.\n");
+    printf("> Select which spell to use.");
+    newLine(1);
     selectionAB();
 
     if (abResult == 1)
     {
         SelectedSpellMinDMG = spells[held[0].minDMG].minDMG;
         SelectedSpellMaxDMG = spells[held[0].minDMG].maxDMG;
-        printf("\nYou attack with [%s].\n", spells[held[0].minDMG].iname);
+        newLine(1);
+        printf("You attack with [%s].", spells[held[0].minDMG].iname);
+        newLine(1);
         Sleep(500);
     }
     else if (abResult == 0)
     {
         SelectedSpellMinDMG = spells[held[0].maxDMG].minDMG;
         SelectedSpellMaxDMG = spells[held[0].maxDMG].maxDMG;
-        printf("\nYou attack with [%s].\n", spells[held[0].maxDMG].iname);
+        newLine(1);
+        printf("You attack with [%s].", spells[held[0].maxDMG].iname);
+        newLine(1);
         Sleep(500);
     }
 
@@ -253,7 +267,8 @@ void itemSelect() {
 
     int backpackArray[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
-    printf("> Your consumable items:\n");
+    printf("> Your consumable items:");
+    newLine(1);
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
@@ -313,7 +328,8 @@ void itemSelect() {
         monsterDmgTakenLog = 0;
 
         customText("Backpack is either empty or these are not consumable items...", 10, 250);
-        printf("> Dont waste your turns [%s].\n", name);
+        printf("> Dont waste your turns [%s].", playerName);
+        newLine(1);
         Sleep(1000);
     }
     else
@@ -358,7 +374,8 @@ void itemSelect() {
                         if (strcmp(backpack[chosenItem].description, items[12].description) == 0)   // items[12].description IS Damage Rune
                         {
                             Sleep(1000);
-                            printf("You have used [%s]\n", backpack[chosenItem].iname);
+                            printf("You have used [%s].", backpack[chosenItem].iname);
+                            newLine(1);
                             Sleep(1000);
                             damageConsumable(backpack[chosenItem].id);
                             removeFromBag(backpack[chosenItem].id);
@@ -382,7 +399,8 @@ void itemSelect() {
                         if (strcmp(backpack[chosenItem].description, items[11].description) == 0)   // items[11].description IS healingPotion
                         {
                             Sleep(1000);
-                            printf("You have used [%s]\n", backpack[chosenItem].iname);
+                            printf("You have used [%s].", backpack[chosenItem].iname);
+                            newLine(1);
                             healingPotion();
                             removeFromBag(backpack[chosenItem].id);
                             whatsInTheBag();
@@ -430,9 +448,11 @@ void healingPotion() {
                     }
 
                     Sleep(1000);
-                    printf("> You restore [%i] Health.\n", 10 + MGC);
+                    printf("> You restore [%i] Health.", 10 + MGC);
+                    newLine(1);
                     Sleep(1000);
-                    printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
+                    printf("> You current health is: [%i/%i].", playerCurrentHP, playerMaxHP);
+                    newLine(1);
 
                     monsterDmgTakenLog = 0;
 
@@ -454,9 +474,11 @@ void instantHealingPotion() {
     }
 
     Sleep(1000);
-    printf("> You restore [%i] Health.\n", 10 + MGC);
+    printf("> You restore [%i] Health.", 10 + MGC);
+    newLine(1);
     Sleep(1000);
-    printf("> You current health is: [%i/%i].\n", playerCurrentHP, playerMaxHP);
+    printf("> You current health is: [%i/%i].", playerCurrentHP, playerMaxHP);
+    newLine(1);
 }
 
 void regenerate() {
@@ -477,8 +499,11 @@ void regenerate() {
     {
         if (tempPotion > 0)
         {
-            printf("\n> Your current Health is: [%i/%i]\n", playerCurrentHP, playerMaxHP);
-            printf("> You have [%i]x [%s] in your backpack.\n", tempPotion, items[11].iname);
+            newLine(1);
+            printf("> Your current Health is: [%i/%i]", playerCurrentHP, playerMaxHP);
+            newLine(1);
+            printf("> You have [%i]x [%s] in your backpack.", tempPotion, items[11].iname);
+            newLine(1);
 
             customText("Would you like to use one?", 10, 10);
             decision();
@@ -516,7 +541,8 @@ void playerHP(int playerDmgTaken) {
     else
     {
         Sleep(1000);
-        printf("> You have taken: [%i] damage.\n", playerDmgTaken);
+        printf("> You have taken: [%i] damage.", playerDmgTaken);
+        newLine(1);
 
         if (playerCurrentHP <= 0)
         {
@@ -530,7 +556,8 @@ void playerHP(int playerDmgTaken) {
         }
         else
         {
-            printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
+            printf("> Your current HP: [%i/%i]", playerCurrentHP, playerMaxHP);
+            newLine(1);
         }
     }
 }
@@ -547,7 +574,8 @@ int playerDamage(int itemID, int bonusDMG) {
 
     dmg = bonusDMG + randomDmgRoll;
 
-    printf("> You Deal [%i] damage!\n", dmg);
+    printf("> You Deal [%i] damage!", dmg);
+    newLine(1);
 
     monsterDmgTaken = dmg;
 
@@ -563,7 +591,8 @@ int playerSpellDamage(int SelectedSpellMinDMG, int SelectedSpellMaxDMG, int bonu
 
     dmg = bonusDMG + randomDmgRoll;
 
-    printf("> You Deal [%i] damage!\n", dmg);
+    printf("> You Deal [%i] damage!", dmg);
+    newLine(1);
 
     monsterDmgTaken = dmg;
 
@@ -578,8 +607,9 @@ int damageConsumable(int itemID) {
 
     dmg = x + rand() % y;
 
-    printf("> You Deal [%i] damage!\n", dmg);
-
+    printf("> You Deal [%i] damage!", dmg);
+    newLine(1);
+    
     monsterDmgTaken = dmg;
 
     monsterDmgTakenLog = dmg;
