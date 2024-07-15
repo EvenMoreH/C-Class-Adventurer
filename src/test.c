@@ -98,7 +98,7 @@ int main() {
 
     storyText("As you reach [Dane], you can see the worry in his eyes.");
     storyText("He quickly fills you in on what happened while you were out in the [Moonlight Den].");
-    storyText("[Dane] explains to you that the village has been struck by a powerful curse from the Hag.");
+    storyText("[Dane] explains to you that the village has been struck by a powerful curse from the [Hag].");
     storyText("\"She had promised to help us with our crops in exchange for some of our livestock,");
     storyText("but she double-crossed us, she took the animals and cursed the whole village afterwards.\"");
 

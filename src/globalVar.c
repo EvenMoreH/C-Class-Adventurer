@@ -125,7 +125,7 @@ void pressC() {
             }
             else if (quip1 > 40 && quip1 < 50)
             {
-                printf("[Looks like you discovered the hidden Easter egg. Congrats!]\n");
+                printf("[Looks like you discovered the hidden Easter egg. Congrats! Don't get your hopes up, this message is the Easter Egg]\n");
             }
             else if (quip1 > 50 && quip1 < 60)
             {

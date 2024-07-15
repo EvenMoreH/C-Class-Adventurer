@@ -74,7 +74,7 @@ void encounter(int monsterID) {
 
 void camp() {
     loading(3);
-    customText("You run away to find a safe place to set up a camp to rest and heal.", 50, 50);
+    customText("You run away to find a safe place to set up a camp to rest and heal.", 50, 800);
     int campHP = floor(playerMaxHP * 0.7);
     campVisit = 1;
     combatEnd = 0;
@@ -82,15 +82,15 @@ void camp() {
 
     if (playerCurrentHP > campHP)
     {
-        customText("You catch a breath away from danger.", 10, 500);
-        customText("You ready yourself to go back on the road.", 10, 250);
+        customText("You catch a breath away from danger.", 10, 800);
+        customText("You ready yourself to go back on the road.", 10, 800);
     }
     else
     {
         playerCurrentHP = campHP;
-        customText("You catch a breath away from danger.", 10, 500);
-        customText("You tend to your wounds and manage to regain some health.", 10, 500);
-        customText("You feel ready to go back on the road.", 10, 250);
+        customText("You catch a breath away from danger.", 10, 800);
+        customText("You tend to your wounds and manage to regain some health.", 10, 800);
+        customText("You feel ready to go back on the road.", 10, 1000);
     }
     printf("> Your current HP: [%i/%i]\n", playerCurrentHP, playerMaxHP);
     camping = 0;
@@ -149,8 +149,8 @@ void ambushEncounter(int monsterID) {
         {
             printf("> It seems that [%s] moved away from this location.", monsters[monsterID].monsterName);
             newLine(1);
-            customText("It feels safe and you start to look around for any leftover supplies.", 250, 250);
-            customText("Getting ready to continue your journey...", 10, 250);
+            customText("It feels safe and you start to look around for any leftover supplies.", 250, 500);
+            customText("Getting ready to continue your journey...", 10, 500);
         }
     }
     campVisit = 0;
