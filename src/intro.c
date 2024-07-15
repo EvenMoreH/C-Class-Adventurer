@@ -74,7 +74,7 @@ void chooseCharacter() {
     while (1)
     {
         printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
-        scanf(" %c", &characterSelect);
+        scanf(" %1c", &characterSelect);
         characterSelect = tolower(characterSelect);
 
         if (characterSelect == 'a' || characterSelect == 'b' || characterSelect == 'c')

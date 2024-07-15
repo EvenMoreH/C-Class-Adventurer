@@ -81,4 +81,6 @@ void formattedText(char* printout);
 void customText(char* printout, int sleepBefore, int sleepAfter);
 
 void newLine (int lines);
+
+void typeWriter(char textToWrite[]);
 #endif

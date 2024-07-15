@@ -190,3 +190,16 @@ void customText(char* printout, int sleepBefore, int sleepAfter) {
     printf("> %s\n", printout);
     Sleep(sleepAfter);
 }
+
+void typeWriter(char textToWrite[]) {
+    int len = strlen(textToWrite);
+
+    printf("> ");
+    for (int i = 0; i < len; i++)
+    {
+        printf("%c", textToWrite[i]);
+        Sleep(35);
+    }
+    printf("\n");
+    Sleep(1000);
+}
