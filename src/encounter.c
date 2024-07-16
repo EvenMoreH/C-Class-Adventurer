@@ -166,7 +166,7 @@ void fromCamp() {
         if (result == 1)
         {
             newLine(1);
-            customText("You pack up your camp and go back...", 10, 10);
+            customText("You pack up your camp and go back...", 500, 10);
             loading(3);
             printf("-----------------------------------\n");
             printf("> You enter the [%s]\n", lastLocation);
@@ -191,7 +191,7 @@ void fromCamp() {
             else
             {
                 newLine(1);
-                customText("You pack up your camp and go back...", 10, 10);
+                customText("You pack up your camp and go back...", 500, 10);
                 loading(3);
                 printf("-----------------------------------\n");
                 printf("> You enter the [%s]\n", lastLocation);

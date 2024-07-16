@@ -522,8 +522,8 @@ void regenerate() {
         else
         {
             newLine(1);
-            customText("Wounded, you think about drinking a [Healing Potion].", 10, 10);
-            customText("but there is none in your backpack... Maybe next time.", 10, 10);
+            customText("Wounded, you think about drinking a [Healing Potion].", 500, 10);
+            customText("but there is none in your backpack... Maybe next time.", 500, 10);
         }
     }
 }

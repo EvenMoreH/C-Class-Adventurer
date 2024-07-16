@@ -40,7 +40,7 @@ int main() {
     storyText("The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.");
     storyTextUnformatted("> In a small clearing, illuminated by slivers of moonlight,");
     storyTextToString(playerName);
-    storyTextUnformatted("is facing off against the snarling beast.");
+    storyTextUnformatted("is facing off against the hungry beast.");
     newLine(1);
 
     pressC();
@@ -163,6 +163,40 @@ int main() {
     pressC();
 
     enterLocation(202); // Woodcarvers Road
+
+    storyText("You took your time walking down the narrow dirt road that led from the village.");
+    storyText("Traveling alone along the winding [Woodcarvers Road], you felt like a solitary figure in a vast painting of nature.");
+    storyText("The road, flanked by imposing hills cloaked in thick forest, cast long shadows that seemed to stretch out towards you.");
+    storyText("Towering trees stood sentinel on either side, their branches swaying gently in the breeze.");
+    storyText("Sunlight filtered through the dense canopy above, creating a mesmerizing play of light and shadow on the path before you.");
+    storyText("The earthy fragrance of damp soil mingled with the sharp scent of pine needles,");
+    storyText("enveloping you in a comforting embrace as you ventured forth with cautious steps.");
+    storyText("The only company you had were the rustling leaves underfoot and the occasional bird's call echoing through the woods.");
+    storyText("These natural sounds added to the eerie ambiance, reminding you of your smallness");
+    storyText("amidst the grandeur of the untamed wilderness that surrounded you.");
+
+    pressC();
+
+    storyText("After several long hours of trekking, your boots scuff against the worn roots at the base of Starstruck Oak.");
+    storyText("The branches above sway in a gentle breeze as you rack your brain, trying to recall the safest route to King's Thicket.");
+    customText("Should you go: ", 10, 800);
+    customText("A. Left, towards [Vontel's Rest]", 10, 300);
+    customText("B. Right, towards [The Oasis]", 10, 300);
+
+    selectionAB();
+    newLine(1);
+
+    if (abResult == 1) // left
+    {
+        storyText("You go left, tomorrow you should arrive at [Vontel's Rest]");
+        // enterLocation(206);
+    }
+    else // right
+    {
+        storyText("You go right, tomorrow you should arrive at [The Oasis]");
+        // enterLocation(207);
+    }
+
 
 ////////////////////////////////////////////
     printf("\n> EOF\n");

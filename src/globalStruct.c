@@ -27,6 +27,8 @@ int currentLocation;    // Used in decision trees to move between locations
        {203, "Mountain Pass", ""},
        {204, "Mines", ""},
        {205, "Graveyard", ""},
+       {206, "Vontel's Rest", ""},
+       {207, "The Oasis", ""},
     };
 
     // item IDs = 0-99
