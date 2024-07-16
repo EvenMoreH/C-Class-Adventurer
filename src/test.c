@@ -194,7 +194,42 @@ int main() {
     else // right
     {
         storyText("You go right, tomorrow you should arrive at [The Oasis]");
-        // enterLocation(207);
+        storyText("After a few hours of journey, you finally reach your destination,");
+
+        enterLocation(207);
+
+        storyText("a hidden spot deep in the woods with a crystal clear spring that is said to have magical healing powers.");
+        storyText("It's surrounded by lush greenery and colorful flowers, creating a peaceful and tranquil atmosphere.");
+        storyText("You take a deep breath and look for a spot to set up your camp for the night.");
+        storyText("However something feels off...");
+
+        pressC();
+
+        storyText("The once crystal-clear water now appears murky and foreboding,");
+        storyText("hinting at the presence of something sinister lurking within its depths.");
+        storyText("Shadows dance beneath the surface, and a sense of unease settled over the area.");
+        storyText("Whatever is living in the water had tainted its purity and cast an eerie aura over the surroundings.");
+        storyText("The surface remains still and undisturbed, but there is a palpable tension in the air,");
+        storyText("as if something is waiting just below the surface, ready to strike.");
+        newLine(1);
+        storyText("It is a stark contrast to the tranquil scene you have been observing while approaching from the distance.");
+
+        pressC();
+
+        customText("A. Do you approach the waters to investigate?", 10, 500);
+        customText("B. You steer clear from the shore and continue setting up the camp.", 10, 500);
+
+        selectionAB();
+        newLine(1);
+
+        if (abResult == 1) // Investigate the waters
+        {
+            // water investigation leading to easier encounter
+        }
+        else // camp setup and ambush from water monster
+        {
+            // you set up camp and ambush will happen
+        }
     }
 
 
