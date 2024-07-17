@@ -197,7 +197,7 @@ void customText(char* printout, int sleepBefore, int sleepAfter) {
 // Streams letter-by-letter with:
     // Start line '>'
     // End line '\n'
-    // Sleep(1000)
+    // Sleep(350)
 void storyText(char textToWrite[]) {
     int len = strlen(textToWrite);
 
@@ -208,7 +208,7 @@ void storyText(char textToWrite[]) {
         Sleep(35);
     }
     printf("\n");
-    Sleep(1000);
+    Sleep(350);
 }
 
 // Streams letter-by-letter without any formatting

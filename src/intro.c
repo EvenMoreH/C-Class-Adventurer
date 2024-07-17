@@ -115,7 +115,7 @@ void chooseCharacter() {
     Sleep(500);
     clearBuffer();
     printf("> What is your Name Adventurer?\n> ");
-    scanf(" %50s", &playerName);
+    scanf(" %50[^\n]", &playerName);
     Sleep(500);
     newLine(1);
     printf("> And thus your journey begins, brave [%s].", playerName);
