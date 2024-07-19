@@ -193,10 +193,18 @@ void actOneWoodcarversRoad() {
 }
 void actOneVontelsRest() {
     storyText("You follow path to the left, before dusk you should arrive at [Vontel's Rest]");
-    // enterLocation(206);
+
+    loading(2.5);
+
+    storyText("After a few hours of journey, you finally reach your destination,");
+    enterLocation(206);
+
 }
 void actOneOasis() {
     storyText("You follow path to the right, before dusk you should arrive at [The Oasis]");
+
+    loading(2.5);
+
     storyText("After a few hours of journey, you finally reach your destination,");
 
     enterLocation(207);

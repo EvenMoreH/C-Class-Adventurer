@@ -103,19 +103,19 @@ int currentLocation;    // Used in decision trees to move between locations
     };
 
 // Global Spells
-    // backpack IDs = 400-410
+    // spells IDs = 600-610
     struct item spells[] = {
-        {400, "", "", 0, 0},    // base empty spell slot
-        {401, "Ice Lance", "Cold", 2, 11},              // base
-        {402, "Lightning Strike", "Lightning", 4, 5},   // weaker but less RNG
-        {403, "Acid Bomb", "Acid", 12, 13},
-        {404, "Starburst", "Fire", 20, 21},
-        {405, "Fireball", "", 12, 25},
-        {406, "Burning Hands", "", 18, 7},
-        {407, "Eldritch Blast", "", 4, 13},             // base
-        {408, "Fire Bolt", "", 5, 7},                   // weaker but less RNG
-        {409, "", "", 0, 0},
-        {410, "", "", 0, 0},
+        {600, "", "", 0, 0},    // base empty spell slot
+        {601, "Ice Lance", "Cold", 2, 11},              // base
+        {602, "Lightning Strike", "Lightning", 4, 5},   // weaker but less RNG
+        {603, "Acid Bomb", "Acid", 12, 13},
+        {604, "Starburst", "Fire", 20, 21},
+        {605, "Fireball", "", 12, 25},
+        {606, "Burning Hands", "", 18, 7},
+        {607, "Eldritch Blast", "", 4, 13},             // base
+        {608, "Fire Bolt", "", 5, 7},                   // weaker but less RNG
+        {609, "", "", 0, 0},
+        {610, "", "", 0, 0},
     };
 
 // Global held items management

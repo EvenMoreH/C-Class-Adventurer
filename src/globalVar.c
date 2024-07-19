@@ -207,7 +207,7 @@ void storyText(char textToWrite[]) {
         printf("%c", textToWrite[i]);
         Sleep(35);
     }
-    printf("\n");
+    newLine(1);
     Sleep(350);
 }
 

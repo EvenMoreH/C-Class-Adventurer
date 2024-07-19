@@ -19,15 +19,16 @@
 //  Locations  ///////////////////////////////////////////////////////
 
 void discoveredLocation(int location) {
-    currentLocation = location;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
     {
         if (location == locations[i].locationID)
         {
             Sleep(1000);
-            printf("\n-----------------------------------\n");
+            printf("----------------------------------------");
+            newLine(1);
             printf("> You discovered [%s]\n", locations[i].locationName);
-            printf("-----------------------------------\n\n");
+            printf("----------------------------------------");
+            newLine(1);
             Sleep(1000);
             break;
         }
@@ -35,15 +36,16 @@ void discoveredLocation(int location) {
 }
 
 void enterLocation(int location) {
-    currentLocation = location;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
     {
         if (location == locations[i].locationID)
         {
             Sleep(2000);
-            printf("-----------------------------------\n");
+            printf("----------------------------------------");
+            newLine(1);
             printf("> You enter the [%s]\n", locations[i].locationName);
-            printf("-----------------------------------\n");
+            printf("----------------------------------------");
+            newLine(1);
             Sleep(2000);
             break;
         }

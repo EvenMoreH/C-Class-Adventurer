@@ -144,15 +144,23 @@ void printCharacterSheet(int currentChar) {
 // 10 element loading bar
     // takes the argument in seconds to display this amount of loading time
 void loading(float s) {
-    float ms = s * 100;
+    float ms = s * 1000;
     newLine(1);
-    printf("> Loading: [");
-    for (int i = 0; i < 10; i++)
+    // printf("> LOADING [");
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     printf("-");
+    //     Sleep(ms);
+    // }
+    // printf("]");
+    // newLine(2);
+    float msDivided = ms / 13;
+    char textToWrite[12] = "...LOADING...";
+    for (int i = 0; i < 13; i++)
     {
-        printf("+");
-        Sleep(ms);
+        printf("%c", textToWrite[i]);
+        Sleep(msDivided);
     }
-    printf("]");
     newLine(2);
 }
 

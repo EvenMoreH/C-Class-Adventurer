@@ -11,8 +11,8 @@ extern int currentLocation;    // Used in decision trees to move between locatio
 
 struct location {
     int locationID;
-    char locationName[40];
-    char locationDescription[200];
+    char *locationName;
+    char *locationDescription;
 };
     extern struct location locations[];
 
