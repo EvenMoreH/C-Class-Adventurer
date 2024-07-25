@@ -26,7 +26,8 @@ void discoveredLocation(int location) {
             Sleep(1000);
             printf("----------------------------------------");
             newLine(1);
-            printf("> You discovered [%s]\n", locations[i].locationName);
+            printf("> You discovered [%s]", locations[i].locationName);
+            newLine(1);
             printf("----------------------------------------");
             newLine(1);
             Sleep(1000);
@@ -43,7 +44,8 @@ void enterLocation(int location) {
             Sleep(2000);
             printf("----------------------------------------");
             newLine(1);
-            printf("> You enter the [%s]\n", locations[i].locationName);
+            printf("> You enter the [%s]", locations[i].locationName);
+            newLine(1);
             printf("----------------------------------------");
             newLine(1);
             Sleep(2000);
