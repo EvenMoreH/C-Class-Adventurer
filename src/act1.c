@@ -85,7 +85,7 @@ void actOneVillage() {
         storyText("You grab crying [Lila] and run to the [Village] as fast as you can.");
     }
 
-    pressC();
+    loading(3);
 
     enterLocation(200);
     lastLocation = "Village";

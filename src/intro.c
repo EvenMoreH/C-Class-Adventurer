@@ -146,16 +146,8 @@ void printCharacterSheet(int currentChar) {
 void loading(float s) {
     float ms = s * 1000;
     newLine(1);
-    // printf("> LOADING [");
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     printf("-");
-    //     Sleep(ms);
-    // }
-    // printf("]");
-    // newLine(2);
     float msDivided = ms / 13;
-    char textToWrite[12] = "...LOADING...";
+    char textToWrite[13] = "...LOADING...";
     for (int i = 0; i < 13; i++)
     {
         printf("%c", textToWrite[i]);
