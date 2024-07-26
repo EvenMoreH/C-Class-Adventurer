@@ -188,14 +188,14 @@ void archerSheet() {
 
     Sleep(500);
     printf("---------------------------\n");
-    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Level: [%i]        |\n", lvl);
     printf("|  Your Class: [Archer]   |\n");
     printf("|  Your Max Health: [%i]  |\n", playerMaxHP);
     printf("|  Your Statistics:       |\n");
-    printf("|     - Strength: [5]     |\n");
-    printf("|     - Dexterity: [7]    |\n");
-    printf("|     - Vitality: [5]     |\n");
-    printf("|     - Magic: [3]        |\n");
+    printf("|     - Strength: [%i]     |\n", STR);
+    printf("|     - Dexterity: [%i]    |\n", DEX);
+    printf("|     - Vitality: [%i]     |\n", VIT);
+    printf("|     - Magic: [%i]        |\n", MGC);
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
@@ -232,21 +232,21 @@ void crusaderSheet() {
 
     Sleep(500);
     printf("---------------------------\n");
-    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Level: [%i]        |\n", lvl);
     printf("|  Your Class: [Crusader] |\n");
     printf("|  Your Max Health: [%i]  |\n", playerMaxHP);
     printf("|  Your Statistics:       |\n");
-    printf("|     - Strength: [7]     |\n");
-    printf("|     - Dexterity: [4]    |\n");
-    printf("|     - Vitality: [6]     |\n");
-    printf("|     - Magic: [3]        |\n");
+    printf("|     - Strength: [%i]     |\n", STR);
+    printf("|     - Dexterity: [%i]    |\n", DEX);
+    printf("|     - Vitality: [%i]     |\n", VIT);
+    printf("|     - Magic: [%i]        |\n", MGC);
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
     printf("|     - %s         |\n", held[0].itemName);
     printf("|     - %s            |\n", held[1].itemName);
-    printf("|     - %s       |\n", held[2].itemName);
+    printf("|     - %s        |\n", held[2].itemName);
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     newLine(1);
@@ -277,14 +277,14 @@ void sorcererSheet() {
 
     Sleep(500);
     printf("---------------------------\n");
-    printf("|  Your Level: [1]        |\n");
+    printf("|  Your Level: [%i]        |\n", lvl);
     printf("|  Your Class: [Sorcerer] |\n");
     printf("|  Your Max Health: [%i]  |\n", playerMaxHP);
     printf("|  Your Statistics:       |\n");
-    printf("|     - Strength: [3]     |\n");
-    printf("|     - Dexterity: [6]    |\n");
-    printf("|     - Vitality: [4]     |\n");
-    printf("|     - Magic: [7]        |\n");
+    printf("|     - Strength: [%i]     |\n", STR);
+    printf("|     - Dexterity: [%i]    |\n", DEX);
+    printf("|     - Vitality: [%i]     |\n", VIT);
+    printf("|     - Magic: [%i]        |\n", MGC);
     printf("---------------------------\n");
     Sleep(500);
     printf("---------------------------\n");
