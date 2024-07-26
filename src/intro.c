@@ -200,9 +200,9 @@ void archerSheet() {
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
-    printf("|     - Bow               |\n");
-    printf("|     - Shortsword        |\n");
-    printf("|     - Leather Armor     |\n");
+    printf("|     - %s               |\n", held[0].itemName);
+    printf("|     - %s        |\n", held[1].itemName);
+    printf("|     - %s     |\n", held[2].itemName);
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     newLine(1);
@@ -244,9 +244,9 @@ void crusaderSheet() {
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
-    printf("|     - Longsword         |\n");
-    printf("|     - Shield            |\n");
-    printf("|     - Plate Armor       |\n");
+    printf("|     - %s         |\n", held[0].itemName);
+    printf("|     - %s            |\n", held[1].itemName);
+    printf("|     - %s       |\n", held[2].itemName);
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     newLine(1);
@@ -289,9 +289,9 @@ void sorcererSheet() {
     Sleep(500);
     printf("---------------------------\n");
     printf("|  Your Equipment:        |\n");
-    printf("|     - Grimoire          |\n");
-    printf("|     - Staff             |\n");
-    printf("|     - Robes             |\n");
+    printf("|     - %s          |\n", held[0].itemName);
+    printf("|     - %s             |\n", held[1].itemName);
+    printf("|     - %s             |\n", held[2].itemName);
     printf("|     - Backpack[10]      |\n");
     printf("---------------------------\n");
     newLine(1);

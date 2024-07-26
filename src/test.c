@@ -34,6 +34,7 @@ int main() {
 
     // Testing EQ
     // playerCurrentHP = 27;
+    // foundItem(6);
     // equipItem(17);
     // equipItem(23);
 

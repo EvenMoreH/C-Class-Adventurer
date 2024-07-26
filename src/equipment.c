@@ -23,7 +23,7 @@ void whatsInTheBag() {
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
-        printf("[%s] ", backpack[i].iname);
+        printf("[%s] ", backpack[i].itemName);
     }
     printf("\n");
     Sleep(1000);
@@ -34,10 +34,10 @@ int addToBag(int itemID) {
 
     for (int i = 0; i < 10; i++)
     {
-        if (strcmp(backpack[i].iname, items[0].iname) == 0)
+        if (strcmp(backpack[i].itemName, items[0].itemName) == 0)
         {
             backpack[i] = items[itemID];
-            printf("> [%s] was added to your bag.", items[itemID].iname);
+            printf("> [%s] was added to your bag.", items[itemID].itemName);
             newLine(1);
             break;
         }
@@ -67,7 +67,7 @@ void backpackFull(int itemID) {
         for (int i = 0; i < 10; i++)
         {
             Sleep(100);
-            printf(" [%i]. [%s]", i, backpack[i].iname);
+            printf(" [%i]. [%s]", i, backpack[i].itemName);
         }
         newLine(1);
         printf("> Select one of the items to replace.\n> ");
@@ -110,7 +110,7 @@ void backpackFull(int itemID) {
 void removeFromBag(int itemID) {
     for (int i = 0; i < 10; i++)
     {
-        if (strcmp(backpack[i].iname, items[itemID].iname) == 0)
+        if (strcmp(backpack[i].itemName, items[itemID].itemName) == 0)
         {
             backpack[i] = items[0];
             break;
@@ -122,7 +122,7 @@ void foundItem(int itemID) {
     newLine(1);
     Sleep(1000);
     printf("-----------------------------------\n");
-    printf("> You found [%s]\n", items[itemID].iname);
+    printf("> You found [%s]\n", items[itemID].itemName);
     printf("-----------------------------------\n");
     Sleep(1000);
 
@@ -155,15 +155,15 @@ void equipItem(int itemID) {
     char* offItem = "Off";
     char* armorItem = "Armor";
 
-    if (strcmp(items[itemID].description, mainItem) == 0)
+    if (strcmp(items[itemID].additionalProperty, mainItem) == 0)
     {
         equipItemMain(itemID);
     }
-    else if (strcmp(items[itemID].description, offItem) == 0)
+    else if (strcmp(items[itemID].additionalProperty, offItem) == 0)
     {
         equipItemOff(itemID);
     }
-    else if (strcmp(items[itemID].description, armorItem) == 0)
+    else if (strcmp(items[itemID].additionalProperty, armorItem) == 0)
     {
         equipItemArmor(itemID);
     }
@@ -172,7 +172,7 @@ void equipItem(int itemID) {
 void equipItemMain(int itemID) {
     held[0] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].itemName);
     newLine(1);
     Sleep(1000);
     formattedText("Your damage with main weapon increase!");
@@ -182,7 +182,7 @@ void equipItemMain(int itemID) {
 void equipItemOff(int itemID) {
     held[1] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].itemName);
     newLine(1);
     Sleep(1000);
     formattedText("Your damage off hand weapon increase!");
@@ -190,13 +190,13 @@ void equipItemOff(int itemID) {
 }
 
 void equipItemArmor(int itemID) {
-    int resistanceIncrease = items[itemID].minDMG - held[2].minDMG;
-    int healthIncrease = items[itemID].maxDMG - held[2].maxDMG;
+    int resistanceIncrease = items[itemID].value1 - held[2].value1;
+    int healthIncrease = items[itemID].value2 - held[2].value2;
     globalResistance = resistanceIncrease;
 
     held[2] = items[itemID];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].iname);
+    printf("> You found [%s], it will greatly improve your combat prowess!", items[itemID].itemName);
     newLine(1);
     Sleep(1000);
     printf("> Your resistance increases by [%i].", resistanceIncrease);
