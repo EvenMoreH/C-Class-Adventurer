@@ -321,7 +321,7 @@ void itemSelect() {
         }
     }
 
-    printf("\n");
+    newLine(1);
     Sleep(1000);
 
     if (backpackEmpty1 == 10 && backpackEmpty2 == 10)
@@ -605,8 +605,9 @@ int playerSpellDamage(int SelectedSpellMinDMG, int SelectedSpellMaxDMG, int bonu
 }
 
 int damageConsumable(int itemID) {
-    int x = items[itemID].value1;
-    int y = items[itemID].value2;
+    idFinder(itemID);
+    int x = temp[0].value1;
+    int y = temp[0].value2;
 
     dmg = x + rand() % y;
 

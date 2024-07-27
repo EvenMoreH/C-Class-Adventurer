@@ -50,8 +50,8 @@ int currentLocation;
        // consumables
        {10, "Healing Potion", "Consumable", "Heals for 10 Health", "", 0, 0},
        {11, "Avalanche Rune", "Consumable", "Deals Damage", "", 6, 13},
-       {12, "Fireball Rune", "Consumable", "Deals Damage", "", 12, 25},
-       {13, "Magic Missile Rune", "Consumable", "Deals Damage", "", 4, 9},
+       {42, "Fireball Rune", "Consumable", "Deals Damage", "", 12, 25},
+       {43, "Magic Missile Rune", "Consumable", "Deals Damage", "", 4, 9},
 
         // special grimoires
        {14, "Scholar's Grimoire", "Weapon", "Main", "", 5, 6},
@@ -77,7 +77,7 @@ int currentLocation;
        {28, "placeholder", "Armor", "Armor", "", 6, 15},
 
        // story items:
-       {29, "Stoneskull Key", "Story", "", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
+       {99, "Stoneskull Key", "Story", "", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
     };
 
     // Global backpack management
