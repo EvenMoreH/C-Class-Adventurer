@@ -35,23 +35,17 @@ int currentLocation;
     //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
        {0, "", "", "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Weapon", "Piercing", "", 1, 8},            // base item do not alter (Archer)
-       {2, "Shortsword", "Weapon", "Slashing", "", 1, 6},     // base item do not alter (Archer)
-       {3, "Longsword", "Weapon", "Slashing", "", 1, 8},      // base item do not alter (Crusader)
-       {4, "Shield",  "Weapon", "Bludgeoning", "", 1, 6},      // base item do not alter (Crusader)
-       {5, "Staff", "Weapon", "Bludgeoning", "", 1, 6},       // base item do not alter (Sorcerer)
-       {6, "Leather Armor", "Armor", "", "", 0, 0},          // base item do not alter (Archer)
-       {7, "Chain Mail", "Armor", "", "", 0, 0},             // base item do not alter (Crusader)
-       {8, "Robes", "Armor", "", "", 0, 0},                  // base item do not alter (Sorcerer)
+       {1, "Bow", "Weapon", "Piercing", "A finely crafted weapon for striking enemies from afar.", 1, 8},
+       {2, "Shortsword", "Weapon", "Slashing", "A quick and versatile blade perfect for close combat.", 1, 6},
+       {3, "Longsword", "Weapon", "Slashing", "A balanced weapon offering reach and power in every swing.", 1, 8},
+       {4, "Shield",  "Weapon", "Bludgeoning", "A sturdy wooden barrier to block incoming attacks and protect its bearer.", 1, 6},
+       {5, "Staff", "Weapon", "Bludgeoning", "A magical conduit for channeling spells and ancient powers.", 1, 6},
+       {6, "Leather Armor", "Armor", "", "Lightweight armor offering decent protection and mobility.", 0, 0},
+       {7, "Chain Mail", "Armor", "", "Interlocked metal rings providing strong defense against slashes.", 0, 0},
+       {8, "Robes", "Armor", "", "Enchanted garments that enhance magical abilities and offer comfort.", 0, 0},
 
-        // for grimoirs value1/value2 damage represent equipped spell
-            // 1 = Ice Lance
-            // 2 = Lightning Strike
-            // 3 = Acid Bomb
-            // 4 = Starburst
-            // 5 - Eldritch Blast
-            // 6 - Fire Bolt
-       {9, "Grimoire", "Weapon", "Main", "", 1, 2},                // base item do not alter (Sorcerer)
+        // for Grimoirs value1/value2 damage represent equipped spell
+       {9, "Grimoire", "Weapon", "Main", "A tome of arcane knowledge filled with powerful spells and secrets", 1, 2},
 
        // consumables
        {10, "Healing Potion", "Consumable", "Heals for 10 Health", "", 0, 0},
@@ -125,6 +119,11 @@ int currentLocation;
         {131, "", "", "", "", 0, 0},    // Off hand weapon
         {132, "", "", "", "", 0, 0},    // Armor
         {133, "", "", "", "", 0, 0},    // ??
+    };
+
+// Struct for future item replacement
+    struct item temp[] = {
+        {0, "", "", "", "", 0, 0},
     };
 
     // monsterIDs = 400 - 499

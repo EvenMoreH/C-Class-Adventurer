@@ -92,4 +92,6 @@ void storyTextUnformatted(char textToWrite[]);
 void parser(char string[]);
 
 void storyTextToString(char variableToParse[]);
+
+void idFinder(int itemID);
 #endif

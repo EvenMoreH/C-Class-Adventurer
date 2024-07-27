@@ -13,5 +13,4 @@ void equipItemMain(int itemID);
 void equipItemOff(int itemID);
 void equipItemArmor(int itemID);
 
-
 #endif

@@ -25,7 +25,7 @@ void whatsInTheBag() {
         Sleep(100);
         printf("[%s] ", backpack[i].itemName);
     }
-    printf("\n");
+    newLine(1);
     Sleep(1000);
 }
 
@@ -119,10 +119,12 @@ void removeFromBag(int itemID) {
 }
 
 void foundItem(int itemID) {
+    idFinder(itemID);
     newLine(1);
     Sleep(1000);
     printf("-----------------------------------\n");
     printf("> You found [%s]\n", items[itemID].itemName);
+    printf("> %s.\n", items[itemID].description);
     printf("-----------------------------------\n");
     Sleep(1000);
 

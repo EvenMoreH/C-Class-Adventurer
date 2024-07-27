@@ -10,6 +10,7 @@
 
 
 #include "../include/globalVar.h"
+#include "../include/globalStruct.h"
 
 
 //put your function headers here
@@ -239,4 +240,15 @@ void storyTextToString(char variableToParse[]) {
     char textToWrite[54];
     strcpy(textToWrite, parsed);
     storyTextUnformatted(textToWrite);
+}
+
+void idFinder(int itemID) {
+    for (int i = 0; i < 1000; i++)
+    {
+        if (items[i].id == itemID)
+        {
+            temp[0] = items[i];
+            break;
+        }
+    }
 }

@@ -76,5 +76,6 @@ struct item {
     extern struct item items[];
     extern struct item backpack[];
     extern struct item held[];
+    extern struct item temp[];
 
 #endif
