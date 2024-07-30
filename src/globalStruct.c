@@ -34,6 +34,7 @@ int currentLocation;
     // item IDs = 0-99
     //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
+        // Base Items 1-9
        {0, "", "", "", "", 0, 0},     // <- something to mimic empty slots
        {1, "Bow", "Weapon", "Piercing", "A finely crafted weapon for striking enemies from afar.", 1, 8},
        {2, "Shortsword", "Weapon", "Slashing", "A quick and versatile blade perfect for close combat.", 1, 6},
@@ -43,41 +44,47 @@ int currentLocation;
        {6, "Leather Armor", "Armor", "", "Lightweight armor offering decent protection and mobility.", 0, 0},
        {7, "Chain Mail", "Armor", "", "Interlocked metal rings providing strong defense against slashes.", 0, 0},
        {8, "Robes", "Armor", "", "Enchanted garments that enhance magical abilities and offer comfort.", 0, 0},
-
         // for Grimoirs value1/value2 damage represent equipped spell
        {9, "Grimoire", "Weapon", "Main", "A tome of arcane knowledge filled with powerful spells and secrets", 1, 2},
 
-       // consumables
-       {10, "Healing Potion", "Consumable", "Heals for 10 Health", "", 0, 0},
-       {11, "Avalanche Rune", "Consumable", "Deals Damage", "", 6, 13},
-       {42, "Fireball Rune", "Consumable", "Deals Damage", "", 12, 25},
-       {43, "Magic Missile Rune", "Consumable", "Deals Damage", "", 4, 9},
+       // Consumables 10-29
+       {10, "Healing Potion", "Consumable", "Heals for 10 Health",
+            "A small vial of crimson liquid that restores a portion of the drinker's health when consumed.",0, 0},
+       {11, "Avalanche Rune", "Consumable", "Deals Damage",
+            "An inscribed stone that, when activated, causes a cascade of ice and rock to crash down on foes.", 6, 13},
+       {12, "Fireball Rune", "Consumable", "Deals Damage",
+            "A rune that ignites a devastating explosion of flames upon activation, engulfing enemies in a fiery blast.", 12, 25},
+       {13, "Magic Missile Rune", "Consumable", "Deals Damage",
+            "A minor glyph that releases a barrage of homing energy projectiles targeting foes upon activation.", 4, 9},
 
-        // special grimoires
-       {14, "Scholar's Grimoire", "Weapon", "Main", "", 5, 6},
-       {15, "Grimoire of Druidcraft", "Weapon", "Main", "", 3, 4},
-       {16, "Grimoire of Wildfire", "Weapon", "Main", "", 7, 8},
+        // Grimoires 30-39
+       {30, "Scholar's Grimoire", "Weapon", "Main",
+        "More advanced tome filled with spells, aiding the wielder in mastering basics of arcane arts.", 8, 9},
+       {31, "Grimoire of Druidcraft", "Weapon", "Main",
+            "A book brimming with natural spells and enchantments, allowing the user to harness the power of nature.", 3, 4},
+       {32, "Grimoire of Wildfire", "Weapon", "Main",
+            "A fiery tome containing powerful incantations that summon and control destructive flames.", 5, 6},
 
-       // Weapons
-       {17, "Longbow", "Weapon", "Main", "", 3, 11},
-       {18, "Warhammer", "Weapon", "Main", "", 3, 11},
-       {19, "Uller's Bow", "Weapon", "Main", "", 6, 15},
-       {20, "Sword of Light", "Weapon", "Main", "", 6, 15},
-       {21, "placeholder", "Weapon", "Main", "", 1, 8},
-       {22, "placeholder", "Weapon", "Main", "", 1, 8},
+       // Weapons 40-59
+       {40, "Longbow", "Weapon", "Main", "", 3, 11},
+       {41, "Warhammer", "Weapon", "Main", "", 3, 11},
+       {42, "Uller's Bow", "Weapon", "Main", "", 6, 15},
+       {43, "Sword of Light", "Weapon", "Main", "", 6, 15},
+       {44, "placeholder", "Weapon", "Main", "", 1, 8},
+       {45, "placeholder", "Weapon", "Main", "", 1, 8},
 
-       // Armors
+       // Armors 60-79
         // value1 = damage reduction
         // value2 = bonus to HP MAX
-       {23, "Studded Leather Armor", "Armor", "Armor", "", 2, 5},
-       {24, "Steel Breastplate", "Armor", "Armor", "", 3, 3},
-       {25, "Scholar's Robes", "Armor", "Armor", "", 0, 10},
-       {26, "placeholder", "Armor", "Armor", "", 6, 15},
-       {27, "placeholder", "Armor", "Armor", "", 6, 15},
-       {28, "placeholder", "Armor", "Armor", "", 6, 15},
+       {60, "Studded Leather Armor", "Armor", "Armor", "", 2, 5},
+       {61, "Steel Breastplate", "Armor", "Armor", "", 3, 3},
+       {62, "Scholar's Robes", "Armor", "Armor", "", 0, 10},
+       {63, "placeholder", "Armor", "Armor", "", 6, 15},
+       {64, "placeholder", "Armor", "Armor", "", 6, 15},
+       {65, "placeholder", "Armor", "Armor", "", 6, 15},
 
-       // story items:
-       {99, "Stoneskull Key", "Story", "", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
+       // Story Items 80-99
+       {80, "Stoneskull Key", "Story", "", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
     };
 
     // Global backpack management
@@ -98,17 +105,24 @@ int currentLocation;
 
 // Global Spells
     // spells IDs = 600-610
+    // Main Spell - high RNG + high DMG
+    // Off Spell - low RNG + low DMG
     struct spell spells[] = {
         {600, "", "", "", 0, 0},    // base empty spell slot
-        {601, "Ice Lance", "", "Cold", 2, 11},              // base
-        {602, "Lightning Strike", "", "Lightning", 4, 5},   // weaker but less RNG
-        {603, "Acid Bomb", "", "Acid", 12, 13},
-        {604, "Starburst", "", "Fire", 20, 21},
-        {605, "Fireball", "", "", 12, 25},
-        {606, "Burning Hands", "", "", 18, 7},
-        {607, "Eldritch Blast", "", "", 4, 13},             // base
-        {608, "Fire Bolt", "", "", 5, 7},                   // weaker but less RNG
-        {609, "", "", "", 0, 0},
+        // Base Grimoire
+        {601, "Ice Lance", "Cold", "", 2, 11},
+        {602, "Lightning Strike", "Lightning", "", 4, 5},
+        // Grimoire of Druidcraft
+        {603, "Acid Bomb", "Acid", "", 12, 25},
+        {604, "Moonfire", "Radiant", "", 18, 7},
+        // Grimoire of Wildlife
+        {605, "Fireball", "Fire", "", 12, 25},
+        {606, "Burning Hands", "Fire", "", 18, 7},
+        // TBD
+        {607, "Fire Bolt", "Fire", "", 5, 7},
+        // Scholar's Grimoire
+        {608, "Eldritch Blast", "Force", "", 4, 13},
+        {609, "Magic Missiles", "Force", "", 4, 9},
         {610, "", "", "", 0, 0},
     };
 
