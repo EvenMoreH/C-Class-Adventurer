@@ -129,10 +129,10 @@ int currentLocation;
 // Global held items management
     // held IDs = 130-133
     struct item held[] = {
-        {130, "", "", "", "", 0, 0},    // Main Weapon
-        {131, "", "", "", "", 0, 0},    // Off hand weapon
-        {132, "", "", "", "", 0, 0},    // Armor
-        {133, "", "", "", "", 0, 0},    // ??
+        {900, "", "", "", "", 0, 0},    // Main Weapon
+        {901, "", "", "", "", 0, 0},    // Off hand weapon
+        {902, "", "", "", "", 0, 0},    // Armor
+        {903, "", "", "", "", 0, 0},    // TODO: Bigger Backpack
     };
 
 // Struct for future item replacement
