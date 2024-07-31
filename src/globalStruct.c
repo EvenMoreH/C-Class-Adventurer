@@ -12,26 +12,12 @@
 #include "../include/globalVar.h"
 
 
-//// STRUCTS /////////////////////////////////////////////////////////
-
-int location;
-// Used in decision trees to move between locations
-int currentLocation;
-
-// Locations - global
-    // Location IDs = 200-210
-    struct location locations[] = {
-       {200, "Village", ""},
-       {201, "Moonlight Den", ""},
-       {202, "Woodcarvers Road", ""},
-       {203, "Mountain Pass", ""},
-       {204, "Mines", ""},
-       {205, "Graveyard", ""},
-       {206, "Vontel's Rest", ""},
-       {207, "The Oasis", ""},
+// Struct for item replacement
+    struct item temp[] = {
+        {0, "", "", "", "", 0, 0},
     };
 
-    // item IDs = 0-99
+// item IDs = 0-99
     //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
     struct item items[] = {
         // Base Items 1-9
@@ -103,6 +89,34 @@ int currentLocation;
         {110, "", "", "", "", 0, 0},
     };
 
+// for calling functions
+int location;
+// Used in decision trees to move between locations
+int currentLocation;
+
+// Locations - global
+    // Location IDs = 200-210
+    struct location locations[] = {
+       {200, "Village", ""},
+       {201, "Moonlight Den", ""},
+       {202, "Woodcarvers Road", ""},
+       {203, "Mountain Pass", ""},
+       {204, "Mines", ""},
+       {205, "Graveyard", ""},
+       {206, "Vontel's Rest", ""},
+       {207, "The Oasis", ""},
+    };
+
+// monsterIDs = 400 - 499
+    struct monster monsters[] = {
+        {400, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0}, // empty monster to initialize the list
+        {401, "Giant Rat", "", 18, "Bite", 2, 6, "Scratch", 2, 4, "Run", 0, 0, 5},
+        {402, "Goblin", "", 28, "Knife", 2, 4, "Kick", 1, 3, "", 0, 0, 0},
+        {403, "Hobgoblin", "", 48, "Greatclub", 6, 8, "Headbutt", 4, 6, "Skullcrsher", 12, 12, 10},
+        {404, "Wolf", "", 15, "Claw", 1, 5, "Bite", 2, 7, "Run", 0, 0, 5},
+        {405, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
+    };
+
 // Global Spells
     // spells IDs = 600-610
     // Main Spell - high RNG + high DMG
@@ -127,25 +141,11 @@ int currentLocation;
     };
 
 // Global held items management
-    // held IDs = 130-133
+    // held IDs = 900-910
     struct item held[] = {
         {900, "", "", "", "", 0, 0},    // Main Weapon
         {901, "", "", "", "", 0, 0},    // Off hand weapon
         {902, "", "", "", "", 0, 0},    // Armor
         {903, "", "", "", "", 0, 0},    // TODO: Bigger Backpack
-    };
-
-// Struct for future item replacement
-    struct item temp[] = {
-        {0, "", "", "", "", 0, 0},
-    };
-
-    // monsterIDs = 400 - 499
-    struct monster monsters[] = {
-        {400, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0}, // empty monster to initialize the list
-        {401, "Giant Rat", "", 18, "Bite", 2, 6, "Scratch", 2, 4, "Run", 0, 0, 5},
-        {402, "Goblin", "", 28, "Knife", 2, 4, "Kick", 1, 3, "", 0, 0, 0},
-        {403, "Hobgoblin", "", 48, "Greatclub", 6, 8, "Headbutt", 4, 6, "Skullcrsher", 12, 12, 10},
-        {404, "Wolf", "", 15, "Claw", 1, 5, "Bite", 2, 7, "Run", 0, 0, 5},
-        {405, "", "", 0, "", 0, 0, "", 0, 0, "", 0, 0, 0},
+        // Space for rings and amulets etc.
     };
