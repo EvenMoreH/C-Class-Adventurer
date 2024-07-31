@@ -435,7 +435,7 @@ void healingPotion() {
             {
                 if (playerCurrentHP >= playerMaxHP)
                 {
-                    customText("You can't use that you are at full health.", 1000, 10);
+                    customText("You drink the potion but feel no effect.", 1000, 10);
 
                     monsterDmgTakenLog = 0;
 

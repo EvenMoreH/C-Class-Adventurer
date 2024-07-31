@@ -34,21 +34,10 @@ int main() {
 
     // Testing EQ
     // playerCurrentHP = 27;
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    foundItem(10);
-    // equipItem(17);
-    // equipItem(23);
+    foundItem(12);
+    foundItem(11);
+    equipItem(31);
+    equipItem(62);
 
     actOne();
 

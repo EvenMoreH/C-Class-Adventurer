@@ -99,8 +99,19 @@ void backpackFull(int itemID) {
     {
         if (itemID == potion)
         {
-            customText("You decide to drink it anyway to avoid wasting it...", 10, 500);
-            instantHealingPotion();
+            customText("You decide to drink it anyway to avoid wasting it...", 10, 1000);
+            if (playerCurrentHP >= playerMaxHP)
+            {
+                customText("You drink the potion but feel no effect.", 10, 1000);
+                newLine(1);
+                printf("> You current health is: [%i/%i].", playerCurrentHP, playerMaxHP);
+                Sleep(1000);
+                newLine(1);
+            }
+            else
+            {
+                instantHealingPotion();
+            }
         }
         else
         {
@@ -116,6 +127,9 @@ void removeFromBag(int itemID) {
         if (strcmp(backpack[i].itemName, temp[0].itemName) == 0)
         {
             backpack[i] = items[0];
+            printf("> [%s] was removed from your bag.", temp[0].itemName);
+            newLine(1);
+            Sleep(500);
             break;
         }
     }
