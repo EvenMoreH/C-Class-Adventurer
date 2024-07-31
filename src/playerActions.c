@@ -272,7 +272,7 @@ void itemSelect() {
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
-        if (strcmp(backpack[i].itemName, items[11].itemName) != 0)
+        if (strcmp(backpack[i].additionalProperty, "Heals") != 0)
         {
             // wombo combo to check if there are any healing items in backpack
             backpackEmpty1 += 1;
@@ -291,7 +291,7 @@ void itemSelect() {
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
-        if (strcmp(backpack[i].additionalProperty, items[12].additionalProperty) != 0)
+        if (strcmp(backpack[i].additionalProperty, "Deals Damage") != 0)
         {
             if (backpackArray[i] == -1)
             {
@@ -372,7 +372,7 @@ void itemSelect() {
                     }
                     else
                     {
-                        if (strcmp(backpack[chosenItem].additionalProperty, items[12].additionalProperty) == 0)
+                        if (strcmp(backpack[chosenItem].additionalProperty, "Deals Damage") == 0)
                         // items[12].additionalProperty IS Damage Rune
                         {
                             Sleep(1000);
@@ -398,7 +398,7 @@ void itemSelect() {
                     }
                     else
                     {
-                        if (strcmp(backpack[chosenItem].additionalProperty, items[11].additionalProperty) == 0)
+                        if (strcmp(backpack[chosenItem].additionalProperty, "Heals") == 0)
                         // items[11].additionalProperty IS healingPotion
                         {
                             Sleep(1000);
@@ -431,7 +431,7 @@ void healingPotion() {
     {
         for (int  i = 0; i < 10; i++)
         {
-            if (strcmp(backpack[i].additionalProperty, items[11].additionalProperty) == 0)
+            if (strcmp(backpack[i].additionalProperty, "Heals") == 0)
             {
                 if (playerCurrentHP >= playerMaxHP)
                 {
@@ -489,7 +489,7 @@ void regenerate() {
 
     for (int i = 0; i < 10; i++)
     {
-        if (strcmp(backpack[i].itemName, items[11].itemName) != 0)
+        if (strcmp(backpack[i].itemName, "Healing Potion") != 0)
         {
             continue;
         }
@@ -505,7 +505,7 @@ void regenerate() {
             newLine(1);
             printf("> Your current Health is: [%i/%i]", playerCurrentHP, playerMaxHP);
             newLine(1);
-            printf("> You have [%i]x [%s] in your backpack.", tempPotion, items[11].itemName);
+            printf("> You have [%i]x [Healing Potion] in your backpack.", tempPotion);
             newLine(1);
 
             customText("Would you like to use one?", 10, 10);

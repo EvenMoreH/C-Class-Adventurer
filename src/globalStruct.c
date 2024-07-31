@@ -18,59 +18,65 @@
     };
 
 // item IDs = 0-99
-    //damage explained: 1k8 is rand % 7 + 1 thus {1, 7} in a struct
+    //damage explained: 1k8 is: [1 + rand % 7] thus {1, 7} in a struct.
+        // damage range 17-32 is: [17 + rand % 15] as it generates random number from 0-15 and adds 17 on top of it.
     struct item items[] = {
         // Base Items 1-9
        {0, "", "", "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Weapon", "Piercing", "A finely crafted weapon for striking enemies from afar.", 1, 8},
-       {2, "Shortsword", "Weapon", "Slashing", "A quick and versatile blade perfect for close combat.", 1, 6},
-       {3, "Longsword", "Weapon", "Slashing", "A balanced weapon offering reach and power in every swing.", 1, 8},
-       {4, "Shield",  "Weapon", "Bludgeoning", "A sturdy wooden barrier to block incoming attacks and protect its bearer.", 1, 6},
-       {5, "Staff", "Weapon", "Bludgeoning", "A magical conduit for channeling spells and ancient powers.", 1, 6},
-       {6, "Leather Armor", "Armor", "", "Lightweight armor offering decent protection and mobility.", 0, 0},
-       {7, "Chain Mail", "Armor", "", "Interlocked metal rings providing strong defense against slashes.", 0, 0},
-       {8, "Robes", "Armor", "", "Enchanted garments that enhance magical abilities and offer comfort.", 0, 0},
+       {1, "Bow", "Weapon", "Piercing", "A finely crafted weapon for striking enemies from afar", 1, 8},
+       {2, "Shortsword", "Weapon", "Slashing", "A quick and versatile blade perfect for close combat", 1, 6},
+       {3, "Longsword", "Weapon", "Slashing", "A balanced weapon offering reach and power in every swing", 1, 8},
+       {4, "Shield",  "Weapon", "Bludgeoning", "A sturdy wooden barrier to block incoming attacks and protect its bearer", 1, 6},
+       {5, "Staff", "Weapon", "Bludgeoning", "A magical conduit for channeling spells and ancient powers", 1, 6},
+       {6, "Leather Armor", "Armor", "", "Lightweight armor offering decent protection and mobility", 0, 0},
+       {7, "Chain Mail", "Armor", "", "Interlocked metal rings providing strong defense against slashes", 0, 0},
+       {8, "Robes", "Armor", "", "Enchanted garments that enhance magical abilities and offer comfort", 0, 0},
         // for Grimoirs value1/value2 damage represent equipped spell
        {9, "Grimoire", "Weapon", "Main", "A tome of arcane knowledge filled with powerful spells and secrets", 1, 2},
 
        // Consumables 10-29
-       {10, "Healing Potion", "Consumable", "Heals for 10 Health",
-            "A small vial of crimson liquid that restores a portion of the drinker's health when consumed.",0, 0},
+       {10, "Healing Potion", "Consumable", "Heals",
+            "A small vial of crimson liquid that restores a portion of the drinker's health when consumed",0, 0},
        {11, "Avalanche Rune", "Consumable", "Deals Damage",
-            "An inscribed stone that, when activated, causes a cascade of ice and rock to crash down on foes.", 6, 13},
+            "An inscribed stone that, when activated, causes a cascade of ice and rock to crash down on foes", 6, 13},
        {12, "Fireball Rune", "Consumable", "Deals Damage",
-            "A rune that ignites a devastating explosion of flames upon activation, engulfing enemies in a fiery blast.", 12, 25},
+            "A rune that ignites a devastating explosion of flames upon activation, engulfing enemies in a fiery blast", 12, 25},
        {13, "Magic Missile Rune", "Consumable", "Deals Damage",
-            "A minor glyph that releases a barrage of homing energy projectiles targeting foes upon activation.", 4, 9},
+            "A minor glyph that releases a barrage of homing energy projectiles targeting foes upon activation", 4, 9},
 
         // Grimoires 30-39
        {30, "Scholar's Grimoire", "Weapon", "Main",
-        "More advanced tome filled with spells, aiding the wielder in mastering basics of arcane arts.", 8, 9},
+        "More advanced tome filled with spells, aiding the wielder in mastering basics of arcane arts", 8, 9},
        {31, "Grimoire of Druidcraft", "Weapon", "Main",
-            "A book brimming with natural spells and enchantments, allowing the user to harness the power of nature.", 3, 4},
+            "A book brimming with natural spells and enchantments, allowing the user to harness the power of nature", 3, 4},
        {32, "Grimoire of Wildfire", "Weapon", "Main",
-            "A fiery tome containing powerful incantations that summon and control destructive flames.", 5, 6},
+            "A fiery tome containing powerful incantations that summon and control destructive flames", 5, 6},
 
        // Weapons 40-59
-       {40, "Longbow", "Weapon", "Main", "", 3, 11},
-       {41, "Warhammer", "Weapon", "Main", "", 3, 11},
-       {42, "Uller's Bow", "Weapon", "Main", "", 6, 15},
-       {43, "Sword of Light", "Weapon", "Main", "", 6, 15},
-       {44, "placeholder", "Weapon", "Main", "", 1, 8},
-       {45, "placeholder", "Weapon", "Main", "", 1, 8},
+       {40, "Longbow", "Weapon", "Main",
+            "A tall, powerful bow designed for precise, long-range combat", 3, 11},
+       {41, "Warhammer", "Weapon", "Main",
+            "A heavy, versatile hammer with a massive head, ideal for crushing armor and bones in battle", 3, 11},
+       {42, "Uller's Bow", "Weapon", "Main", "", 6, 15},    // WIP
+       {43, "Sword of Light", "Weapon", "Main", "", 6, 15}, // WIP
+       {44, "placeholder", "Weapon", "Main", "", 1, 8}, // WIP
+       {45, "placeholder", "Weapon", "Main", "", 1, 8}, // WIP
 
        // Armors 60-79
         // value1 = damage reduction
         // value2 = bonus to HP MAX
-       {60, "Studded Leather Armor", "Armor", "Armor", "", 2, 5},
-       {61, "Steel Breastplate", "Armor", "Armor", "", 3, 3},
-       {62, "Scholar's Robes", "Armor", "Armor", "", 0, 10},
-       {63, "placeholder", "Armor", "Armor", "", 6, 15},
-       {64, "placeholder", "Armor", "Armor", "", 6, 15},
-       {65, "placeholder", "Armor", "Armor", "", 6, 15},
+       {60, "Studded Leather Armor", "Armor", "Armor",
+            "Flexible leather armor reinforced with metal studs, offering a balance of mobility and protection", 2, 5},
+       {61, "Steel Breastplate", "Armor", "Armor",
+            "A solid steel chest piece that provides excellent defense against physical attacks", 3, 3},
+       {62, "Scholar's Robes", "Armor", "Armor",
+            "Elegant and flowing robes imbued with minor enchantments, favored by mages and intellectuals", 0, 10},
+       {63, "placeholder", "Armor", "Armor", "", 6, 15},    // WIP
+       {64, "placeholder", "Armor", "Armor", "", 6, 15},    // WIP
+       {65, "placeholder", "Armor", "Armor", "", 6, 15},    // WIP
 
        // Story Items 80-99
-       {80, "Stoneskull Key", "Story", "", "Required to open Stone Gates located at [Mountain Road]", 0, 0},
+       {80, "Stoneskull Key", "Story", "Key", "Required to open Stone Gates located at [Mountain Road]", 0, 0}, // Key Example
     };
 
     // Global backpack management
