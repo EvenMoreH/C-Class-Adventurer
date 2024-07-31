@@ -55,13 +55,13 @@ void intro() {
 
 void chooseCharacter() {
         formattedText("Who are you, brave adventurer?");
-        customText("A. Archer", 1, 500);
+        customText("A. [Archer]", 1, 500);
             customText("\tNimble and agile fighter relying on Bows, Shortswords and light armor.", 1, 500);
             customText("\tArchers have average resiliency, and their combat capabilities rely on Dexterity.", 1, 500);
-        customText("B. Crusader", 1, 500);
+        customText("B. [Crusader]", 1, 500);
             customText("\tStrong and durable fighter relying on Swords, Shields and heavy armor.", 1, 500);
             customText("\tCrusaders have high resiliency, and their combat capabilities rely on Strength.", 1, 500);
-        customText("C. Sorcerer", 1, 500);
+        customText("C. [Sorcerer]", 1, 500);
             customText("\tMaster of the dark arts, relying on Grimoires filled with spells, Staves and robes.", 1, 500);
             customText("\tSorcerers have low resiliency, and their combat capabilities rely on Magic and Dexterity.", 1, 1250);
 
@@ -73,7 +73,8 @@ void chooseCharacter() {
 
     while (1)
     {
-        printf("\n> Select your class by pressing A, B or C and confirm with Enter: ");
+        newLine(1);
+        printf("> Select your class by pressing A, B or C and confirm with Enter: ");
         scanf(" %1c", &characterSelect);
         characterSelect = tolower(characterSelect);
 
@@ -117,6 +118,7 @@ void chooseCharacter() {
     printf("> What is your Name Adventurer?\n> ");
     scanf(" %50[^\n]", &playerName);
     Sleep(500);
+    playerName[0] = toupper(playerName[0]);
     newLine(1);
     printf("> And thus your journey begins, brave [%s].", playerName);
     newLine(2);
