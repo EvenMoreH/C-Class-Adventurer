@@ -48,7 +48,7 @@
        {30, "Scholar's Grimoire", "Weapon", "Main",
         "More advanced tome filled with spells, aiding the wielder in mastering basics of arcane arts", 8, 9},
        {31, "Grimoire of Druidcraft", "Weapon", "Main",
-            "A book brimming with natural spells and enchantments, allowing the user to harness the power of nature", 3, 4},
+            "A book brimming with ancient spells and enchantments, allowing the user to harness the power of nature", 3, 4},
        {32, "Grimoire of Wildfire", "Weapon", "Main",
             "A fiery tome containing powerful incantations that summon and control destructive flames", 5, 6},
 

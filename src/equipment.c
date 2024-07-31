@@ -192,9 +192,9 @@ void equipItemMain(int itemID) {
     idFinder(itemID);
     held[0] = temp[0];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", temp[0].itemName);
+    printf("> You found [%s]!\n> %s.", temp[0].itemName, temp[0].description);
     newLine(1);
-    Sleep(1000);
+    customText("It will greatly improve your combat prowess!", 700, 700);
     formattedText("Your damage with main weapon increase!");
     newLine(1);
 }
@@ -203,9 +203,9 @@ void equipItemOff(int itemID) {
     idFinder(itemID);
     held[1] = temp[0];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", temp[0].itemName);
+    printf("> You found [%s]!\n> %s.", temp[0].itemName, temp[0].description);
     newLine(1);
-    Sleep(1000);
+    customText("It will greatly improve your combat prowess!", 700, 700);
     formattedText("Your damage off hand weapon increase!");
     newLine(1);
 }
@@ -218,9 +218,9 @@ void equipItemArmor(int itemID) {
 
     held[2] = temp[0];
 
-    printf("> You found [%s], it will greatly improve your combat prowess!", temp[0].itemName);
+    printf("> You found [%s]!\n> %s.", temp[0].itemName, temp[0].description);
     newLine(1);
-    Sleep(1000);
+    customText("It will greatly improve your combat prowess!", 700, 700);
     printf("> Your resistance increases by [%i].", resistanceIncrease);
     newLine(1);
     Sleep(1000);
