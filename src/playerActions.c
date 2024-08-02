@@ -443,7 +443,7 @@ void healingPotion() {
                 }
                 else
                 {
-                    playerCurrentHP = playerCurrentHP + (10 + MGC);
+                    playerCurrentHP = playerCurrentHP + (10 + MGC + potionScaling(lvl));
 
                     if (playerCurrentHP > playerMaxHP)
                     {
@@ -451,7 +451,7 @@ void healingPotion() {
                     }
 
                     Sleep(1000);
-                    printf("> You restore [%i] Health.", 10 + MGC);
+                    printf("> You restore [%i] Health.", 10 + MGC + potionScaling(lvl));
                     newLine(1);
                     Sleep(1000);
                     printf("> You current health is: [%i/%i].", playerCurrentHP, playerMaxHP);
@@ -469,7 +469,7 @@ void healingPotion() {
 
 void instantHealingPotion() {
 
-    playerCurrentHP = playerCurrentHP + (10 + MGC);
+    playerCurrentHP = playerCurrentHP + (10 + MGC + potionScaling(lvl));
 
     if (playerCurrentHP > playerMaxHP)
     {
@@ -477,7 +477,7 @@ void instantHealingPotion() {
     }
 
     Sleep(1000);
-    printf("> You restore [%i] Health.", 10 + MGC);
+    printf("> You restore [%i] Health.", 10 + MGC + potionScaling(lvl));
     newLine(1);
     Sleep(1000);
     printf("> You current health is: [%i/%i].", playerCurrentHP, playerMaxHP);

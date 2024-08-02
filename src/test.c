@@ -30,11 +30,13 @@ int main() {
     pressC();
     chooseCharacter();
     printCharacterSheet(currentChar);
+
     pressC();
 
     // Testing EQ
     // playerCurrentHP = 27;
     foundItem(12);
+    foundItem(potion);
     foundItem(11);
     equipItem(31);
     equipItem(62);

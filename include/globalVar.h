@@ -10,6 +10,7 @@
     extern char playerName[51];
     extern int daze;               // responsible for applying daze penalty to monsters
     extern int MGC;                // global for Magic stat for characters
+    extern int lvl;
     extern int camping;        // sets flag if player would run to camp
     extern int campVisit;          // sets flag if player was at a camp
     extern char* lastLocation;     // pinter to string for manual control where combat had been placed
@@ -94,4 +95,6 @@ void parser(char string[]);
 void storyTextToString(char variableToParse[]);
 
 void idFinder(int itemID);
+
+int potionScaling(int lvl);
 #endif

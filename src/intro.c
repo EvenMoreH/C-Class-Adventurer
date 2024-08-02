@@ -98,17 +98,20 @@ void chooseCharacter() {
             // output depending first letter a/an
             if (characterSelect == 'a')
             {
-                printf("> So you are an [%s]\n", currentCharacter);
+                printf("> So you are an [%s]", currentCharacter);
+                newLine(1);
             }
             else
             {
-                printf("> So you are a [%s]\n", currentCharacter);
+                printf("> So you are a [%s]", currentCharacter);
+                newLine(1);
             }
             break;
         }
         else
         {
-            printf("> A, B or C. Please try again.\n");
+            printf("> A, B or C. Please try again.");
+            newLine(1);
 
             clearBuffer();
         }
@@ -159,7 +162,7 @@ void loading(float s) {
 }
 
 void archerSheet() {
-    int lvl = 1;
+    lvl = 1;
     int STR = 5;
     int DEX = 7;
     int VIT = 5;
@@ -203,7 +206,7 @@ void archerSheet() {
 }
 
 void crusaderSheet() {
-    int lvl = 1;
+    lvl = 1;
     int STR = 7;
     int DEX = 4;
     int VIT = 6;
@@ -247,7 +250,7 @@ void crusaderSheet() {
 }
 
 void sorcererSheet() {
-    int lvl = 1;
+    lvl = 1;
     int STR = 3;
     int DEX = 6;
     int VIT = 4;

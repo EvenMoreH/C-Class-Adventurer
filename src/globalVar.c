@@ -22,6 +22,7 @@
     char playerName[51];
     int daze;               // responsible for applying daze penalty to monsters
     int MGC;                // global for Magic stat for characters
+    int lvl;
     int camping = 0;        // sets flag if player would run to camp
     int campVisit;          // sets flag if player was at a camp
     char* lastLocation;     // pointer to string for manual control where player is (basically a save point)
@@ -250,5 +251,17 @@ void idFinder(int itemID) {
             temp[0] = items[i];
             break;
         }
+    }
+}
+
+int potionScaling(int lvl) {
+    switch (lvl)
+    {
+    case 1:
+        return 1;
+        break;
+    default:
+        return lvl * 3;
+        break;
     }
 }
