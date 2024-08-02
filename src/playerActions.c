@@ -263,7 +263,6 @@ void attackRollSpell(int bonusDMGspell) {
 
 void itemSelect() {
     int backpackEmpty1 = 0;
-    int backpackEmpty2 = 0;
 
     int backpackArray[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
@@ -272,9 +271,8 @@ void itemSelect() {
     for (int i = 0; i < 10; i++)
     {
         Sleep(100);
-        if (strcmp(backpack[i].additionalProperty, "Heals") != 0)
+        if (strcmp(backpack[i].type, "Consumable") != 0)
         {
-            // wombo combo to check if there are any healing items in backpack
             backpackEmpty1 += 1;
             backpackArray[i] = 99;
             continue;
@@ -284,47 +282,12 @@ void itemSelect() {
             backpackArray[i] = i;
 
             Sleep(100);
-            printf("%i. [%s]\n", i, backpack[i].itemName);
+            printf("%i. [%s]", i, backpack[i].itemName);
+            newLine(1);
         }
     }
-
-    for (int i = 0; i < 10; i++)
-    {
-        Sleep(100);
-        if (strcmp(backpack[i].additionalProperty, "Deals Damage") != 0)
-        {
-            if (backpackArray[i] == -1)
-            {
-                backpackArray[i] = 99;
-            }
-            else
-            {
-                // wombo combo to check if there are any damaging items in backpack
-                backpackEmpty2 += 1;
-                continue;
-            }
-        }
-        else
-        {
-            backpackArray[i] = i;
-
-            if (backpackEmpty1 == 1)
-            {
-                // do nothing
-            }
-            else
-            {
-                Sleep(100);
-                printf("%i. [%s]", i, backpack[i].itemName);
-                newLine(1);
-            }
-        }
-    }
-
-    newLine(1);
     Sleep(1000);
-
-    if (backpackEmpty1 == 10 && backpackEmpty2 == 10)
+    if (backpackEmpty1 == 10)
     {
         monsterDmgTakenLog = 0;
 
@@ -340,20 +303,20 @@ void itemSelect() {
         {
             if (backpackArray[i] != 99)
             {
-                Sleep(100);
+                Sleep(50);
                 printf("[%i] ", backpackArray[i]);
             }
         }
-
-        printf("\n> ");
+        newLine(1);
+        printf("> ");
 
         int chosenItem;
         while (1)
         {
             scanf(" %i", &chosenItem);
 
-            if
-            (chosenItem == backpackArray[0] ||
+            if (
+            chosenItem == backpackArray[0] ||
             chosenItem == backpackArray[1] ||
             chosenItem == backpackArray[2] ||
             chosenItem == backpackArray[3] ||
