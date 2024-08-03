@@ -3,6 +3,7 @@
 
 
 //put your function headers here
+
 //  Act 1 - Sleeping Curse
 void actOne();
 void actOneVillage();

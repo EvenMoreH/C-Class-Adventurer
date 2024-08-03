@@ -11,6 +11,8 @@
 #include "../include/globalStruct.h"
 #include "../include/globalVar.h"
 
+#include "../include/testing.h"
+
 #include "../include/decisions.h"
 #include "../include/encounter.h"
 #include "../include/equipment.h"
@@ -22,7 +24,6 @@
 #include "../include/act1.h"
 
 
-
 int main() {
     randomize();
 
@@ -30,18 +31,9 @@ int main() {
     pressC();
     chooseCharacter();
     printCharacterSheet(currentChar);
-
     pressC();
 
-    // Testing EQ
-    // playerCurrentHP = 27;
-    foundItem(12);
-    foundItem(potion);
-    foundItem(11);
-
-    mainWeaponTier1();
-    offWeaponTier1();
-    armorTier1();
+    testing(true);
 
     actOne();
 
