@@ -35,6 +35,7 @@ void actOne() {
 }
 void actOneVillage() {
     // Act I - Moonlight Den and Village
+    newLine(1);
     storyText("Lets dive in...");
     newLine(1);
     storyText("The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.");

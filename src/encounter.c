@@ -30,9 +30,7 @@ void encounter(int monsterID) {
     combatEnd = 1;
 
     newLine(1);
-    printf("> ---------------------------------------------\n");
     printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, playerName);
-    printf("> ---------------------------------------------\n");
     printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
     printf("> Your bonus Damage Reduction from [%s] is [%i].\n", held[2].itemName, globalResistance);
     whatsInTheBag();
@@ -118,10 +116,8 @@ void ambushEncounter(int monsterID) {
             combatEnd = 1;
 
             newLine(1);
-            printf("> ---------------------------------------------\n");
             printf("> It is an ambush! There is no way to run!\n");
             printf("> You face [%s]. Get ready [%s]!\n", monsters[monsterID].monsterName, playerName);
-            printf("> ---------------------------------------------\n");
             printf("> Your current HP is [%i/%i].\n", playerCurrentHP, playerMaxHP);
             printf("> Your bonus Damage Reduction from [%s] is [%i].\n", held[2].itemName, globalResistance);
             whatsInTheBag();
@@ -168,9 +164,7 @@ void fromCamp() {
             newLine(1);
             customText("You pack up your camp and go back...", 500, 10);
             loading(3);
-            printf("-----------------------------------\n");
             printf("> You enter the [%s]\n", lastLocation);
-            printf("-----------------------------------\n");
             Sleep(1000);
         }
         else
@@ -182,9 +176,8 @@ void fromCamp() {
             if (result == 1)
             {
                 Sleep(1000);
-                printf("-------------------------\n");
-                printf("> You journey ends here.\n");
-                printf("-------------------------\n");
+                printf("> You journey ends here.");
+                newLine(1);
                 Sleep(5000);
                 exit(0);
             }
@@ -193,9 +186,7 @@ void fromCamp() {
                 newLine(1);
                 customText("You pack up your camp and go back...", 500, 10);
                 loading(3);
-                printf("-----------------------------------\n");
                 printf("> You enter the [%s]\n", lastLocation);
-                printf("-----------------------------------\n");
                 Sleep(1000);
             }
         }

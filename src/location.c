@@ -24,11 +24,9 @@ void discoveredLocation(int location) {
         if (location == locations[i].locationID)
         {
             Sleep(1000);
-            printf("----------------------------------------");
             newLine(1);
             printf("> You discovered [%s]", locations[i].locationName);
             newLine(1);
-            printf("----------------------------------------");
             newLine(1);
             Sleep(1000);
             break;
@@ -42,12 +40,8 @@ void enterLocation(int location) {
         if (location == locations[i].locationID)
         {
             Sleep(2000);
-            printf("----------------------------------------");
-            newLine(1);
             printf("> You enter the [%s]", locations[i].locationName);
-            newLine(1);
-            printf("----------------------------------------");
-            newLine(1);
+            newLine(2);
             Sleep(2000);
             break;
         }

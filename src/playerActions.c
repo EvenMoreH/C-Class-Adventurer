@@ -514,9 +514,8 @@ void playerHP(int playerDmgTaken) {
         {
             playerCurrentHP = 0;
             Sleep(1000);
-            printf("----------------------------------------\n");
-            printf("> You have died. You journey ends here.\n");
-            printf("----------------------------------------\n");
+            printf("> You have died. You journey ends here.");
+            newLine(1);
             Sleep(5000);
             exit(0);
         }

@@ -40,9 +40,7 @@ void monsterHP(int monsterDmgTaken, int monsterID) {
             combatEnd = 0;
             Sleep(1000);
             newLine(1);
-            printf("-----------------------------\n");
             printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
-            printf("-----------------------------\n");
             Sleep(1000);
 
             newLine(1);
@@ -246,9 +244,7 @@ void monsterAction(int monsterID) {
                     printf("> [%s] Runs away in terror!\n", monsters[monsterID].monsterName);
                     Sleep(1000);
                     newLine(1);
-                    printf("-----------------------------\n");
                     printf("> [%s] defeated.\n", monsters[monsterID].monsterName);
-                    printf("-----------------------------\n");
                     Sleep(1000);
 
                     newLine(1);

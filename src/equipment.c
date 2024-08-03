@@ -138,10 +138,8 @@ void removeFromBag(int itemID) {
 void foundItem(int itemID) {
     idFinder(itemID);
     Sleep(1000);
-    printf("-----------------------------------\n");
     printf("> You found [%s]\n", temp[0].itemName);
     printf("> %s.\n", temp[0].description);
-    printf("-----------------------------------\n");
     Sleep(1000);
 
     if (itemID == potion && playerCurrentHP < playerMaxHP)
@@ -243,25 +241,16 @@ void mainWeaponTier1() {
     switch (currentChar)
     {
     case 900:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(40);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 901:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(41);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 902:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(30);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     }
 }
@@ -270,25 +259,16 @@ void offWeaponTier1() {
     switch (currentChar)
     {
     case 900:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(44);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 901:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(44);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 902:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(44);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     }
 }
@@ -297,25 +277,16 @@ void armorTier1() {
     switch (currentChar)
     {
     case 900:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(60);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 901:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(61);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     case 902:
-        printf("-----------------------------------");
-        newLine(1);
         equipItem(62);
-        printf("-----------------------------------");
-        newLine(2);
+        newLine(1);
         break;
     }
 }
