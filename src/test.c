@@ -38,8 +38,10 @@ int main() {
     foundItem(12);
     foundItem(potion);
     foundItem(11);
-    equipItem(31);
-    equipItem(62);
+
+    mainWeaponTier1();
+    offWeaponTier1();
+    armorTier1();
 
     actOne();
 

@@ -195,8 +195,8 @@ void equipItemMain(int itemID) {
     printf("> You found [%s]!\n> %s.", temp[0].itemName, temp[0].description);
     newLine(1);
     customText("It will greatly improve your combat prowess!", 700, 700);
-    formattedText("Your damage with main weapon increase!");
-    newLine(1);
+    formattedText("Your damage with main weapon increased!");
+    // newLine(1);
 }
 
 void equipItemOff(int itemID) {
@@ -206,8 +206,8 @@ void equipItemOff(int itemID) {
     printf("> You found [%s]!\n> %s.", temp[0].itemName, temp[0].description);
     newLine(1);
     customText("It will greatly improve your combat prowess!", 700, 700);
-    formattedText("Your damage off hand weapon increase!");
-    newLine(1);
+    formattedText("Your damage off hand weapon increased!");
+    // newLine(1);
 }
 
 void equipItemArmor(int itemID) {
@@ -236,5 +236,86 @@ void equipItemArmor(int itemID) {
         playerCurrentHP = playerMaxHP;
     }
     printf("> Your current health is [%i]/[%i].", playerCurrentHP, playerMaxHP);
-    newLine(2);
+    newLine(1);
+}
+
+void mainWeaponTier1() {
+    switch (currentChar)
+    {
+    case 900:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(40);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 901:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(41);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 902:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(30);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    }
+}
+
+void offWeaponTier1() {
+    switch (currentChar)
+    {
+    case 900:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(44);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 901:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(44);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 902:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(44);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    }
+}
+
+void armorTier1() {
+    switch (currentChar)
+    {
+    case 900:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(60);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 901:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(61);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    case 902:
+        printf("-----------------------------------");
+        newLine(1);
+        equipItem(62);
+        printf("-----------------------------------");
+        newLine(2);
+        break;
+    }
 }

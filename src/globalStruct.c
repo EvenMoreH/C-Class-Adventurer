@@ -15,6 +15,7 @@
 // Struct for item replacement
     struct item temp[] = {
         {0, "", "", "", "", 0, 0},
+        {1, "", "", "", "", 0, 0},  // for equipment tiers
     };
 
 // item IDs = 0-99
@@ -23,11 +24,11 @@
     struct item items[] = {
         // Base Items 1-9
        {0, "", "", "", "", 0, 0},     // <- something to mimic empty slots
-       {1, "Bow", "Weapon", "Piercing", "A finely crafted weapon for striking enemies from afar", 1, 8},
-       {2, "Shortsword", "Weapon", "Slashing", "A quick and versatile blade perfect for close combat", 1, 6},
-       {3, "Longsword", "Weapon", "Slashing", "A balanced weapon offering reach and power in every swing", 1, 8},
-       {4, "Shield",  "Weapon", "Bludgeoning", "A sturdy wooden barrier to block incoming attacks and protect its bearer", 1, 6},
-       {5, "Staff", "Weapon", "Bludgeoning", "A magical conduit for channeling spells and ancient powers", 1, 6},
+       {1, "Bow", "Weapon", "Main", "A finely crafted weapon for striking enemies from afar", 1, 8},
+       {2, "Shortsword", "Weapon", "Off", "A quick and versatile blade perfect for close combat", 1, 6},
+       {3, "Longsword", "Weapon", "Main", "A balanced weapon offering reach and power in every swing", 1, 8},
+       {4, "Shield",  "Weapon", "Off", "A sturdy wooden barrier to block incoming attacks and protect its bearer", 1, 6},
+       {5, "Staff", "Weapon", "Off", "A magical conduit for channeling spells and ancient powers", 1, 6},
        {6, "Leather Armor", "Armor", "", "Lightweight armor offering decent protection and mobility", 0, 0},
        {7, "Chain Mail", "Armor", "", "Interlocked metal rings providing strong defense against slashes", 0, 0},
        {8, "Robes", "Armor", "", "Enchanted garments that enhance magical abilities and offer comfort", 0, 0},
@@ -59,7 +60,7 @@
             "A heavy, versatile hammer with a massive head, ideal for crushing armor and bones in battle", 3, 11},
        {42, "Uller's Bow", "Weapon", "Main", "", 6, 15},    // WIP
        {43, "Sword of Light", "Weapon", "Main", "", 6, 15}, // WIP
-       {44, "placeholder", "Weapon", "Main", "", 1, 8}, // WIP
+       {44, "placeholder", "Weapon", "Off", "", 1, 8}, // WIP
        {45, "placeholder", "Weapon", "Main", "", 1, 8}, // WIP
 
        // Armors 60-79
