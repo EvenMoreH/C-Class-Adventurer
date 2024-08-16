@@ -33,7 +33,7 @@ int main() {
     printCharacterSheet(currentChar);
     pressC();
 
-    testing(true);
+    testing(false);
 
     actOne();
 

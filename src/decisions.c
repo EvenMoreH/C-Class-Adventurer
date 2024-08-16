@@ -45,6 +45,8 @@ void decision() {
     }
 }
 
+// a = 1
+    // b = 0
 void selectionAB() {
     char ab;
     Sleep(500);
@@ -72,6 +74,9 @@ void selectionAB() {
     }
 }
 
+// a = 1
+    // b = 2
+    // c = 3
 void selectionABC() {
     char abc;
     int loop = 0;

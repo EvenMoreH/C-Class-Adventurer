@@ -34,7 +34,7 @@ void testing(bool test) {
         offWeaponTier1();
         armorTier1();
 
-        printf("\n\t# TESTING FINISHED #\n");
+        printf("\n\t# TESTING FINISHED #\n\n");
     }
     else
     {

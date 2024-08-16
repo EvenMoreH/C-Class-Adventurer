@@ -197,7 +197,7 @@ void actOneVontelsRest() {
 
     loading(2.5);
 
-    storyText("After a few hours of journey, you finally reach your destination,");
+    storyText("After a few hours of journey, you finally reach your destination.");
     enterLocation(206);
 
 }
@@ -206,7 +206,7 @@ void actOneOasis() {
 
     loading(2.5);
 
-    storyText("After a few hours of journey, you finally reach your destination,");
+    storyText("After a few hours of journey, you finally reach your destination.");
 
     enterLocation(207);
 
@@ -228,8 +228,8 @@ void actOneOasis() {
 
     pressC();
 
-    customText("A. Do you approach the waters to investigate?", 10, 500);
-    customText("B. You steer clear from the shore and continue setting up the camp.", 10, 500);
+    customText("A. Do you approach the waters to investigate?", 10, 350);
+    customText("B. You steer clear from the shore and continue setting up the camp.", 10, 150);
 
     selectionAB();
     newLine(1);
@@ -237,9 +237,101 @@ void actOneOasis() {
     if (abResult == 1) // Investigate the waters
     {
         // water investigation leading to easier encounter
+        storyText("The surface remains still, giving no indication of what lies beneath.");
+        storyText("You kneel down at the water's edge, peering into its depths with a mix of curiosity and trepidation.");
+        newLine(1);
+        customText("A. Disturb the water.", 10, 350);
+        customText("B. Circle around the Oasis looking for any clues.", 10, 350);
+        customText("C. Go back to setting up a camp.", 10, 150);
+
+        selectionABC();
+        newLine(1);
+
+        if (abcResult == 1)
+        {
+            storyText("Aiming carefully, you send a small rock skipping across the water's surface, creating ripples that dance in the sunlight.");
+            storyText("Without warning, a dark figure shoots out from below, sending ripples across the water's surface.");
+
+            Sleep(500);
+
+            storyText("You stumble backwards in shock as a creature emerges from the depths.");
+            storyText("It is unlike anything you have ever seen before...");
+            storyText("a hulking mass covered in slimy scales with glowing red eyes and sharp teeth.");
+            storyText("Its long tentacles flail wildly as it lets out an otherworldly screech.");
+            storyText("Your heart races as you realize this must be what has tainted the once pristine oasis.");
+            storyText("Without hesitation, you draw your weapon and prepare for battle.");
+
+            // encounter(999999); to be developed
+        }
+        else if (abcResult == 2)
+        {
+            storyText("With cautious steps, you navigate a slow circle around the sunless waters of the Oasis.");
+            storyText("The nebulous water seems to swallow the sunlight,");
+            storyText("leaving the sandy ground untouched by dancing light patterns that often reflect in the water.");
+            storyText("You search intently for any signs or hints as to what may have befallen this fabled location,");
+            storyText("your curiosity piqued by its mysterious reputation.");
+
+            Sleep(500);
+            newLine(1);
+
+            storyText("After a few minutes of walking, you come across some chewed bones lying on the other side of the shore.");
+            storyText("The marks of claws and teeth are clearly visible on what you suspect to be a femur bone.");
+            storyText("You are now certain that there is some kind of predator residing in this area.");
+            newLine(1);
+            customText("A. Charge into the waters to meet the monster head on!", 10, 350);
+            customText("B. Maintain a sense of calm and move away from the waters.", 10, 150);
+            printf("     Return to setting up your camp, all while getting ready to hunt the hunter.");
+
+            newLine(1);
+            Sleep(350);
+
+            selectionAB();
+            newLine(1);
+
+            if (abResult == 1)
+            {
+                storyText("You charge straight into the depths of the Oasis.");
+                storyText("Immediately a dark figure shoots out from below, sending ripples across the water's surface.");
+                storyText("You watch in shock as a creature emerges from the depths but you press on.");
+                storyText("It is unlike anything you have ever seen before...");
+                storyText("a hulking mass covered in slimy scales with glowing red eyes and sharp teeth.");
+                storyText("Its long tentacles flail wildly as it lets out an otherworldly screech.");
+                storyText("Your heart races as you realize this must be what has tainted the once pristine oasis.");
+                storyText("Without hesitation, you draw your weapon and prepare for battle.");
+
+                // encounter(999999); to be developed
+
+            }
+            else if (abResult == 0)
+            {
+                storyText("You calmly move away from the shoreline and begin to set up your camp.");
+                storyText("As you do, you also construct several traps using your rope, nearby trees, and whatever else you can find.");
+                storyText("You create makeshift ballistas and stake-filled pits with the materials at hand, ready to harm any unsuspecting monster.");
+                Sleep(500);
+                newLine(1);
+                storyText("Now you wait...");
+                Sleep(500);
+                newLine(1);
+                storyText("As the sun sets and darkness creeps in, the looming shadow of a monstrous creature emerges from the depths.");
+                storyText("Its massive body, adorned with sharp claws that could easily tear through flesh.");
+                storyText("Its tentacles sway on the sand, while its two fiery red eyes seem to glow in the dim lighting.");
+                storyText("You have been waiting for this moment, setting up multiple traps and weapons to take down the beast. ");
+                storyText("As the creature stumbles into the carefully laid traps, it lets out a howl of pain and begins to weaken.");
+                storyText("Blood oozes from its wounds as it struggles to keep its balance.");
+                storyText("You stand resolute, towering in stature, preparing yourself for the ultimate showdown with the wounded beast.");
+                storyText("This is a fight for survival, a test of strength and courage");
+                storyText("as the two opponents face off in a fierce showdown under the cover of darkness.");
+            }
+        }
+        else if (abcResult == 3)
+        {
+            /*condition*/
+            // go back to setting up a camp
+        }
     }
     else // camp setup and ambush from water monster
     {
+        // go back to setting up a camp
         // you set up camp and ambush will happen
     }
 }

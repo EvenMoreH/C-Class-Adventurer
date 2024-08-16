@@ -57,6 +57,7 @@ template.c
 template.h
 # ignoring testing folder
 additional_files/
+build/
 notes.md
 buildInstructions.md
 minunitExample.c

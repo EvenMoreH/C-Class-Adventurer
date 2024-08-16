@@ -18,12 +18,11 @@
         "stdbool.h": "c",
         "minunit.h": "c"
     },
-    "makefile.makefilePath": "Makefile",
-    "makefile.makeDirectory": "E:/Repositories/LearnC/C-Class-Adventurer",
+    "makefile.makePath": "L:\\Compilers\\GnuWin32\\bin",
     "makefile.launchConfigurations": [
         {
-            "cwd": "e:\\Repositories\\LearnC\\C-Class-Adventurer\\build",
-            "binaryPath": "e:\\Repositories\\LearnC\\C-Class-Adventurer\\build\\alpha_C_Class",
+            "cwd": "l:\\Repositiories\\C-Class-Adventurer\\build",
+            "binaryPath": "l:\\Repositiories\\C-Class-Adventurer\\build\\alpha_C_Class",
             "binaryArgs": []
         }
     ],
