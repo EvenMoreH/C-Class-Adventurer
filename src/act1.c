@@ -11,6 +11,7 @@
 
 #include "../include/globalStruct.h"
 #include "../include/globalVar.h"
+#include "../include/printing.h"
 
 #include "../include/decisions.h"
 #include "../include/encounter.h"

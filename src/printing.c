@@ -9,36 +9,40 @@
 #include <ctype.h>      // allows for tolower() funtion
 
 
-#include "../include/globalStruct.h"
-#include "../include/globalVar.h"
 #include "../include/printing.h"
 
-#include "../include/decisions.h"
-#include "../include/encounter.h"
-#include "../include/equipment.h"
-#include "../include/intro.h"
-#include "../include/location.h"
-#include "../include/monsters.h"
-#include "../include/playerActions.h"
+#include "../include/globalStruct.h"
+#include "../include/globalVar.h"
 
-// TRUE/FALSE flag to ON/OFF testing related functions in [testing.c] file
-void testing(bool test) {
-    if (test == 1)
+int a = 14;
+int b = 20;
+
+char testLocation[] = "Village";
+
+void storyText(char textToWrite[]);
+
+int main() {            // Main function
+
+    char textBuffer[256];
+    sprintf(textBuffer, "Your current HP: [%i/%i].", a, b);
+    storyText(textBuffer);
+
+    sprintf(textBuffer, "You reached your destination: [%s].", testLocation);
+    storyText(textBuffer);
+
+
+    return 0;               // Ends main function
+}
+
+void storyText(char textToWrite[]) {
+    int len = strlen(textToWrite);
+
+    printf("> ");
+    for (int i = 0; i < len; i++)
     {
-        printf("\n\t# TESTING STARTED #\n\n");
-
-        foundItem(12);
-        foundItem(potion);
-        foundItem(11);
-
-        mainWeaponTier1();
-        offWeaponTier1();
-        armorTier1();
-
-        printf("\n\t# TESTING FINISHED #\n\n");
+        printf("%c", textToWrite[i]);
+        Sleep(35);
     }
-    else
-    {
-        // No testing //
-    }
+    printf("\n");
+    Sleep(350);
 }

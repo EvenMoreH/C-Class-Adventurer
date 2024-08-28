@@ -13,6 +13,7 @@
 
 #include "../include/globalStruct.h"
 #include "../include/globalVar.h"
+#include "../include/printing.h"
 
 
 //  Decision Trees  //////////////////////////////////////////////////

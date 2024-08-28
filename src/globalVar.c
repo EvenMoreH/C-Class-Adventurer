@@ -12,6 +12,7 @@
 
 #include "../include/globalVar.h"
 #include "../include/globalStruct.h"
+#include "../include/printing.h"
 
 
 //put your function headers here
