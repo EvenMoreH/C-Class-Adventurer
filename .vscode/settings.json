@@ -18,7 +18,7 @@
         "stdbool.h": "c",
         "minunit.h": "c"
     },
-    "makefile.makePath": "L:\\Compilers\\GnuWin32\\bin",
+    "makefile.makePath": "C:\\Compilers\\GnuWin32\\bin",
     "makefile.launchConfigurations": [
         {
             "cwd": "l:\\Repositiories\\C-Class-Adventurer\\build",

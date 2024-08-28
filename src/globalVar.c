@@ -7,6 +7,7 @@
 #include <math.h>       // Enables using math functions
 #include <windows.h>    // Unlocks windows functionalities
 #include <ctype.h>      // allows for tolower() funtion
+#include <unistd.h>     // for getpid() entropy source
 
 
 #include "../include/globalVar.h"
@@ -86,10 +87,15 @@
 
 
 void randomize() {
-    srand(time(NULL));
     // randomNumber = rand() % X
     // random number from {0, X-1} as counting starts from 0 and array has X elements
     // rand() % 20 + 21 = random number from {20, 40}
+    int entropy_source1 = 32;
+    unsigned int seed = (unsigned int)time(NULL)
+    ^ (unsigned int)getpid()
+    ^ (unsigned int)(uintptr_t)&entropy_source1;
+
+    srand(seed);
 }
 
 //  Clear Buffer  ////////////////////////////////////////////////////
@@ -97,7 +103,8 @@ void randomize() {
 void clearBuffer() {
     // Clear the input buffer
     int clearBuffer;
-    while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF) { }
+    while ((clearBuffer = getchar()) != '\n' && clearBuffer != EOF)
+    { }
     // I don't get the above yet but:
     // The while loop with getchar()
         // reads and discards characters until it encounters a newline ('\n')
