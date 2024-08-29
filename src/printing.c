@@ -17,13 +17,15 @@
 int a = 14;
 int b = 20;
 
+char textBuffer[256];
+
+
 char testLocation[] = "Village";
 
 void storyText(char textToWrite[]);
 
 int main() {            // Main function
 
-    char textBuffer[256];
     sprintf(textBuffer, "Your current HP: [%i/%i].", a, b);
     storyText(textBuffer);
 
