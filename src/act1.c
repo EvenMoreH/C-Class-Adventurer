@@ -69,8 +69,10 @@ void actOneVillage() {
     storyText("\"The village... It's the [Hag]... Everyone has fallen asleep while the hunters were away!\"");
     storyText("\"No one will wake up, the [Hag] is gone... [Dane] is looking after the folk... Please! Help...\"");
     newLine(1);
-    customText("A. Try to calm down the girl.", 1, 250);
-    customText("B. Run straight to the [Village]", 1, 250);
+    // customText("A. Try to calm down the girl.", 1, 250);
+    // customText("B. Run straight to the [Village]", 1, 250);
+    storyText("A. Try to calm down the girl.");
+    storyText("B. Run straight to the [Village]");
 
     selectionAB();
     newLine(1);
@@ -111,10 +113,11 @@ void actOneVillage() {
     newLine(1);
     storyText("\"Let's head over to the Hag's hut first. Maybe we'll find some clues there, or items that could help break the curse.\"");
     storyText("[Dane] instructed, looking at you.");
-    storyTextUnformatted(">");
-    storyTextToString(playerName);
-    storyTextUnformatted("... You have to investigate, I'll stay here with [Lila] and keep them safe and comfortable.\"");
-    newLine(1);
+    // storyTextUnformatted(">");
+    // storyTextToString(playerName);
+    // storyTextUnformatted("... You have to investigate, I'll stay here with [Lila] and keep them safe and comfortable.\"");
+    // newLine(1);
+    toString(textOutput, "\"[%s]... You have to investigate, I'll stay here with [Lila] and keep them safe and comfortable.\"", playerName);
     storyText("[Dane] reassured you.");
 
     pressC();
@@ -183,15 +186,19 @@ void actOneWoodcarversRoad() {
     storyText("After several long hours of trekking, your boots scuff against the worn roots at the base of [Starstruck Oak].");
     storyText("The branches above sway in a gentle breeze as you rack your brain,");
     storyText("trying to recall the safest route to [King's Thicket] - the last stop before [Gloomy Forest].");
-    customText("Should you go: ", 10, 800);
-    customText("A. Left, towards [Vontel's Rest]", 10, 300);
-    customText("B. Right, towards [The Oasis]", 10, 300);
+    newLine(1);
+    storyText("Should you go: ");
+    storyText("A. Left, towards [Vontel's Rest]");
+    storyText("B. Right, towards [The Oasis]");
+    // customText("Should you go: ", 10, 800);
+    // customText("A. Left, towards [Vontel's Rest]", 10, 300);
+    // customText("B. Right, towards [The Oasis]", 10, 300);
 
     selectionAB();
     newLine(1);
 }
 void actOneVontelsRest() {
-    storyText("You follow path to the left, before dusk you should arrive at [Vontel's Rest]");
+    storyText("You follow path to the left, before dusk, you should arrive at [Vontel's Rest]");
 
     loading(2.5);
 
@@ -200,7 +207,7 @@ void actOneVontelsRest() {
 
 }
 void actOneOasis() {
-    storyText("You follow path to the right, before dusk you should arrive at [The Oasis]");
+    storyText("You follow path to the right, before dusk, you should arrive at [The Oasis]");
 
     loading(2.5);
 
@@ -226,8 +233,10 @@ void actOneOasis() {
 
     pressC();
 
-    customText("A. Do you approach the waters to investigate?", 10, 350);
-    customText("B. You steer clear from the shore and continue setting up the camp.", 10, 150);
+    // customText("A. Do you approach the waters to investigate?", 10, 350);
+    // customText("B. You steer clear from the shore and continue setting up the camp.", 10, 150);
+    storyText("A. Do you approach the waters to investigate?");
+    storyText("B. You steer clear from the shore and continue setting up the camp.");
 
     selectionAB();
     newLine(1);
@@ -238,9 +247,12 @@ void actOneOasis() {
         storyText("The surface remains still, giving no indication of what lies beneath.");
         storyText("You kneel down at the water's edge, peering into its depths with a mix of curiosity and trepidation.");
         newLine(1);
-        customText("A. Disturb the water.", 10, 350);
-        customText("B. Circle around the Oasis looking for any clues.", 10, 350);
-        customText("C. Go back to setting up a camp.", 10, 150);
+        // customText("A. Disturb the water.", 10, 350);
+        // customText("B. Circle around the Oasis looking for any clues.", 10, 350);
+        // customText("C. Go back to setting up a camp.", 10, 150);
+        storyText("A. Disturb the water.");
+        storyText("B. Circle around the Oasis looking for any clues.");
+        storyText("C. Go back to setting up a camp.");
 
         selectionABC();
         newLine(1);
@@ -276,10 +288,12 @@ void actOneOasis() {
             storyText("The marks of claws and teeth are clearly visible on what you suspect to be a femur bone.");
             storyText("You are now certain that there is some kind of predator residing in this area.");
             newLine(1);
-            customText("A. Charge into the waters to meet the monster head on!", 10, 350);
-            customText("B. Maintain a sense of calm and move away from the waters.", 10, 150);
-            printf("     Return to setting up your camp, all while getting ready to hunt the hunter.");
-
+            // customText("A. Charge into the waters to meet the monster head on!", 10, 350);
+            // customText("B. Maintain a sense of calm and move away from the waters.", 10, 150);
+            // printf("     Return to setting up your camp, all while getting ready to hunt the hunter.");
+            storyText("A. Charge into the waters to meet the monster head on!");
+            storyText("B. Maintain a sense of calm and move away from the waters.");
+            storyTextUnformatted("     Return to setting up your camp, all while getting ready to hunt the hunter.");
             newLine(1);
             Sleep(350);
 

@@ -29,3 +29,55 @@ void toString(char *destination, const char *prompt, ...) {
 
     storyText(textOutput);
 }
+
+// Text only, no variables
+    // Sleep(1000) included
+void formattedText(char *printout) {
+    printf("> %s\n", printout);
+    Sleep(1000);
+}
+
+// \n
+void newLine (int lines) {
+    for (int i = 0; i < lines; i++)
+    {
+        printf("\n");
+    }
+}
+
+// "Formatted Text"
+    // INT 1: sleepBefore(in ms)
+    // INT 2: sleepAfter(in ms)
+void customText(char *printout, int sleepBefore, int sleepAfter) {
+    Sleep(sleepBefore);
+    printf("> %s\n", printout);
+    Sleep(sleepAfter);
+}
+
+// Streams letter-by-letter with:
+    // Start line '>'
+    // End line '\n'
+    // Sleep(350)
+void storyText(char *textToWrite) {
+    int len = strlen(textToWrite);
+
+    printf("> ");
+    for (int i = 0; i < len; i++)
+    {
+        printf("%c", textToWrite[i]);
+        Sleep(35);
+    }
+    printf("\n");
+    Sleep(350);
+}
+
+// Streams letter-by-letter without any formatting
+void storyTextUnformatted(char *textToWrite) {
+    int len = strlen(textToWrite);
+
+    for (int i = 0; i < len; i++)
+    {
+        printf("%c", textToWrite[i]);
+        Sleep(35);
+    }
+}

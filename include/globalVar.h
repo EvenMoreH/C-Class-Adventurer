@@ -80,20 +80,6 @@ void clearBuffer();
 
 void pressC();
 
-void formattedText(char* printout);
-
-void customText(char* printout, int sleepBefore, int sleepAfter);
-
-void newLine (int lines);
-
-void storyText(char textToWrite[]);
-
-void storyTextUnformatted(char textToWrite[]);
-
-void parser(char string[]);
-
-void storyTextToString(char variableToParse[]);
-
 void idFinder(int itemID);
 
 int potionScaling(int lvl);
