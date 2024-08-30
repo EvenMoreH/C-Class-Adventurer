@@ -40,25 +40,26 @@ int main() {            // Main function
     sprintf(textBuffer, "You reached your destination: [%s].", testLocation1);
     storyText(textBuffer);
 
-    printf("\n\n");
+    printf("\n");
 
-    toString(textOutput, "Player health is %i/%i. Player mana is %i/%i. You reached: %s. Your next stop is: %s.", a, b, c, d, testLocation1, testLocation2);
+    toString(textOutput, "Player health is %i/%i. Player mana is %i/%i.", a, b, c, d);
 
     a = 2;
     c = 21;
+
+    toString(textOutput, "You reached: %s. Your next stop is: %s.", testLocation1, testLocation2);
+    printf("\n");
 
     strcpy(textBuffer, testLocation2);
     strcpy(testLocation2, testLocation1);
     strcpy(testLocation1, textBuffer);
 
-
-    toString(textOutput, "Player health is %i/%i. Player mana is %i/%i. You reached: %s. Your next stop is: %s.", a, b, c, d, testLocation1, testLocation2);
-
+    toString(textOutput, "You reached: %s. Your next stop is: %s.", testLocation1, testLocation2);
 
     return 0;               // Ends main function
 }
 
-void storyText(char textToWrite[]) {
+void storyText(char *textToWrite) {
     int len = strlen(textToWrite);
 
     printf("> ");
@@ -71,7 +72,7 @@ void storyText(char textToWrite[]) {
     Sleep(350);
 }
 
-// 'destination' is a string that holds final output
+// 'destination' is a string that holds final output (I will use global textBuffer[256])
     // 'prompt' is a formatted text with arguments to be printed (same format as with printf)
     // For example: "Your current HP: [%d/%d].", a, b
 void toString(char *destination, const char *prompt, ...) {
