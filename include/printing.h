@@ -14,6 +14,4 @@ void newLine (int lines);
 void storyText(char *textToWrite);
 
 void storyTextUnformatted(char *textToWrite);
-
-// void storyTextToString(char *variableToParse);
 #endif
