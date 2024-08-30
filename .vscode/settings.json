@@ -16,7 +16,8 @@
         "ctype.h": "c",
         "stdio.h": "c",
         "stdbool.h": "c",
-        "minunit.h": "c"
+        "minunit.h": "c",
+        "printing.h": "c"
     },
     "makefile.makePath": "C:\\Compilers\\GnuWin32\\bin",
     "makefile.launchConfigurations": [

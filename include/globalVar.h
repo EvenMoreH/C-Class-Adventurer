@@ -18,7 +18,7 @@
     extern int s;
 
     extern char parsed[51];
-
+    extern char textOutput[256];
 
     // selected character
         // 900 - Archer

@@ -32,6 +32,7 @@
     int s;
 
     char parsed[51];
+    char textOutput[256];
 
 
     // selected character
@@ -114,69 +115,9 @@ void clearBuffer() {
 
 void pressC() {
     Sleep(500);
-    printf("\n[Press C to continue...] ");
-    char ch2;
-    while (1)
-    {
-        scanf(" %c", &ch2);
-        ch2 = tolower(ch2);
-        if (ch2 == 'c')
-        {
-            printf("\n");
-            break;
-        }
-        else
-        {
-            clearBuffer();
-            int quip1 = rand() % 130;
-            if (quip1 > 30 && quip1 < 40)
-            {
-                printf("[Oops, it seems like your fingers took a detour. They must be sightseeing!]\n");
-            }
-            else if (quip1 > 40 && quip1 < 50)
-            {
-                printf("[Looks like you discovered the hidden Easter egg. Congrats! Don't get your hopes up, this message is the Easter Egg]\n");
-            }
-            else if (quip1 > 50 && quip1 < 60)
-            {
-                printf("[Well, someone is feeling a bit rebellious today, huh?]\n");
-            }
-            else if (quip1 > 60 && quip1 < 70)
-            {
-                printf("[C is for cookie, but it seems you are craving a different flavor!]\n");
-            }
-            else if (quip1 > 70 && quip1 < 80)
-            {
-                printf("[Your fingers have a mind of their own. They must be geniuses!]\n");
-            }
-            else if (quip1 > 80 && quip1 < 90)
-            {
-                printf("[Ah, an accidental jazz note! You're improvising already.]\n");
-            }
-            else if (quip1 > 90 && quip1 < 100)
-            {
-                printf("[Is that a creative interpretation of the letter C I see?]\n");
-            }
-            else if (quip1 > 100 && quip1 < 110)
-            {
-                printf("[Looks like your keyboard has a mischievous streak. I like it!]\n");
-            }
-            else if (quip1 > 110 && quip1 < 120)
-            {
-                printf("[I see you have found the scenic route on the keyboard. Nice one!]\n");
-            }
-            else if (quip1 > 120 && quip1 < 130)
-            {
-                printf("[C? Who needs C when you have got your own unique style!]\n");
-            }
-            else
-            {
-                printf("[It supposed to be C but anyway...]\n");
-            }
-            printf("\n");
-            break;
-        }
-    }
+    newLine(1);
+    system("pause");
+    newLine(1);
     Sleep(500);
 }
 
@@ -208,7 +149,7 @@ void customText(char* printout, int sleepBefore, int sleepAfter) {
     // Start line '>'
     // End line '\n'
     // Sleep(350)
-void storyText(char textToWrite[]) {
+void storyText(char *textToWrite) {
     int len = strlen(textToWrite);
 
     printf("> ");
@@ -217,7 +158,7 @@ void storyText(char textToWrite[]) {
         printf("%c", textToWrite[i]);
         Sleep(35);
     }
-    newLine(1);
+    printf("\n");
     Sleep(350);
 }
 

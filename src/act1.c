@@ -41,10 +41,7 @@ void actOneVillage() {
     newLine(1);
     storyText("The moon hung low over the dense, ancient woods, casting an eerie glow through the twisted branches.");
     storyText("The air was thick with the scent of pine and damp earth, punctuated by the snarls of a ferocious wolf.");
-    storyTextUnformatted("> In a small clearing, illuminated by slivers of moonlight,");
-    storyTextToString(playerName);
-    storyTextUnformatted("is facing off against the hungry beast.");
-    newLine(1);
+    toString(textOutput, "In a small clearing, illuminated by slivers of moonlight, %s is facing off against the hungry beast.", playerName);
 
     pressC();
 
